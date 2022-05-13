@@ -12,7 +12,7 @@ In most Linux courses, there are 7 major topic areas that are essential for anyo
 - Topic 4: Working with the Shell
 - Topic 5: System Administration
 - Topic 6: Network Administration
-- Topic 7: Cloud Technologies
+- Topic 7: Cloud Technologies (we'll save this for Section 3)
 
 Most Linux concepts are easy to apply to macOS and FreeBSD UNIX. As a result, macOS and FreeBSD are often introduced as supplementary topics in Linux courses.
 
