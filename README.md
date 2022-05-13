@@ -6,7 +6,7 @@ In most Networking courses,
 
 ## Session 2: Linux
 In most Linux courses, there are 7 major topic areas that are essential for anyone pursuing a career in systems administration or software development:
-- Introduction to the Linux (including basic usage)
+- Introduction to Linux (including basic usage)
 - Navigating the File System & Working with Text Files
 - Managing Linux Files
 - Working with the Shell
