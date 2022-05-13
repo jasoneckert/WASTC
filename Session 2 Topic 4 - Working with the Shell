@@ -1,9 +1,48 @@
 Run the following commands in a new Terminal on your Fedora Workstation as root:
 
 - Redirecting stdin, stdout & stderr
+   df -hT >diskspace (we examine the df command later)
+   date >>diskspace
+   cat diskspace
+   ls letter lett >good 2>bad
+   cat good
+   cat bad
+   cp /etc/hosts ~
+   cat hosts
+   sort hosts >hosts
+   cat hosts (the file is empty because the shell clears an existing file	before writing stdout to it with the > symbol)
+   tr a A <letter >newletter
+   cat newletter
+   ls <letter	(ls runs normally because it does not accept stdin)
+
 - Piping 
+   cd classfiles
+   grep -i mother letter | wc -l		
+   cat letter | pr -d | less
+   cat proposal1 | tr a W | sort | tee newfile
+   cat newfile
+   cat Poems/Shakespeare/sonnet* | wc -l
+   grep -i love Poems/Shakespeare/sonnet* | wc -l
+
 - Shell Variables
+   VAR1="Hello World"
+   echo $VAR1
+   set | grep VAR1
+   env | grep VAR1 (VAR1 is not shown, as it was not exported)
+   export VAR1
+   env | grep VAR1
+   PS1='C:${PWD////\\\\}>  ' 
+   cat ~/.bash_profile (on Fedora, it runs .bashrc first if it exists)
+   cat ~/.bashrc (note the aliases for rm, cp and mv)
+   exit (open a new shell as the root user)
+   echo $VAR1 
+   vi ~/.bashrc file (add the following lines, save and quit)
+      export VAR1="Hello World"
+      alias bye="echo Goodbye ; sleep 5 ; exit"
+   source ~/.bashrc (so you don't need to open a new shell)
+
 - Shell Scripts
+
 - Text Tools, sed & awk
 - Using Git
 - The Z Shell (optional extra)
