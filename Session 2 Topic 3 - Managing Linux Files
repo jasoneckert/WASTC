@@ -86,14 +86,29 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    mkdir /public
    chmod 1777 /public (sets the sticky bit)
    touch /public/rootfile
-	ll /public/rootfile (note that the owner is root)
-	exit (log into a new terminal as woot to execute remaining commands)
+   ll /public/rootfile (note that the owner is root)
+   exit (log into a new terminal as woot to execute remaining commands)
    touch /public/wootfile
    ll /public/wootfile (note that the owner is woot)
    rm -f /public/wootfile
    rm -f /public/rootfile (note the error message, even though you have w permission on the directory)
+   exit (log into a new terminal as root to execute commands in the next 2 sections)
+   
+- File ACLs (Beyond User, Group, and Other)
+   cd classfiles
+   setfacl -m u:woot:rw- letter	
+   ll letter (note the + symbol next to the mode)
+   getfacl letter (note the mask and entry for woot)
+   setfacl -b letter
+   ll letter (note the + symbol is no longer present)
+   getfacl letter (note the absence of additional ACL entries)
 
-- Beyond User, Group & Other
 - Linux File Attributes
-
-
+   cd classfiles
+   lsattr letter
+   chattr +i letter
+   lsattr letter (note the immutable attribute is set)
+   vi letter (make a change and attempt to save the file – when you are denied, exit vi discarding changes)
+   chattr -i letter
+   lsattr letter
+   man chattr (note the description of other attributes)
