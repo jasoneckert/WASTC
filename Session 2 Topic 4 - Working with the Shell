@@ -75,4 +75,51 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    awk –F: '/root/ {print $3, $5}' /etc/passwd	
    
 - Using Git
+   mkdir /scripts
+  	cp scriptname scriptname scriptname /scripts
+  	cd /scripts
+   git config --global user.name "name"
+  	git config --global user.email "email"
+  	git init
+  	git status
+  	git add .  
+  	git commit -m "My first snapshot"
+  	git log
+   git checkout -b sample
+  	git branch
+   vi scriptname
+  	git add .
+  	git commit -m "Description"
+   git checkout master
+  	cat scriptname
+   git merge sample
+  	cat scriptname
+
+   - Optionally create a free account on GitHub and create a public "scripts" repo. 
+   - Next, use the appropriate commands (shown on GitHub after you create a new repo) to push your /scripts repo 
+     to GitHub and set it as the origin (this converts your /scripts repo into a cloned copy). 
+   - When you push your /scripts repo to GitHub, you will be prompted to log in with your GitHub username and a 
+     personal access token (very long password) that is used in place of your real GitHub password for pushing. 
+   - You can generate a personal access token on the GitHub website by clicking your user icon and navigating to
+     Settings > Developer settings > Personal access tokens. When generating a personal access token, you must supply 
+     a description, expiration and select the repo scope for it to work. 
+
 - The Z Shell (optional extra)
+   cd classfiles
+   grep -i mother letter >file1.txt >file2.txt
+   cat file1.txt
+   cat file2.txt
+   grep -i mother letter >file1.txt | grep -i granada >file2.txt
+   cat file1.txt
+   cat file2.txt
+   sort <proposal1 <greeting >sortedresults.txt
+   cat sortedresults.txt
+   setopt autocd correct
+   grp	-i mother letter	(note that it prompts you to correct the command to grep)
+   autoload -U compinit 
+   compinit
+   date - (press [Tab] to see the available date command options)
+   vi ~/.zshrc (add the following lines, save and quit)
+      setopt autocd correct
+      autoload -U compinit 
+      compinit
