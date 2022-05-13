@@ -1,14 +1,14 @@
 Run the following commands in a new Terminal on your Fedora Workstation as root:
 
 - Navigating the Linux Directory Structure:
-   pwd	(you should be in /root)
+   pwd (you should be in /root)
    cd /etc/sysconfig	(switches directory using absolute pathname) 
-   pwd	(you should be in /etc/sysconfig)
+   pwd (you should be in /etc/sysconfig)
    cd ../.. (switches to / using relative pathname)
-   cd root	(switches to /root using relative pathname)
+   cd root (switches to /root using relative pathname)
    cd ../etc/sysconfig	(switches to /etc/sysconfig using relative pathname)
    cd ~woot (takes you to woot’s home directory)
-   pwd	(you should be in /home/woot)
+   pwd (you should be in /home/woot)
    cd (takes you to your home directory, /root)	
    cd /etc/sysconfig/network-scripts (instead of typing this out, use the [Tab] key to autocomplete the path!)
 
