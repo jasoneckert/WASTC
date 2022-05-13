@@ -23,7 +23,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    locate newfile1 (no results in the locate database for this new file)		
    updatedb
    locate newfile1 (it works now because you updated the locate database)
-   echo $PATH	(note the directories in PATH)
+   echo $PATH (note the directories in PATH)
    which cp	(note that cp is in a directory in PATH)
    which newfile1	(no results are shown because newfile1 is not in PATH)
    cp newfile1 /usr/bin
