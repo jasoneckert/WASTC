@@ -41,8 +41,38 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
       alias bye="echo Goodbye ; sleep 5 ; exit"
    source ~/.bashrc (so you don't need to open a new shell)
 
-- Shell Scripts
-
+- Shell Scripts (note that the tar command is discussed later)
+   git clone https://github.com/jasoneckert/shellscripts.git
+   cd shellscripts 
+   cat script1.sh
+   cat script2.sh
+   cat script3.sh 
+   cat script5.sh
+   
 - Text Tools, sed & awk
+   cd classfiles
+   cut –d: -f3 /etc/passwd		
+   cut –d: -f3 /etc/passwd > passfile
+   cut –d: -f6 /etc/passwd > passfile2	
+   paste passfile passfile2	
+   pr –d letter > letter2	
+   pr –d –l20 letter > letter2	 
+   fmt –30 letter	 
+   nl letter
+   printf "Hello %s! \nYour shell is: %s \n" $LOGNAME $SHELL 
+   split –l4 /etc/passwd
+   sed /Mother/s/the/BILLY/ letter	
+   sed 1s/Mother/Grandma/ letter		
+   sed ‘$s/Alan/Mike/’ letter			
+   sed 1,8s/the/WOWEE/g letter
+   sed /the/d letter
+   cat bin/treed (this is a challenge!)
+   bin/treed .
+   cat ../shellscripts/script4.sh (note the use of sed)
+   awk '/Mother/ {print}' letter
+   awk '/Mother/ {print $1, $4}' letter		
+   awk '/Mother/ {print $1 "\t" $4}' letter 
+   awk –F: '/root/ {print $3, $5}' /etc/passwd	
+   
 - Using Git
 - The Z Shell (optional extra)
