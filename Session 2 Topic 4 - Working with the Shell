@@ -1,0 +1,9 @@
+Run the following commands in a new Terminal on your Fedora Workstation as root:
+
+- Redirecting stdin, stdout & stderr
+- Piping 
+- Shell Variables
+- Shell Scripts
+- Text Tools, sed & awk
+- Using Git
+- The Z Shell (optional extra)
