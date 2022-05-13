@@ -10,10 +10,10 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    cp /etc/hosts ~
    cat hosts
    sort hosts >hosts
-   cat hosts (the file is empty because the shell clears an existing file	before writing stdout to it with the > symbol)
+   cat hosts (the file is empty because the shell clears an existing file before writing stdout to it with the > symbol)
    tr a A <letter >newletter
    cat newletter
-   ls <letter	(ls runs normally because it does not accept stdin)
+   ls <letter (ls runs normally because it does not accept stdin)
 
 - Piping 
    cd classfiles
@@ -115,7 +115,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    sort <proposal1 <greeting >sortedresults.txt
    cat sortedresults.txt
    setopt autocd correct
-   grp	-i mother letter	(note that it prompts you to correct the command to grep)
+   grp -i mother letter (note that it prompts you to correct the command to grep)
    autoload -U compinit 
    compinit
    date - (press [Tab] to see the available date command options)
