@@ -64,6 +64,39 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    cd /etc/sysconfig/network-scripts (instead of typing this out, use the [Tab] key to autocomplete the path!)
 
 - Viewing Directory Contents:
-   
+   cd classfiles 
+   ls -F
+   ls -l 
+   file * (note the files empty and what_am_i).
+   ls -l /dev | less 
+   ls -l /run/systemd/journal/dev-log 
+   stat /run/systemd/journal/dev-log 
+   cd ; ls -a 
+   ls -l classfiles/Poems/Shakespeare 
+   ls -R classfiles/Poems 
+   tree classfiles/Poems 
+
+- Viewing the Contents of Text Files:
+   cd classfiles 
+   cat bigfile
+   more bigfile (type h for help, q to quit)
+   less bigfile (type h for help, q to quit)
+   cat letter
+   tail -8 letter
+   strings letter
+   od -x letter
+   cat /etc/hosts
+   cat Poems/Yeats/mooncat
+   cat Poems/Shakespeare/* | less 	
+   cat Poems/Blake/tiger
+   head -1 Poems/Blake/tiger
+
+- Common Text Tools:
+   cd classfiles 
+   grep "I " letter 
+   grep -v "I " letter
+   grep -i love Poems/Shakespeare/* (note the number of lines returned)
+   wc -l Poems/Shakespeare/* (was Shakespeare a romantic?) 
+
 
 
