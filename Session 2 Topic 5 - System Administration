@@ -1,6 +1,6 @@
 Run the following commands in a new Terminal on your Fedora Workstation as root:
 
-- Users & Groups
+# Users & Groups
    less /etc/login.defs
    cat /etc/default/useradd
    touch /etc/skel/policies.txt
@@ -43,7 +43,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    touch secondnewfile
    ls -l secondnewfile (note the owner of root, and group owner of sys) 
 
-- Processes 
+# Processes 
    ps -ef | less (view the processes on your system)
    ps -el | grep Z (do you have any zombie processes on your system?)
    pstree (use [Shift]+[PageUp] and [Shift]+[PageDown] to navigate)
@@ -72,7 +72,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    cat /testfile (to this in about 1 minute to see the results)
    crontab -e (save your changes when finished - use https://crontab.guru/ to interpret when /bin/false is scheduled to run!)
       15  6   1-6  *  2  /bin/false
-	    20  21  1-6  *  2  /bin/false
+      20  21  1-6  *  2  /bin/false
    crontab -l 
    ls -F /proc/1 (this is the PID for the first daemon on the system)
    cat /proc/cpuinfo
@@ -80,7 +80,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    cat /proc/uptime
    cat /proc/sys/net/ipv4/ip_forward 
   
-- Printing 
+# Printing 
    lpadmin -p p1 -E -v /dev/null -m raw  (creates a fake printer that prints to /dev/null)
    lpadmin -d p1 (sets the system default printer to p1)
    cupsaccept p1
@@ -98,18 +98,93 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    cancel p1-1 p1-2
    lpstat
    
-   - Also explore the graphical CUPS admin tool in Firefox (http://localhost:631)
+   * Also explore the graphical CUPS admin tool in Firefox (http://localhost:631)
 
-- Storage
-- Server Installation
-- Server Storage
-- System Startup & Daemons
-- Localization
-- Compression
-- Backup
-- Software 
-- Logs
-- Performance
-- Devices
-- System Rescue
+# Storage
+   ls -l /dev/sda* (note the block file type, major number and minor numbers)
+   ls -l /dev/tty[0-6] (note the character file type, major number and minor numbers)
+
+   * In the settings for your virtual machine, insert your Fedora ISO image into the virtual DVD drive. 
+   * In the GNOME desktop, navigate to Activities > Files and note that your DVD is shown as mounted. 
+
+   df -hT (note the standard partitions are mounted to /, /home and /boot, and DVD automounted to /run/media/woot/label) 
+   lsblk (swap is not mounted) 
+   ls /sys/block 
+   less /proc/devices 
+   ls /run/media/woot/label 
+   umount /run/media/woot/label
+   df -hT (verify that the virtual DVD is no longer mounted)
+   mount /dev/cdrom /mnt (/dev/cdrom is a symlink to your CD/DVD device file)
+   ls /mnt (note the DVD contents)
+   fdisk /dev/sda 
+      p 
+      n 
+      [Enter] 
+      [Enter]
+      p
+      w
+   partprobe 
+   mkfs -t ext4 /dev/sdan (where n is the partition number from fdisk)
+   mkdir /data
+   mount /dev/sdan /data
+   lsblk
+   cp -R /root/classfiles /data
+   ls /data
+   ls /data/classfiles
+   df -hT
+   umount /data
+   pvcreate /dev/sdan (choose y to remove the existing ext4 filesystem)
+   vgcreate vg00 /dev/sdan  
+   vgdisplay (note the value next to VG Size in GB for creating LVs)
+   lvcreate -L size -n data vg00 (where size is the VG Size from the last command)
+   mkfs -t ext4 /dev/vg00/data
+   mount /dev/vg00/data /data
+   lvdisplay
+   lsblk
+   df -hT
+   vi /etc/fstab (add the following line and save your changes)
+      /dev/vg00/data   /data  ext4  defaults  0  0 
+  reboot (after the system has booted, open a Terminal as root)
+  lsblk (verify that the data LV is mounted)
+
+  * In your virtualization software, add a second virtual hard disk to your Fedora Linux virtual machine (this will be /dev/sdb). 
+  
+  lsblk 
+  fdisk /dev/sdb 
+     n
+     [Enter]
+     [Enter]
+     p
+     w
+  pvcreate /dev/sdb1
+  vgextend vg00 /dev/sdb1
+  vgdisplay  (note the additional space available in the vg00 pool)
+  lvextend -L +size –r vg00/data (where size is the additional space)
+  lsblk
+  df -hT  (note that your /data volume is now much larger!)
+  umount /data
+  fsck -f /dev/vg00/data
+  echo $? (note that you receive 0, which indicates that no other errors exist)
+  mount /data (this works because of the line in /etc/fstab)
+  cd classfiles
+  mkisofs -RJ -o poems.iso Poems
+  ls -l poems.iso
+  mount -o loop -r -t iso9660 poems.iso /mnt
+  lsblk
+  df -hT
+  ls /mnt
+  ls -R /mnt
+  umount /mnt
+
+# Server Installation
+# Server Storage
+# System Startup & Daemons
+# Localization
+# Compression
+# Backup
+# Software 
+# Logs
+# Performance
+# Devices
+# System Rescue
 
