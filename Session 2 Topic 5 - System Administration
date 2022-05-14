@@ -177,6 +177,20 @@ STORAGE
   umount /mnt
 
 SERVER INSTALLATION
+  * Install Ubuntu Server (if you have not already)
+  * Open a Terminal as root on Ubuntu Server to run the following commands to examine the system configuration
+  
+  lsblk
+  fdisk -l
+  lvdisplay
+  df -hT
+  apt install net-tools cockpit
+  systemctl start cockpit
+  ifconfig (note your IP address)
+
+  * On your Windows or macOS host computer, open up your Web browser and access your Cockpit console (https://IPaddress:9090)
+  * Log into Cockpit as the root user, navigate the interface and note the configuration options.
+
 SERVER STORAGE
 SYSTEM STARTUP & DAEMONS
 LOCALISATION
