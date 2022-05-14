@@ -1,6 +1,6 @@
 Run the following commands in a new Terminal on your Fedora Workstation as root:
 
-- Manipulating Files & Directories:
+MANIPULATING FILES & DIRECTORIES
    cd classfiles 
    cp proposal1 /var
    ls /var
@@ -17,7 +17,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    rm -Rf Poems3
    ls
 
-- Finding Files on the Filesystem
+FINDING FILES ON THE FILESYSTEM
    cd classfiles
    touch newfile1
    locate newfile1 (no results in the locate database for this new file)		
@@ -32,7 +32,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    find / -name “*hosts*”
    find /usr -type d
 
-- Linking Files & Directories
+LINKING FILES & DIRECTORIES
    cd classfiles
    ll letter (note that it is not hard linked or symlinked from the link count)
    ln letter hardletter
@@ -43,7 +43,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    ll	(note the file type and target pointer)
    rm -f symletter
 
-- File & Directory Ownership
+FILE & DIRECTORY OWNERSHIP
    cd classfiles			
    ll proposal1 (note the user and group owner)
    chown nobody proposal1
@@ -52,7 +52,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    chown root.bin proposal1
    ll proposal1 (note the root user and bin group owner)
 
-- File & Directory Permissions
+FILE & DIRECTORY PERMISSIONS
    cd classfiles
    chmod u=r,g=rwx,o=w letter
    ll letter (note the mode is r--rwx-w-)
@@ -65,7 +65,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    chmod 664 letter
    ll letter (note the mode is rw-rw-r--)
 
-- Default Permissions
+DEFAULT PERMISSIONS
    umask	(note the default umask of 0022, which is 022)
    mkdir sampledir
    ll -d sampledir (note the default permissions of rwx-r-xr-x)
@@ -77,7 +77,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    touch samplefile2
    ll samplefile2 (note the default permissions of rw--------)
 
-- Special Permissions
+SPECIAL PERMISSIONS
    cd classfiles
    chmod 4666 /bin/false	
    ll /bin/false (note the capitalization indicating absence of x)
@@ -94,7 +94,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    rm -f /public/rootfile (note the error message, even though you have w permission on the directory)
    exit (log into a new terminal as root to execute commands in the next 2 sections)
    
-- File ACLs (Beyond User, Group, and Other)
+MODIFYING THE ACL (beyond User, Group, Other)
    cd classfiles
    setfacl -m u:woot:rw- letter	
    ll letter (note the + symbol next to the mode)
@@ -103,7 +103,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    ll letter (note the + symbol is no longer present)
    getfacl letter (note the absence of additional ACL entries)
 
-- Linux File Attributes
+FILE ATTRIBUTES
    cd classfiles
    lsattr letter
    chattr +i letter
