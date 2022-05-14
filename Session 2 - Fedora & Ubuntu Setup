@@ -1,4 +1,4 @@
-Installing Fedora Workstation & Obtaining Sample Files
+INSTALLING FEDORA WORKSTATION & OBTAINING SAMPLE FILES
 
 1. On your Windows or macOS computer, download the latest ISO image for Fedora Workstation from getfedora.org.
 2. Install a free hypervisor on your Windows or macOS system. 
@@ -37,7 +37,7 @@ Installing Fedora Workstation & Obtaining Sample Files
     - Type "git clone https://github.com/jasoneckert/classfiles.git" and press Enter. 
     - Type "poweroff" to shut down your Fedora virtual machine.
 
-Installing Ubuntu Server 
+INSTALLING UBUNTU SERVER (this can be done later in Topic 5)
 
 1. On your Windows or macOS computer, download the latest ISO image for Ubuntu Server from ubuntu.com/download/server. 
 2. In your hypervisor software, create a new virtual machine called "Ubuntu Server" that has 1GB of RAM, 64GB of virtual hard disk storage, 
