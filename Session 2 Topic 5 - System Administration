@@ -21,7 +21,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    grep larry /etc/shadow
    passwd -u larry
    grep larry /etc/shadow
-   chfn larry	(supply some suitable values of your choice)
+   chfn larry (supply some suitable values of your choice)
    grep larry /etc/passwd
    dnf install finger
    finger larry
@@ -29,9 +29,9 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    ls -a /home/larry (note the contents are the same as /etc/skel and include policies.txt)
    su - woot
    groups (note that you are a member of the wheel group)
-   sudo userdel larry	(supply your password of Secret555 when prompted to confirm)
+   sudo userdel larry (supply your password of Secret555 when prompted to confirm)
    su -	(supply the root user password of Secret555 when prompted)
-   ls -la /home/larry	(note that larry’s old UID owns existing files)
+   ls -la /home/larry (note that larry’s old UID owns existing files)
    useradd -m -u UID shemp (where UID is larry’s old UID)
    ls -la /home/larry /home/shemp (note that shemp owns larry’s old files)
    exit
