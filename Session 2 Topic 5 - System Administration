@@ -80,7 +80,26 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    cat /proc/uptime
    cat /proc/sys/net/ipv4/ip_forward 
   
-- Printing
+- Printing 
+   lpadmin -p p1 -E -v /dev/null -m raw  (creates a fake printer that prints to /dev/null)
+   lpadmin -d p1 (sets the system default printer to p1)
+   cupsaccept p1
+   cupsdisable p1 (this holds print jobs in the print queue)
+   lpstat -t
+   less /etc/cups/printers.conf
+   lp /etc/issue
+   lpstat
+   ls /var/spool/cups
+   lpr /etc/issue
+   lpq
+   ls /var/spool/cups
+   lpc status
+   lpstat
+   cancel p1-1 p1-2
+   lpstat
+   
+   - Also explore the graphical CUPS admin tool in Firefox (http://localhost:631)
+
 - Storage
 - Server Installation
 - Server Storage
