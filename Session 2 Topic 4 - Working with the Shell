@@ -1,6 +1,6 @@
 Run the following commands in a new Terminal on your Fedora Workstation as root:
 
-- Redirecting stdin, stdout & stderr
+REDIRECTING STDOUT, STDERR, & STDIN
    df -hT >diskspace (we examine the df command later)
    date >>diskspace
    cat diskspace
@@ -15,7 +15,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    cat newletter
    ls <letter (ls runs normally because it does not accept stdin)
 
-- Piping 
+PIPING
    cd classfiles
    grep -i mother letter | wc -l		
    cat letter | pr -d | less
@@ -24,7 +24,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    cat Poems/Shakespeare/sonnet* | wc -l
    grep -i love Poems/Shakespeare/sonnet* | wc -l
 
-- Shell Variables
+SHELL VARIABLES
    VAR1="Hello World"
    echo $VAR1
    set | grep VAR1
@@ -41,7 +41,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
       alias bye="echo Goodbye ; sleep 5 ; exit"
    source ~/.bashrc (so you don't need to open a new shell)
 
-- Shell Scripts (note that the tar command is discussed later)
+SHELL SCRIPTS (note that the tar command is discussed later)
    git clone https://github.com/jasoneckert/shellscripts.git
    cd shellscripts 
    cat script1.sh
@@ -49,7 +49,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    cat script3.sh 
    cat script5.sh
    
-- Text Tools, sed & awk
+ADVANCED TEXT TOOLS
    cd classfiles
    cut –d: -f3 /etc/passwd		
    cut –d: -f3 /etc/passwd > passfile
@@ -74,7 +74,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    awk '/Mother/ {print $1 "\t" $4}' letter 
    awk –F: '/root/ {print $3, $5}' /etc/passwd	
    
-- Using Git
+GIT
    mkdir /scripts
   	cp scriptname scriptname scriptname /scripts
   	cd /scripts
@@ -95,16 +95,16 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    git merge sample
   	cat scriptname
 
-   - Optionally create a free account on GitHub and create a public "scripts" repo. 
-   - Next, use the appropriate commands (shown on GitHub after you create a new repo) to push your /scripts repo 
+   * Optionally create a free account on GitHub and create a public "scripts" repo. 
+   * Next, use the appropriate commands (shown on GitHub after you create a new repo) to push your /scripts repo 
      to GitHub and set it as the origin (this converts your /scripts repo into a cloned copy). 
-   - When you push your /scripts repo to GitHub, you will be prompted to log in with your GitHub username and a 
+   * When you push your /scripts repo to GitHub, you will be prompted to log in with your GitHub username and a 
      personal access token (very long password) that is used in place of your real GitHub password for pushing. 
-   - You can generate a personal access token on the GitHub website by clicking your user icon and navigating to
+   * You can generate a personal access token on the GitHub website by clicking your user icon and navigating to
      Settings > Developer settings > Personal access tokens. When generating a personal access token, you must supply 
      a description, expiration and select the repo scope for it to work. 
 
-- The Z Shell (optional extra)
+THE Z SHELL (optional extra)
    cd classfiles
    grep -i mother letter >file1.txt >file2.txt
    cat file1.txt
