@@ -1,6 +1,6 @@
 Run the following commands in a new Terminal on your Fedora Workstation as root:
 
-# Users & Groups
+USERS & GROUPS
    less /etc/login.defs
    cat /etc/default/useradd
    touch /etc/skel/policies.txt
@@ -43,7 +43,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    touch secondnewfile
    ls -l secondnewfile (note the owner of root, and group owner of sys) 
 
-# Processes 
+PROCESSES 
    ps -ef | less (view the processes on your system)
    ps -el | grep Z (do you have any zombie processes on your system?)
    pstree (use [Shift]+[PageUp] and [Shift]+[PageDown] to navigate)
@@ -80,7 +80,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    cat /proc/uptime
    cat /proc/sys/net/ipv4/ip_forward 
   
-# Printing 
+PRINTING 
    lpadmin -p p1 -E -v /dev/null -m raw  (creates a fake printer that prints to /dev/null)
    lpadmin -d p1 (sets the system default printer to p1)
    cupsaccept p1
@@ -100,7 +100,7 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
    
    * Also explore the graphical CUPS admin tool in Firefox (http://localhost:631)
 
-# Storage
+STORAGE
    ls -l /dev/sda* (note the block file type, major number and minor numbers)
    ls -l /dev/tty[0-6] (note the character file type, major number and minor numbers)
 
@@ -176,15 +176,15 @@ Run the following commands in a new Terminal on your Fedora Workstation as root:
   ls -R /mnt
   umount /mnt
 
-# Server Installation
-# Server Storage
-# System Startup & Daemons
-# Localization
-# Compression
-# Backup
-# Software 
-# Logs
-# Performance
-# Devices
-# System Rescue
+SERVER INSTALLATION
+SERVER STORAGE
+SYSTEM STARTUP & DAEMONS
+LOCALISATION
+COMPRESSION
+BACKUP
+SOFTWARE
+LOGS
+PERFORMANCE
+DEVICES
+SYSTEM RESCUE
 
