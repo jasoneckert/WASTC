@@ -1,6 +1,6 @@
-Run the following commands in a new Terminal on your Fedora Workstation as root (unless specified otherwise):
-
 USERS & GROUPS
+   * Open a Terminal on your Fedora Workstation virtual machine as root
+   
    less /etc/login.defs
    cat /etc/default/useradd
    touch /etc/skel/policies.txt
@@ -44,6 +44,8 @@ USERS & GROUPS
    ls -l secondnewfile (note the owner of root, and group owner of sys) 
 
 PROCESSES 
+   * Open a Terminal on your Fedora Workstation virtual machine as root
+   
    ps -ef | less (view the processes on your system)
    ps -el | grep Z (do you have any zombie processes on your system?)
    pstree (use [Shift]+[PageUp] and [Shift]+[PageDown] to navigate)
@@ -81,6 +83,8 @@ PROCESSES
    cat /proc/sys/net/ipv4/ip_forward 
   
 PRINTING 
+   * Open a Terminal on your Fedora Workstation virtual machine as root
+   
    lpadmin -p p1 -E -v /dev/null -m raw  (creates a fake printer that prints to /dev/null)
    lpadmin -d p1 (sets the system default printer to p1)
    cupsaccept p1
@@ -101,6 +105,8 @@ PRINTING
    * Also explore the graphical CUPS admin tool in Firefox (http://localhost:631)
 
 STORAGE
+   * Open a Terminal on your Fedora Workstation virtual machine as root
+   
    ls -l /dev/sda* (note the block file type, major number and minor numbers)
    ls -l /dev/tty[0-6] (note the character file type, major number and minor numbers)
 
@@ -147,7 +153,7 @@ STORAGE
   reboot (after the system has booted, open a Terminal as root)
   lsblk (verify that the data LV is mounted)
 
-  * In your virtualization software, add a second virtual hard disk to your Fedora Linux virtual machine (this will be /dev/sdb). 
+  * In your virtualization software, add a second virtual hard disk to your Fedora Workstation virtual machine (this will be /dev/sdb). 
   
   lsblk 
   fdisk /dev/sdb 
@@ -178,7 +184,7 @@ STORAGE
 
 SERVER INSTALLATION
   * Install Ubuntu Server (if you have not already)
-  * Open a Terminal as root on Ubuntu Server to run the following commands to examine the system configuration
+  * Open a Terminal on your Ubuntu Server virtual machine as root
   
   lsblk
   fdisk -l
@@ -193,7 +199,7 @@ SERVER INSTALLATION
 
 SERVER STORAGE
   * In the Settings of your Ubuntu Server virtual machine, add 4 additional virtual disks (8GB each)
-  * Boot your Ubuntu Server virtual machine and open a Terminal as the root user
+  * Boot your Ubuntu Server virtual machine and open a Terminal as root 
   
   lsblk (note that your new block devices are detected) 
   mdadm --create /dev/md0 --level=5 --raid-devices=3 /dev/sdb /dev/sdc /dev/sdd (to create a softare RAID 5)
@@ -304,10 +310,10 @@ SERVER STORAGE
   btrfsck /dev/sdb
   poweroff
 
-  * In the Settings of your virtual machine, remove the 4 additional 8GB virtual disks you added earlier.
+  * In the Settings of your Ubuntu Server virtual machine, remove the 4 additional 8GB virtual disks you added earlier.
 
 SYSTEM STARTUP & DAEMONS
-  * On your Fedora Workstation, open a Terminal as root
+  * Open a Terminal on your Fedora Workstation virtual machine as root
   
   vi /etc/default/grub (change the GRUB_TIMEOUT to 30 seconds, saving your changes)
   grub2-mkconfig –o /boot/grub2/grub.cfg (if your hypervisor emulates standard BIOS)
@@ -342,6 +348,8 @@ SYSTEM STARTUP & DAEMONS
   * Optionally explore various unit files under the /lib/systemd/system folder, interpreting their contents. 
 
 LOCALIZATION
+  * Open a Terminal on your Fedora Workstation virtual machine as root
+
   date +%s 
   hwclock
   date
@@ -355,6 +363,8 @@ LOCALIZATION
   localectl list-keymaps | less (note the us-mac keymap for U.S. Apple keyboards)
 
 COMPRESSION
+  * Open a Terminal on your Fedora Workstation virtual machine as root
+
   dnf install ncompress	
   cd classfiles
   compress -v bigfile (note the compression ratio)
@@ -369,7 +379,77 @@ COMPRESSION
   bunzip2 bigfile.bz2		
 
 BACKUP
+  * Open a Terminal on your Fedora Workstation virtual machine as root
+
+  cd classfiles
+  tar -zcvf /sample.tar.gz Poems
+  tar -ztvf /sample.tar.gz
+  mkdir test1 && cd test1
+  tar -zxvf /sample.tar.gz
+  ls -R 
+  cd ~/classfiles 
+  find Poems | cpio -vocBL -O /sample.cpio
+  cpio -Bitv -I /sample.cpio
+  mkdir test2 && cd test2
+  cpio -vicdumB -I /sample.cpio
+  dnf install dump
+  dump -0uf /sda1.dump0 /dev/sda1 (if UEFI, use sda2 instead of sda1)
+  dump -1uf /sda1.dump1 /dev/sda1 (if UEFI, use sda2 instead of sda1)
+  cat /etc/dumpdates (note the two backups and their dump levels)
+  dd if=/dev/sda1 of=/sda1.dd
+  df -hT 
+  ls -l /sda1.dd (note the size of the backup = the size of the filesystem)
+  
 SOFTWARE
+  * Open a Terminal on your Fedora Workstation virtual machine as root
+
+  dnf groupinstall “Development Tools”   
+  git clone https://github.com/bartobri/no-more-secrets.git 
+  cd no-more-secrets 
+  less README.md
+  make nms 
+  make sneakers 
+  make install 
+  which sneakers
+  which nms
+  sneakers 
+  ls -l | nms 
+
+  dnf install nmap
+  rpm -qi nmap
+  rpm -V nmap
+  rpm -ql nmap
+  dnf info nmap
+  dnf grouplist
+  dnf list installed
+  rpm -qf /bin/bash
+
+  * Open a Terminal on your Ubuntu Server virtual machine as root
+  
+  apt install nmap
+  dpkg -l 
+  dpkg -l '*nmap*'
+  dpkg -L nmap | less
+  snap install powershell --classic
+  snap info powershell
+  snap list
+  powershell
+     Get-Host
+     exit
+
+  * Open a Terminal on your Fedora Workstation virtual machine as root
+  
+  flatpak --system remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo 
+  flatpak search vlc 
+  flatpak install flathub org.videolan.VLC (search for VLC in the GNOME desktop to run it)
+
+  * In Firefox on your Fedora Workstation (as woot), download the sample Subsurface .appimage package from https://appimage.org/ for your architecture. 
+  * Next, open a Terminal app as woot and run the following commands to run your AppImage package:
+  
+  cd Downloads 
+  chmod +x Subsurface*.appimage
+  ./Subsurface*.appimage
+
 LOGS
 PERFORMANCE
 DEVICES
