@@ -307,6 +307,40 @@ SERVER STORAGE
   * In the Settings of your virtual machine, remove the 4 additional 8GB virtual disks you added earlier.
 
 SYSTEM STARTUP & DAEMONS
+  * On your Fedora Workstation, open a Terminal as root
+  
+  vi /etc/default/grub (change the GRUB_TIMEOUT to 30 seconds, saving your changes)
+  grub2-mkconfig –o /boot/grub2/grub.cfg (if your hypervisor emulates standard BIOS)
+  grub2-mkconfig –o /boot/efi/EFI/fedora/grub.cfg (if your hypervisor emulates UEFI)
+  less /boot/grub2/grub.cfg (if standard BIOS, noting the timeout value)
+  less /boot/efi/EFI/fedora/grub.cfg (if UEFI, noting the timeout value)
+  reboot	(at the GRUB menu, press c to obtain a command prompt and run the following)
+     [Tab]
+     ls
+     [Esc]
+     e (scroll down to the linux ($root)/vmlinuz-* line, and append the word "single" to it) 
+     [F10] (supply the root password once the system reaches single user mode) 
+  runlevel 
+  reboot (press [Enter] at the GRUB menu to boot the default kernel normally - following boot, open a Terminal as root)  
+  runlevel (note that your current runlevel is 5 and previous is N)
+  init 3
+  runlevel (note that your current runlevel is 3 and previous is 5)
+  [Ctrl]+[Alt]+[F1] (note that the gdm is not available)
+  [Ctrl]+[Alt]+[F3] (log in as root)
+  startx (log out of GNOME when finished)
+  init 6 (following boot, open a Teminal as root)
+  chkconfig --list (note the livesys and livesys-late legacy daemons)
+  systemctl | grep crond (note that crond is a modern Systemd-managed daemon)
+  service crond restart	(this works because Systemd is init-compatible)
+  systemctl restart crond.service
+  systemctl status crond.service (crond is started, and set to start in the default target)
+  systemctl disable crond.service
+  systemctl status crond.service (note that crond not set to start in the default target)
+  systemctl enable crond.service
+  systemctl get-default (note that graphical.target is the default target)
+
+  * Optionally explore various unit files under the /lib/systemd/system folder, interpreting their contents. 
+
 LOCALISATION
 COMPRESSION
 BACKUP
