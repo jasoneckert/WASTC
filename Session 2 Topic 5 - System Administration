@@ -451,7 +451,88 @@ SOFTWARE
   ./Subsurface*.appimage
 
 LOGS
-PERFORMANCE
-DEVICES
-SYSTEM RESCUE
+  * Open a Terminal on your Fedora Workstation virtual machine as root
+  
+  ls /var/log
+  less /etc/logrotate.conf
+  ls /etc/logrotate.d
+  less /etc/logrotate.d/*
+  who /var/log/wtmp
+  journalctl _COMM=su 
+  journalctl _COMM=gdm --since “08:00”
+  journalctl --unit=crond.service --since “08:00”
+  journalctl --unit=cups.service --since “08:00”
+  journalctl -b 
+  journalctl -k 
+  dmesg | less
 
+  * Open a Terminal on your Ubuntu Server virtual machine as root
+  
+  ls /var/log
+  less /etc/logrotate.conf
+  ls /etc/logrotate.d
+  less /etc/logrotate.d/*
+  who -f /var/log/wtmp
+  less /etc/rsyslog.conf
+  less /etc/rsyslog.d/50-default.conf
+  less /var/log/kern.log
+  less /var/log/syslog
+  less /var/log/boot.log
+
+PERFORMANCE
+  * Open a Terminal on your Fedora Workstation virtual machine as root
+  
+  dnf install sysstat iotop ioping iftop
+  mpstat 2 5
+  pidstat
+  iostat
+  vmstat
+  free
+  sar -u 2 5
+  sar -q 2 5
+  sar -d 2 5
+  sar -f /var/log/sa/saX (where X is the day of the month – this will work tomorrow!)
+  top
+  iotop
+  ioping /dev/sda
+  iftop
+  uptime
+  tload (use [Ctrl]+c to quit)
+  w
+
+DEVICES
+  * Open a Terminal on your Fedora Workstation virtual machine as root
+  
+  dnf install lshw
+  lshw -class network (note the driver used)
+  lsmod | less (note that your driver is listed)
+  modprobe dummy (dummy is a fake network card driver used for testing only) 
+  lsmod | grep dummy (note that your driver is listed)
+  modinfo dummy
+  rmmod dummy
+  less /etc/modprobe.d/* (note any manually-loaded modules)
+  poweroff (for next section)
+
+SYSTEM RESCUE
+  * In the settings of your Fedora Workstation virtual machine:
+     a) Insert the Fedora installation ISO into the virtual DVD, and 
+     b) Ensure that the virtual DVD is listed first in the boot order 
+
+  * Start your Fedora Workstation virtual machine
+  * Once the live distro has loaded, open a Terminal 
+     su -
+     df -hT	(note the partitions that are mounted)
+     ls -l / (note that there are fewer directories under the root of the live distribution)
+     fsck -f device1 (where device1 is the device file for your root filesystem – e.g. /dev/sda3)  
+     mount device1 /mnt
+     mount device2 /mnt/boot (where device2 is the device file for your /boot filesystem – e.g. /dev/sda1)
+     mount -t proc proc /proc	(this activates the /proc filesystem)
+     chroot /mnt (changes the system root from the live distribution to the root of the system installed on /dev/sda as the root user)
+     ls -l / (note that you are on the root filesystem on /dev/sda)
+     cat /etc/fstab	(note the entry you created earlier in this chapter)
+     passwd root (specify a new root password of your choice)
+     exit
+     poweroff
+
+   * In the settings of your Fedora Workstation virtual machine, remove the Fedora Workstation installation media from the virtual DVD drive
+   * Boot your Fedora Workstation virtual machine and obtain a Terminal as root (using your new password!)
