@@ -341,7 +341,19 @@ SYSTEM STARTUP & DAEMONS
 
   * Optionally explore various unit files under the /lib/systemd/system folder, interpreting their contents. 
 
-LOCALISATION
+LOCALIZATION
+  date +%s 
+  hwclock
+  date
+  timedatectl
+  ls -l /etc/localtime
+  cat /proc/cmdline (note the kernel that was loaded during the previous boot did not receive a locale from GRUB)
+  locale
+  localectl
+  locale –a | less
+  localectl list-locales | less
+  localectl list-keymaps | less (note the us-mac keymap for U.S. Apple keyboards)
+
 COMPRESSION
 BACKUP
 SOFTWARE
