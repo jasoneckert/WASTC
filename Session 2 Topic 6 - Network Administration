@@ -194,7 +194,113 @@ SAMBA
   * If your host OS is macOS, open the Finder app and navigate to Go > Connect to Server and enter smb://ubuntu and click Connect (note the connection in your Finder)
 
 APACHE
-   * Open a Terminal on your Fedora Workstation virtual machine as root
+   * Open a Terminal on your Ubuntu Server virtual machine as root
+   
+  apt install apache2
+  systemctl enable apache2.service
+  systemctl status apache2.service
+  ps -ef | grep apache (note that additional Apache daemons run as www-data)
+  grep RUN /etc/apache2/envvars (note that the default user and group are www-data)
+  grep ^User /etc/apache2/apache2.conf
+  grep ^Group /etc/apache2/apache2.conf  
+
+  grep LOG /etc/apache2/envvars (note that logs are stored in /var/log/apache2)
+  grep ErrorLog /etc/apache2/apache2.conf  
+  grep LogLevel /etc/apache2/apache2.conf
+  cat /var/log/apache/error.log
+
+  grep LogFormat /etc/apache2/apache2.conf (note the log formats defined)
+  ls -l /etc/apache2/sites-enabled (note the symlink to ../sites-available/000-default.conf)
+  less /etc/apache2/sites-available/000-default.conf (note the default virtual host that listens for HTTP requests on port 80 and serves Web content from the /var/www/html document root directory, logging each hit to access.log using a combined log format)
+  less /etc/apache2/apache2.conf (note the <Directory /> and <Directory /var/www/> block directives that deny access to / and allow access to /var/www/ and its subdirectories)
+  less /var/www/html/index.html 
+  curl http://localhost | less (note the same HTML webpage)
+
+  * Open a Web browser on your Windows or macOS PC and navigate to http://UbuntuIPaddress to view your webpage
+  * Next, run the following commands
+
+  ls -l /var/www/html/index.html (note the owner/group = root, and the mode = 644)
+  chmod 640 /var/www/html/index.html
+
+  * Refresh the webpage in your Web browser and note the Forbidden (HTTP 403) error 
+  * Next, run the following command
+  
+  chgrp www-data /var/www/html/index.html
+
+  * Refresh the webpage in your Web browser and note the webpage displays properly. 
+  * Next, run the following commands
+  
+  cat /var/log/apache2/access.log 
+  vi /etc/apache2/sites-available/000-default.conf 
+  
+  
+  
+  . Change combined to referer at the end of the CustomLog line, save your changes and quit the vi editor. Next, run the apachectl configtest command to check for syntax errors, and then run the apachectl graceful command to restart the Apache daemons.
+6. Refresh the webpage in your Web browser five times. Next, run the cat /var/log/apache2/access.log command, noting that the last 5 lines only log the requested resource (index.html).
+
+7. Run the ab -n 1000 -c 100 http://localhost/ command to test the responsiveness of your Apache server.
+
+8. Run the useradd –m shrek command to create the shrek user. Next, run the mkdir /home/shrek/public_html command to create a Web content folder for shrek. Next, create a new /home/shrek/public_html/index.html file using the vi editor with the following contents (save and quit the vi editor when finished):
+  <html>
+      <body>
+          <h1> Welcome to Shreks Homepage! </h1>
+      </body>
+  </html>
+
+9. Run the cat /etc/apache2/mods-available/userdir.conf command, noting the lines that allow Apache to enter the public_html folder under everyone’s home directory, except for the root user). Next, run the following commands:
+  ls -l /etc/apache2/mods-enabled (note the absence of a shortcut to userdir.conf)
+  a2enmod userdir
+  systemctl restart apache2.service
+  ls -l /etc/apache2/mods-enabled (note the shortcut to userdir.conf)
+
+10. Open a Web browser on your Windows or macOS PC and navigate to http://UbuntuIPaddress/~shrek/ to view shrek’s webpage.
+
+11. Edit the /etc/apache2/apache2.conf file using the vi editor and add the following line to the end of the file (save and quit the vi editor when finished):
+  alias /donkey/  /home/shrek/public_html/
+
+12. Run the apachectl graceful command. Next, open a Web browser on your Windows or macOS PC and navigate to http://UbuntuIPaddress/donkey/ to view shrek’s webpage.
+
+13. Run the mkdir /var/www/html2 command to create another document root directory under /var/www/. Next, create a new /var/www/html2/index.html file using the vi editor with the following contents (save and quit the vi editor when finished):
+  <html>
+      <body>
+          <h1> It works! </h1>
+      </body>
+  </html>
+
+14. Edit the /etc/apache2/sites-available/000-default.conf file using the vi editor. Uncomment the line that says ServerName www.example.com to assign a sample host name to your first virtual host. Next, add the following lines to the end of the file to add another virtual host with a different document root directory (save and quit the vi editor when finished):
+  <VirtualHost *:80>
+      ServerName www.example2.com
+      ServerAdmin webmaster@localhost
+      DocumentRoot /var/www/html2
+      ErrorLog ${APACHE_LOG_DIR}/error.log
+      CustomLog ${APACHE_LOG_DIR}/access.log referer
+  </VirtualHost>
+
+15. Run the systemctl restart apache2.service command to restart Apache.
+
+16. If you have a Windows PC, add the following line to the bottom of the C:\Windows\System32\drivers\etc\hosts file to perform local name resolution for the two sample host names used in Step 14. If you have a macOS PC, add this same line to the bottom of your /etc/hosts file (sudo /etc/hosts): 
+  UbuntuIPaddress www.example.com www.example2.com
+
+17. Open a Web browser on your Windows or macOS PC and navigate to http://www.example.com to view the webpage from /var/www/html/. Next, navigate to http://www.example2.com to view the webpage from /var/www/html2/.
+
+ 
+18. Create a new /usr/lib/cgi-bin/hello.pl Perl script using the vi editor with the following contents (save and quit the vi editor when finished):
+  #!/usr/bin/perl
+  print "Content-type: text/html \n\n";
+  print <<"EOF";
+  <html>
+  <body>
+  <h1> Hello World!</h1>
+  </body>
+  </html>
+  EOF
+
+19. Run the chmod 755 /usr/lib/cgi-bin/hello.pl command. Next, run a2enmod cgid (to enable the CGI module) followed by systemctl restart apache2.service.  
+
+20. Open a Web browser on your Windows or macOS PC and navigate to http://www.example.com/cgi-bin/hello.pl to execute your Perl script.
+
+21. Run the openssl s_client -connect localhost:443 and note the error. Next, run openssl s_client -connect localhost:9090 to connect to Cockpit using HTTPS and note that you are successful via a self-signed certificate.
+
 WORDPRESS
    * Open a Terminal on your Fedora Workstation virtual machine as root
 POSTGRESQL
