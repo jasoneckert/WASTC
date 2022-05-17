@@ -153,7 +153,46 @@ NFS
   umount /mnt
 
 SAMBA
-   * Open a Terminal on your Fedora Workstation virtual machine as root
+   * Open a Terminal on your Ubuntu Server virtual machine as root
+ 
+  apt install samba smbclient cifs-utils
+  ps –ef | grep mbd (note that smbd and nmbd are running)
+
+  vi /etc/samba/smb.conf 
+     * View the comments and then add the following line under the workgroup = WORKGROUP line
+     netbios name = ubuntu
+
+     * Uncomment/modify the section that shares out all home directories:
+     [homes]
+       comment = Home Directories
+       browseable = yes
+       read only = no
+
+     * Add the following share definition to the bottom of the file, saving your changes:
+     [etc]
+       comment = The etc directory
+       path = /etc
+       guest ok = yes
+       read only = yes
+       browseable = yes
+
+  testparm (if you made an error, re-edit the /etc/samba/smb.conf file to fix it)
+  systemctl restart smbd.service ; systemctl restart nmbd.service 
+  smbpasswd –a root (supply Secret555 when prompted)
+  smbpasswd –a woot (supply Secret555 when prompted)
+  pdbedit –L (note that both root and woot have Samba passwords)
+  nmblookup ubuntu (note that your NetBIOS name resolves to your IP address)
+  smbclient –L ubuntu (note your shares shown, including the root home directory)
+  mount –t cifs //ubuntu/root /mnt
+  df -hT
+  ls -a /mnt (note your home directory contents)
+
+  * If your host OS is Windows, open File Explorer and enter \\ubuntu in the search bar. Next, open PowerShell as Administrator and run the following command
+  
+  net use z: \\ubuntu\woot /user:woot Secret555 (access your Z:\ mapped drive afterwards in File Explorer)
+
+  * If your host OS is macOS, open the Finder app and navigate to Go > Connect to Server and enter smb://ubuntu and click Connect (note the connection in your Finder)
+
 APACHE
    * Open a Terminal on your Fedora Workstation virtual machine as root
 WORDPRESS
