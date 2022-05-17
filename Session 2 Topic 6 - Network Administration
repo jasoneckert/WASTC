@@ -43,10 +43,10 @@ NETWORK INTERFACES & SERVICES
   nmap -sT localhost (note the telnet service listening to port 23/tcp, on demand)
   telnet localhost (log in as the root user)
   who (note that you are logged in remotely via a pseudo terminal, pts/0)
-  ss -t	(note the established telnet socket on your system – after initially connecting on port 23/tcp, communication is redirected to a random port above 32768 for the session duration)
+  ss -t (note the established telnet socket on your system – after initially connecting on port 23/tcp, communication is redirected to a random port above 32768 for the session duration)
   exit (quits your telnet session to localhost)
-  who			(note that your pseudo terminal is no longer present)
-  ss -t			(note that your telnet socket is no longer present)
+  who (note that your pseudo terminal is no longer present)
+  ss -t (note that your telnet socket is no longer present)
 
    * Open a Terminal on your Ubuntu Server virtual machine as root
   
