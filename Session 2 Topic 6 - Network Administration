@@ -61,10 +61,97 @@ NETWORK INTERFACES & SERVICES
 
 SSH
    * Open a Terminal on your Fedora Workstation virtual machine as root
+  
+  ssh woot@UbuntuIPaddress (accept the SSH host key and supply the woot user’s password when prompted)
+     su - (supply the root user’s password when prompted)
+     who (note that you are connected via a remote pseudo terminal session) 
+     exit
+  ssh-keygen (press Enter at each prompt to use default settings)
+  ssh-copy-id -i woot@UbuntuIPaddress
+  ssh woot@UbuntuIPaddress (note that you are not prompted to supply a password!)
+     exit
+  ssh woot@UbuntuIPaddress cat /etc/hosts > downloadedhosts 
+  cat downloadedhosts
+
+  * If your host OS is Windows, download and install the Putty Windows SSH client (putty.exe) from the following website: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html. 
+  * Next, run the putty.exe executable and connect to the IP address of your Ubuntu Server using SSH on port 22. Accept the SSH host key and log in as the woot user. 
+  
+     who
+     exit
+     
+  * If your host OS is macOS, navigate to Applications > Utilities > Terminal to open a shell on your local system. 
+  
+    ssh woot@UbuntuIPaddress (accept the SSH host key and supply woot’s password when prompted)
+    who
+    exit
+    
 FTP
+   * Open a Terminal on your Ubuntu Server virtual machine as root
+   
+   apt install vsftpd 
+   cp -f /etc/hosts ~woot/file1 
+   cp -f /etc/hosts ~woot/file2 
+   cp -f /etc/hosts /srv/ftp/file3 
+   vi /etc/vsftpd.conf (view the comments and ensure the following lines are uncommented, saving your changes)
+      anonymous_enable=YES 
+      write_enable=YES
+   systemctl restart vsftpd.service 
+   
    * Open a Terminal on your Fedora Workstation virtual machine as root
+ 
+   ftp UbuntuIPaddress (log in as the woot user when prompted)
+      dir (note that file1 and file2 are present)
+      lcd /etc (changes the directory on Fedora to /etc)
+      put hosts (uploads the hosts file to woot’s home directory on the Ubuntu server)
+      dir 
+      lcd / (changes the directory on Fedora to /)
+      get hosts (downloads the hosts file from the Ubuntu server to / on Fedora)
+      mget file* (press y when prompted to download the file1 and file2)
+      help 
+      bye
+  
+   ls / (note that hosts, file1, and file2 were downloaded successfully)
+   ftp UbuntuIPaddress (log in as the anonymous user when prompted)
+     dir (note that file3 is present)
+     lcd /
+     get file3
+     put file2 (note that you receive a permission error!)
+     bye 
+
+   * On your Windows or macOS host OS, open a Web browser and navigate to ftp://UbuntuIPaddress and note that you can see and download file3. 
+   * On your Windows or macOS PC, download and install the FileZilla FTP client program from https://filezilla-project.org/. 
+   * Next, open FileZilla and connect to sftp://UbuntuIPaddress as the woot user and practice some graphical file transfers. 
+   
 NFS
+   * Open a Terminal on your Ubuntu Server virtual machine as root
+ 
+  apt install nfs-kernel-server 
+  vi /etc/exports (add the following line, saving your changes)
+     /etc *(rw) 
+  exportfs -a 
+  systemctl restart nfs-kernel-server 
+  showmount –e localhost 
+  mount –t nfs localhost:/etc /mnt 
+  df -hT
+  cat /mnt/hosts (note that you are viewing /etc/hosts on the remote system via NFS)
+  umount /mnt 
+
    * Open a Terminal on your Fedora Workstation virtual machine as root
+
+  dnf install nfs-utils (this installs the NFS client utilities if not already installed)
+  mount –t nfs IPaddress:/etc /mnt (where IPaddress is your Ubuntu Server IP address)
+  df -hT 
+  ls /mnt
+  cat /mnt/hosts
+  umount /mnt 
+
+  dnf install sshfs (SSHFS is an NFS-like implementation using SSH)
+  sshfs woot@IPaddress:/etc /mnt (where IPaddress is your Ubuntu Server IP address)
+  df -hT
+  ls /mnt
+  cat /mnt/hosts 
+  umount /mnt
+
 SAMBA
    * Open a Terminal on your Fedora Workstation virtual machine as root
 APACHE
