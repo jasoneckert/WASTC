@@ -272,9 +272,48 @@ APACHE
   * Next, navigate to http://www.example2.com to view the webpage from /var/www/html2/
 
 POSTGRESQL
-   * Open a Terminal on your Fedora Workstation virtual machine as root
+   * Open a Terminal on your Ubuntu Server virtual machine as root
+   
+  apt install postgresql 
+  passwd postgres (specify Secret555 when prompted).
+  su - postgres 
+  createdb quarry  
+  psql quarry 
+     CREATE TABLE employee (Name char(20),Dept char(20),jobTitle char(20)); 
+     INSERT INTO employee VALUES ('Fred Flintstone','Quarry','Digger'); 
+     INSERT INTO employee VALUES ('Wilma Flintstone','Finance','Analyst');
+     INSERT into employee VALUES ('Barney Rubble','Sales','Neighbor');
+     INSERT INTO employee VALUES ('Betty Rubble','IT','Neighbor');
+     SELECT * from employee; 
+     \d
+     \d employee
+     \l
+     \q
+
 DNS
    * Open a Terminal on your Fedora Workstation virtual machine as root
+   
+   dnf install bind
+   curl http://triosdevelopers.com/jason.eckert/trios/example.com.dns --output /var/named/example.com.dns 	
+   cat /var/named/example.com.dns 
+   chmod 644 /var/named/example.com.dns 
+   curl http://triosdevelopers.com/jason.eckert/trios/named.conf.additions --output named.conf.additions 
+   vi /etc/named.conf 
+      * Go to the end of the file and type ":r named.conf.additions" 
+      * Ensure that the last line (the forwarders option for 8.8.8.8) is added to the options block near the top of the file (remove the word “options” when adding it to this block), and then comment this last line. 
+      * Save your changes and quit vi
+   systemctl start named.service ; systemctl enable named.service 
+
+   * Log into the GNOME desktop environment and set a static DNS server of 127.0.0.1 for your network interface in the Network tool
+   
+   nmcli connection down "name" (where name is the name of your network interface)
+   nmcli connection up "name" (where name is the name of your network interface)
+   nslookup server1.example.com (note the successful name resolution)
+   nslookup www.yahoo.com (this worked because of the forwarder configured)
+   vi /var/named/example.com.dns 	(create several resource records of your choice, saving changes)
+   systemctl restart named.service 
+   dig @localhost example.com ANY (note that your new records are shown)
+
 DHCP
    * Open a Terminal on your Fedora Workstation virtual machine as root
 NTP
