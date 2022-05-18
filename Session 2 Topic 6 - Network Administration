@@ -403,6 +403,47 @@ SECURITY BASICS
   less outputfile
 
 FIREWALLS
+   * Open a Terminal on your Ubuntu Server virtual machine as root
+  
+   iptables -L (note the default policy for each chain)
+   iptables –P INPUT DROP  
+   ping gateway	(where gateway is your default gateway – this should fail)
+   iptables -L (note the default policy for the INPUT chain)
+   iptables –A INPUT –s subnet -j ACCEPT  (where subnet is your local IP network)
+   iptables -L (note the firewall rule under the INPUT chain)
+   ping gateway	(where gateway is your default gateway – this works now because the ping reply is now allowed into your system)
+   iptables –F ; iptables –P INPUT ACCEPT 
+   iptables -L (note that your configuration has been reverted to defaults)
+   apt install nftables
+   nft add table ip filter
+   nft add chain ip filter input
+   nft add rule ip filter input drop
+   nft add rule ip filter input tcp dport 22 accept
+   nft add rule ip filter input tcp dport 80 accept
+   nft list table ip filter
+   nft list ruleset	(same output since the ip table is the only one defined)
+   nft delete table ip filter
+   ufw enable 
+   ufw status verbose
+   ufw allow ssh ; ufw allow ftp ; ufw allow nfs 
+   ufw allow samba ; ufw allow http ; ufw allow postgres
+   ufw status verbose
+   ufw disable 
+
    * Open a Terminal on your Fedora Workstation virtual machine as root
+
+   iptables -L
+   firewall-cmd --get-zones 
+   firewall-cmd --get-services 
+   firewall-cmd --list-all-zones 
+   firewall-cmd --get-default-zone 
+   firewall-cmd --get-active-zones
+   firewall-cmd --list-all  
+   firewall-cmd --add-service samba 
+   firewall-cmd --permanent --add-service samba
+   firewall-cmd --query-service=samba  
+
+   * Log into the GNOME desktop as the woot user and explore the graphical Firewall configuration tool (Activities > Show Applications > Sundry > Firewall)
+
 SECURITY SERVICES (SELINUX & APPARMOR)
    * Open a Terminal on your Fedora Workstation virtual machine as root
