@@ -421,7 +421,7 @@ FIREWALLS
    nft add rule ip filter input tcp dport 22 accept
    nft add rule ip filter input tcp dport 80 accept
    nft list table ip filter
-   nft list ruleset	(same output since the ip table is the only one defined)
+   nft list ruleset (same output since the ip table is the only one defined)
    nft delete table ip filter
    ufw enable 
    ufw status verbose
@@ -447,3 +447,36 @@ FIREWALLS
 
 SECURITY SERVICES (SELINUX & APPARMOR)
    * Open a Terminal on your Fedora Workstation virtual machine as root
+   
+   sestatus –v (note that SELinux is enabled and enforcing by default)
+   cat /etc/selinux/config 
+   setenforce permissive
+   sestatus -v
+   setenforce enforcing
+   sestatus -v
+   ps -eZ | less
+   ls -lZ /var/* | less
+   ls -lZ classfiles (note the default type of admin_home)
+   mv text.err /var
+   ls -lZ /var (note that text.err still has the same type)
+   restorecon /var/text.err
+   ls -lZ /var (note that text.err now has a generic var type)
+   getsebool -a | less
+   less /var/log/audit/audit.log (note any SELinux violations)
+   audit2why </var/log/audit/audit.log | less (note the summaries and remediations)
+
+   * Log into the GNOME desktop environment as woot and navigate to Activities > Show Applications > SELinux Troubleshooter 
+   * Note the most recent SELinux violation and click Troubleshoot to see the commands that you can run to allow it (should it be allowed)
+   * Next, click List all Alerts to view all of the unique SELinux violations that occurred (these are parsed from /var/log/audit/audit.log)
+
+   * Open a Terminal on your Ubuntu Server virtual machine as root
+ 
+   aa-status (note the AppArmor profiles configured in enforce mode, the PowerShell profile in complain mode and the NTP daemon process in enforce mode)
+   apt install apparmor-utils
+   aa-complain /usr/sbin/ntpd
+   aa-status
+   aa-enforce /usr/sbin/ntpd
+   aa-status
+   less /etc/apparmor.d/usr.sbin.ntpd
+   ls /etc/apparmor.d/tuneables 
+   cat /etc/apparmor.d/tuneables/home 
