@@ -351,6 +351,57 @@ NTP
 
 SECURITY BASICS
    * Open a Terminal on your Fedora Workstation virtual machine as root
+   
+  nmap -sT localhost (note that telnet is not necessary)
+  systemctl stop telnet.socket ; systemctl disable telnet.socket
+  nmap -sT localhost (note that your attack surface is now lower)
+  tcpdump -i eth0	(press [Ctrl]+c after a few minutes)
+  ulimit -u	(note the default value) 
+  ulimit -u 100 ; ulimit -u
+  less /etc/security/limits.conf (read the comments and example lines)
+  dnf install expect 
+  mkpasswd-expect –l 12 –d 1 –c 1 –C 1 –s 1 -v (note the strong password generated)
+  who /var/log/wtmp 
+  last
+  lastb
+  gpg --gen-key	(supply your email and Secret555 passphrase)
+  cd classfiles
+  gpg --encrypt --sign -r email letter
+  file letter* ; head -1 letter*
+  gpg letter.gpg	(choose to overwrite letter)
+  head -1 letter
+  poweroff
+
+  * In the Settings of your virtual machine, add an additional 8GB virtual hard disk (/dev/sdc) to your Fedora Workstation virtual machine and start it. 
+  
+  fdisk /dev/sdc (create a single partition that space the entire disk)
+  cryptsetup luksFormat /dev/sdc1	(specify lUkS-555 as the passphrase)
+  cryptsetup luksOpen /dev/sdc1 private
+  mkfs -t ext4 /dev/mapper/private
+  mkdir /private
+  mount /dev/mapper/private /private 
+  cp -R classfiles/* /private
+  vi /etc/crypttab (add the line: private /dev/sdc1)
+  vi /etc/fstab (add the line: /dev/mapper/private /private ext4 defaults 0 0)
+  reboot (supply the lUkS-555 passphrase to mount /dev/sdc1, then obtain a shell as root)
+  lsblk (verify that /dev/sdc1 is mounted as a crypt volume)
+  ls /private
+
+   * Open a Terminal on your Ubuntu Server virtual machine as root
+
+  vi /etc/pam.d/common-auth (add the following line above the pam_unix.so line) 
+     auth required pam_tally2.so deny=3 unlock_time=7200
+
+  * Log into tty5 three times as woot with an incorrect password and note the warning that your account was locked when attempting to log in a fouth time. 
+  * Next, return to your previous Terminal as root
+
+  pam_tally2 (note that woot has been locked out)
+  pam_tally2 --reset --user woot 
+  apt-get install tripwire (create a passphrase of Secret555, use other defaults)
+  tripwire --init (this creates a database with the checksums/hashes of key system files)
+  tripwire --check >outputfile (this compares the checksums/hashes of files to those within the tripwire database to see if any were modified)
+  less outputfile
+
 FIREWALLS
    * Open a Terminal on your Fedora Workstation virtual machine as root
 SECURITY SERVICES (SELINUX & APPARMOR)
