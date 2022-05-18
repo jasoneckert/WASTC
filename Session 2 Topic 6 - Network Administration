@@ -220,19 +220,10 @@ APACHE
   curl http://localhost | less (note the same HTML webpage)
 
   * Open a Web browser on your Windows or macOS PC and navigate to http://UbuntuIPaddress to view your webpage
-  * Next, run the following commands
-
+ 
   ls -l /var/www/html/index.html (note the owner/group = root, and the mode = 644)
-  chmod 640 /var/www/html/index.html
-
-  * Refresh the webpage in your Web browser and note the Forbidden (HTTP 403) error 
-  * Next, run the following command
-  
-  chgrp www-data /var/www/html/index.html
-
-  * Refresh the webpage in your Web browser and note the webpage displays properly. 
-  * Next, run the following commands
-  
+  chmod 640 /var/www/html/index.html (refresh the webpage in your Web browser and note the Forbidden (HTTP 403) error) 
+  chgrp www-data /var/www/html/index.html (refresh the webpage in your Web browser and note the webpage displays properly) 
   cat /var/log/apache2/access.log 
   ab -n 1000 -c 100 http://localhost/ 
   useradd –m shrek 
@@ -255,7 +246,7 @@ APACHE
   alias /donkey/  /home/shrek/public_html/
   apachectl graceful 
   
-  * Openpen a Web browser on your Windows or macOS PC and navigate to http://UbuntuIPaddress/donkey/ to view shrek’s webpage.
+  * Open a Web browser on your Windows or macOS PC and navigate to http://UbuntuIPaddress/donkey/ to view shrek’s webpage.
 
   mkdir /var/www/html2 
   vi /var/www/html2/index.html (add the following, saving changes)
