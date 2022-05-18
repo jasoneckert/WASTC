@@ -324,7 +324,7 @@ DHCP
   firewall-cmd --add-service dhcp (allows DHCP in your firewall, discussed later)
   firewall-cmd --add-service dhcp --permanent  
 
-   * Open a Terminal on your Fedora Workstation virtual machine as root
+   * Open a Terminal on your Ubuntu Server virtual machine as root
 
    ifconfig name down ; dhclient name ; ifconfig name up (where name is your interface name) 
    
@@ -334,6 +334,21 @@ DHCP
 
 NTP
    * Open a Terminal on your Fedora Workstation virtual machine as root
+   
+  less /etc/chrony.conf (note the default pool line for NTP servers)
+  vi /etc/chrony.conf (add the allow subnet line, where subnet is your local IP subnet – e.g. 192.168.1/24)
+  systemctl restart chronyd.service 
+  firewall-cmd --add-service ntp (allows NTP in your firewall, discussed later)
+  firewall-cmd --add-service ntp --permanent 
+  chronyc sources -v (note the NTP servers queried for time) 
+
+   * Open a Terminal on your Ubuntu Server virtual machine as root
+
+  apt install ntp
+  vi /etc/ntp.conf (add this line before other pool entries: pool FedoraIP iburst)
+  systemctl restart ntp.service
+  ntpq -p	(note your Fedora time server listed) 
+
 SECURITY BASICS
    * Open a Terminal on your Fedora Workstation virtual machine as root
 FIREWALLS
