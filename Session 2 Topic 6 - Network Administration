@@ -160,15 +160,18 @@ SAMBA
 
   vi /etc/samba/smb.conf 
      * View the comments and then add the following line under the workgroup = WORKGROUP line
+     
      netbios name = ubuntu
 
-     * Uncomment/modify the section that shares out all home directories:
+     * Uncomment/modify the section that shares out all home directories
+     
      [homes]
        comment = Home Directories
        browseable = yes
        read only = no
 
-     * Add the following share definition to the bottom of the file, saving your changes:
+     * Add the following share definition to the bottom of the file, save your changes and quit vi
+     
      [etc]
        comment = The etc directory
        path = /etc
