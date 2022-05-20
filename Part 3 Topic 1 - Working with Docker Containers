@@ -55,12 +55,7 @@
 
   mkdir webappcontainer && cd webappcontainer 
   vi index.html (add the following contents, saving your changes)
-     <html>
-     <body>
-     <h1>This is a custom app!</h1>
-     </body>
-     </html>
-
+     <html><body><h1>This is a custom app!</h1></body></html>
   vi Dockerfile (add the following contents, saving your changes)
      FROM httpd
      COPY ./index.html htdocs/index.html
