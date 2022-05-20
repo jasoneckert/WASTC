@@ -15,7 +15,7 @@ In most Linux courses, there are 7 major topic areas that are essential for anyo
 - Topic 7: Cloud Technologies (we'll save this for Section 3)
 
 Most Linux concepts are easy to apply to macOS and FreeBSD UNIX. As a result, macOS and FreeBSD are often introduced as supplementary topics in Linux courses. You can learn more about them using my blog:
-- https://jasoneckert.github.io/myblog/freebsd-unix-for-linux-sysadmins/
+- https://jasoneckert.github.io/myblog/macos-for-linux-admins/
 - https://jasoneckert.github.io/myblog/freebsd-unix-for-linux-sysadmins/
 
 ## Part 3: Cloud
