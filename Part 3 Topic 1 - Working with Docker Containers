@@ -1,3 +1,4 @@
+DOCKER BASICS
   * Open a Terminal on your Fedora Workstation virtual machine as root
   
   snap install docker 
@@ -44,10 +45,27 @@
   docker container prune
   docker ps -a	   
 
+HOW MANY CONTAINERS CAN WE RUN?!?
   * To see how many comtainers can be run on a single cloud host (versus VMs), create and execute the following shell script (use Cockpit to monitor resources)
+  * For added fun, do this on a Raspberry Pi 4 (instructions on how to install Docker on the Raspberry Pi OS Linux distro, see https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo)
+  
+  COUNTER=1
+  while true
+  do
+    docker run -d -P --name site$COUNTER httpd
+    COUNTER=$(expr $COUNTER + 1)
+  done
   
   * When you are satisfied with the number of containers run, stop the shell script and create and run the following shell script to stop the containers
   
+  COUNTER=1
+  while true
+  do
+    docker stop site$COUNTER 
+    COUNTER=$(expr $COUNTER + 1)
+  done
+  
+BUILDING CONTAINERS
   * Developers often start with a pre-built container image, add their Web app to it, and then push that image to Docker Hub. 
   * To illustrate this process without creating an actual Web app, we’ll create another container image based on httpd, but with a different webpage, run it locally, and then push it to Docker Hub. 
   * First create a free account on Docker Hub (https://hub.docker.com) and follow the instructions to create a free public repository called webapp. 
