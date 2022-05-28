@@ -49,6 +49,7 @@
 - ISPs retained all other public networks, and typically allocated a single public IP to an organization for use on the external side of their proxy server or NAT router.
 - Can also have NAT behind NAT.
 
+![image](https://user-images.githubusercontent.com/40586970/170838808-fee08e43-9872-42aa-b80b-e159b869c13a.png)
 
 
 
