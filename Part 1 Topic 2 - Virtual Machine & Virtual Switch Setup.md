@@ -13,16 +13,16 @@
 2. Ensure that your Win10 host has Hyper-V installed - if not, upgrade to Win10 Pro or Education (https://portal.azure.com)
 
 3. In Hyper-V Manager (`virtmgmt.msc`):
-- Create an external, internal & private virtual switch.
-- Create a new VM called Domain Controller 
-  - Generation 2
-  - 2GB RAM (non-dynamic)
-  - External/default virtual switch
-  - Install from Windows Server 2019 ISO
-- In VM Settings, set 2 vCPUs and disable checkpoints
+   - Create an external, internal & private virtual switch.
+   - Create a new VM called Domain Controller 
+     - Generation 2
+     - 2GB RAM (non-dynamic)
+     - External/default virtual switch
+     - Install from Windows Server 2019 ISO
+   - In VM Settings, set 2 vCPUs and disable checkpoints
 
 4. Start the Domain Controller VM and install Windows Server 2019 Datacenter (Desktop)
 
 5. On your Domain Controller VM
-- Set the name (DC), time/zone, and view your DHCP-obtained IP configuration from your local LAN
-- Install Active Directory Domain Services and configure a new domain/forest of your choice (e.g. whatever.com)
+   - Set the name (DC), time/zone, and view your DHCP-obtained IP configuration from your local LAN
+   - Install Active Directory Domain Services and configure a new domain/forest of your choice (e.g. whatever.com)
