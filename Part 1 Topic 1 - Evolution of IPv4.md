@@ -32,3 +32,16 @@
 # In the 90s, hubs (multiport repeaters) created LANs
 ![image](https://user-images.githubusercontent.com/40586970/170838574-ad8a7133-658c-4ade-8166-5f19bfa11a8a.png)
 
+# To segment your 90s LAN, we invented subnetting
+![image](https://user-images.githubusercontent.com/40586970/170838652-9e9ae16a-db20-4e75-b5ef-63f632a28c91.png)
+
+![image](https://user-images.githubusercontent.com/40586970/170838666-ecb97002-fe22-44c1-9b6a-6682e2a2e2ad.png)
+
+![image](https://user-images.githubusercontent.com/40586970/170838672-a6967a98-dac8-4fdc-a417-810d129f6bdf.png)
+
+![image](https://user-images.githubusercontent.com/40586970/170838683-48751f38-1423-4838-8654-0d9decfba4da.png)
+
+
+
+
+
