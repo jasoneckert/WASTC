@@ -4,11 +4,11 @@
 - Default Virtual Switch on Win11 = virtual NAT router
 
 # Steps:
-1. Download the ISO for Windows Server 2019 (Datacenter) from https://portal.azure.com (we don’t need the key)
+1. Download the ISO for Windows Server 2019 (Datacenter) from https://portal.azure.com (we don’t need the key).
 
-2. Ensure that your Win10 host has Hyper-V installed. If not, upgrade to Win10 Pro or Education (https://portal.azure.com)
+2. Ensure that your Win10 host has Hyper-V installed. If not, upgrade to Win10 Pro or Education (https://portal.azure.com).
 
-3. In Hyper-V Manager (virtmgmt.msc):
+3. In Hyper-V Manager (`virtmgmt.msc`):
 - Create an external, internal & private virtual switch
 - Create a new VM called Server2019 
   - Generation 2
