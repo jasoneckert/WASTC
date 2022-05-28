@@ -18,10 +18,10 @@
    - In VM Settings, set 2 vCPUs and disable checkpoints
 4. Start VMA and install Windows Server 2019 Datacenter (Desktop)
 5. On VMA:
-- Set the name (VMA), time/zone, and static IP configuration of 172.16.0.1/16, DNS=172.16.0.1, GW=172.16.0.1
-- Attempt to browse the Internet as well as ping yahoo.ca (unsuccessful since your Domain Controller is not a router)
-- In VM Settings, set 2 vCPUs and disable checkpoints
+   - Set the name (VMA), time/zone, and static IP configuration of 172.16.0.1/16, DNS=172.16.0.1, GW=172.16.0.1
+   - Attempt to browse the Internet as well as ping yahoo.ca (unsuccessful since your Domain Controller is not a router)
+   - In VM Settings, set 2 vCPUs and disable checkpoints
 6. On your Domain Controller:
-- Install the Remote Access role (Routing & VPN/DirectAccess components)
-- Open the Routing and Remote Access tool and configure your Domain Controller as a NAT router (adding the correct internal and external interfaces)
+   - Install the Remote Access role (Routing & VPN/DirectAccess components)
+   - Open the Routing and Remote Access tool and configure your Domain Controller as a NAT router (adding the correct internal and external interfaces)
 7. On VMA, veriy that you now can ping yahoo.ca and have Internet access
