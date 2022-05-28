@@ -41,6 +41,15 @@
 
 ![image](https://user-images.githubusercontent.com/40586970/170838683-48751f38-1423-4838-8654-0d9decfba4da.png)
 
+# As the Internet grew, the number of public IPv4 networks wouldn't suffice
+# So we separated a public Internet from a private (reusable) Internet using proxy servers & NAT routers  
+- Private LANs inside organizations could use these IPv4 networks:
+  - 10.0.0.0 /8
+  - 172.16-31.0.0 /16
+  - 192.168.0-255.0 /24
+- ISPs retained all other public networks, and typically allocated a single public IP to an organization for use on the external side of their proxy server or NAT router.
+- Can also have NAT behind NAT.
+
 
 
 
