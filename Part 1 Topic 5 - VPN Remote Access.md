@@ -21,11 +21,10 @@
    - In the properties of your server object, ensure that the RAS server hands out IPv4 addresses 172.16.100.1-172.16.100.254 on the VPN
    - Optionally examine authentication methods and VPN types/ports 
 5. In Active Directory Users & Computers on your Domain Controller, ensure that Allow access is selected on the Dial-in tab of Administrator's user properties
-6. On VMA, add a new VPN connection in the Settings app using the following parameters:
+6. On VMA, add a new VPN connection called WorkVPN in the Settings app using the following parameters:
    - Windows (built-in) VPN provider
-   - Name = Work VPN 
    - Server name or address = IP of the Domain Controller on the external virtual switch (e.g. 192.168.1.107) 
-   - VPN type = Point to Point Tunneling Protocol (PPTP) 
+   - Point to Point Tunneling Protocol (PPTP) 
 7. Connect to your VPN (sign in as Administrator in your domain).
 8. On VMA, examine your IP configuration using `ipconfig` or `Get-NetIPConfiguration` (note that you have two network interfaces: your original one and a new one called “PPP adapter Work VPN” that has an IP on the 172.16.0.0/16 network. Also note that your default gateway is set to 0.0.0.0 for this additional network interface to force traffic through the VPN)
 9. Repeat the previous step on your Domain Controller
