@@ -5,10 +5,7 @@
 # IPv4 Addressing 
 - Each IP address has a network & host portion
 - Subnet mask is used to determine which portion is the network portion 
-	`192.168.1. .55` 
-  `255.255.255.0`
-	= host 55 on the 192.168.1 network
-
+- e.g., 192.168.1.55 and 255.255.255.0 = host 55 on the 192.168.1 network
 
 # IPv4 Address Classes
 - First number (octet) determines the class and default subnet mask
@@ -16,7 +13,18 @@
   - 128-191 = Class B (subnet mask 255.255.0.0)
   - 192-223 = Class C (subnet mask 255.255.255.0)
   - 224+ = Class D/E (multicasting/unused)
+  - e.g., 192.168.1.55 is a Class C, and 62.44.6.2 is a Class A
 
-  192.168.1.55 is a Class C
-  62.44.6.2 is a Class A
+# IPv4 Address Classes
+- We often use CIDR notations for subnet masks:
+  - 255.0.0.0 = /8 
+  - 255.255.0.0 = /16 
+  - 255.255.255.0 = /24
+
+- First address = network ID
+- Last address = broadcast ID
+  - e.g. 192.168.1.0 (= 192.168.1.0 network), and 192.168.1.255 (= all hosts on 192.168.1.0 network)
+
+- APIPA (can’t get a DHCP address? 169.254.*.*)
+
 
