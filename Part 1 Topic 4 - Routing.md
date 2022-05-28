@@ -25,5 +25,5 @@
 4. Add the Remote Access role (Routing & VPN/DirectAccess) to VMA
 5. In Routing and Remote Access on your Domain Controller, unconfigure and reconfigure your system as a regular router
 6. In Routing and Remote Access on VMA, configure your system as a regular router
-7. Create the necessary routes to the 192.168.1.0 and 10.0.0.0 networks and ensure that hosts can ping back and forth
+7. Create the necessary routes to the 192.168.1.0/24 and 10.0.0.0/8 networks and ensure that hosts can ping back and forth
 8. Delete your static routes & add RIP (add interface for the DMZ network only) - note that the routes are re-added by RIP & ping back and forth to test
