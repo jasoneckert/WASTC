@@ -1,4 +1,4 @@
-# Rules of IP:
+# Rules of IP
 - Two hosts can directly talk only if they are on the same LAN
 - To communicate to a host on another LAN, the packet must be passed through a router (= default gateway)
 
@@ -26,4 +26,7 @@
   - 192.168.1.255 (= all hosts on 192.168.1.0 network)
 - APIPA (can’t get a DHCP address? 169.254.*.*)
 
+# Today, switchs create LANs
+![image](https://user-images.githubusercontent.com/40586970/170838574-ad8a7133-658c-4ade-8166-5f19bfa11a8a.png)
 
+# In the 90s, hubs (multiport repeaters) created LANs
