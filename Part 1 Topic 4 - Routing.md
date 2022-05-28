@@ -1,4 +1,4 @@
-# Every device that has the IP protocol MUST have a route table:
+# Every device that has the IP protocol MUST have a route table
 - Defines where to go, how to get there
 - For VMA:
   - 172.16.0.0/16, 172.16.0.2
