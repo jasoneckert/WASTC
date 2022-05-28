@@ -26,4 +26,3 @@
 5. On your Domain Controller VM
 - Set the name (DC), time/zone, and view your DHCP-obtained IP configuration from your local LAN
 - Install Active Directory Domain Services and configure a new domain/forest of your choice (e.g. whatever.com)
-- 
