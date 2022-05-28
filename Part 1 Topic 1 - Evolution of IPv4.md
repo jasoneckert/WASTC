@@ -27,6 +27,8 @@
 - APIPA (can’t get a DHCP address? 169.254.*.*)
 
 # Today, switchs create LANs
-![image](https://user-images.githubusercontent.com/40586970/170838574-ad8a7133-658c-4ade-8166-5f19bfa11a8a.png)
+![image](https://user-images.githubusercontent.com/40586970/170838591-d6f94439-1745-434b-b80b-169ab2c07535.png)
 
 # In the 90s, hubs (multiport repeaters) created LANs
+![image](https://user-images.githubusercontent.com/40586970/170838574-ad8a7133-658c-4ade-8166-5f19bfa11a8a.png)
+
