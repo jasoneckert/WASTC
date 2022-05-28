@@ -11,9 +11,9 @@
 3. In Hyper-V Manager (virtmgmt.msc):
 - Create an external, internal & private virtual switch
 - Create a new VM called Server2019 
-- - Generation 2
-- - 2GB RAM (non-dynamic)
-- - External/default virtual switch
-- - Install from Windows Server 2019 ISO
+  - Generation 2
+  - 2GB RAM (non-dynamic)
+  - External/default virtual switch
+  - Install from Windows Server 2019 ISO
 - In VM Settings, set 2 vCPUs and disable checkpoints.
 - Start the VM and install Windows Server 2019 Datacenter (Desktop)
