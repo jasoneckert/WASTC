@@ -21,8 +21,9 @@
   - 255.255.0.0 = /16 
   - 255.255.255.0 = /24
 - First address = network ID
+  - 192.168.1.0 (= 192.168.1.0 network)
 - Last address = broadcast ID
-  - e.g. 192.168.1.0 (= 192.168.1.0 network), and 192.168.1.255 (= all hosts on 192.168.1.0 network)
+  - 192.168.1.255 (= all hosts on 192.168.1.0 network)
 - APIPA (can’t get a DHCP address? 169.254.*.*)
 
 
