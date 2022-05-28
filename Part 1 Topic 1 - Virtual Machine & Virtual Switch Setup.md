@@ -1,2 +1,14 @@
 # Virtual Switches in Hyper-V
+![image](https://user-images.githubusercontent.com/40586970/170838173-0cc0b4d3-446f-48b9-aec9-2cb17879f983.png)
+
+1. Download the ISO for Windows Server 2019 (Datacenter) from https://portal.azure.com (we don’t need the key)
+
+2. Ensure that your Win10 host has Hyper-V installed. If not, upgrade to Win10 Pro or Education (https://portal.azure.com)
+
+3. In Hyper-V Manager (virtmgmt.msc):
+- Create an external, internal & private virtual switch
+- Create a new VM called Server2019 (Gen2, 2GB RAM non-dynamic, external/default virtual switch, install from Windows Server 2019 ISO)
+- In VM Settings, set 2 vCPUs and disable checkpoints.
+- Start the VM and install Windows Server 2019 Datacenter (Desktop) 
+![image](https://user-images.githubusercontent.com/40586970/170838131-47c0e69b-992c-4ddf-9b11-a156f63755c1.png)
 
