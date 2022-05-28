@@ -1,8 +1,9 @@
-# Virtual Switches in Hyper-V
+# Virtual Switches in Hyper-V:
 ![image](https://user-images.githubusercontent.com/40586970/170838173-0cc0b4d3-446f-48b9-aec9-2cb17879f983.png)
 
 - Default Virtual Switch on Win11 = virtual NAT router
 
+# Steps:
 1. Download the ISO for Windows Server 2019 (Datacenter) from https://portal.azure.com (we don’t need the key)
 
 2. Ensure that your Win10 host has Hyper-V installed. If not, upgrade to Win10 Pro or Education (https://portal.azure.com)
