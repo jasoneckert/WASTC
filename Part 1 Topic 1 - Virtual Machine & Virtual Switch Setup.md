@@ -9,6 +9,4 @@
 - Create an external, internal & private virtual switch
 - Create a new VM called Server2019 (Gen2, 2GB RAM non-dynamic, external/default virtual switch, install from Windows Server 2019 ISO)
 - In VM Settings, set 2 vCPUs and disable checkpoints.
-- Start the VM and install Windows Server 2019 Datacenter (Desktop) 
-![image](https://user-images.githubusercontent.com/40586970/170838131-47c0e69b-992c-4ddf-9b11-a156f63755c1.png)
-
+- Start the VM and install Windows Server 2019 Datacenter (Desktop)
