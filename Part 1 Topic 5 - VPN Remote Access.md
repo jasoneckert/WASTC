@@ -31,5 +31,5 @@
 9. Repeat the previous step on your Domain Controller
 10. In Routing and Remote Access on your Domain Controller, view your active connection
 11. On VMA
-   - Connect to \\\\IPaddress (where IPaddress is the IP address of your Domain Controller on the external virtual switch) - note the shared folders that you can access unencrypted
-   - Connect to \\\\172.16.0.1 (in your DMZ) to access the same shared folders across the encrypted VPN tunnel
+   - Connect to `\\\\IPaddress` (where IPaddress is the IP address of your Domain Controller on the external virtual switch) - note the shared folders that you can access unencrypted
+   - Connect to `\\\\172.16.0.1` (in your DMZ) to access the same shared folders across the encrypted VPN tunnel
