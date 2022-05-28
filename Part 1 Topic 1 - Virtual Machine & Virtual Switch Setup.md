@@ -1,4 +1,8 @@
 # Virtual Switches in Hyper-V:
+![image](https://user-images.githubusercontent.com/40586970/170838298-d9bd0ca2-6658-4d17-9df7-7cd31148cbb4.png)
+
+![image](https://user-images.githubusercontent.com/40586970/170838306-5bc9aa9d-56ff-4c34-bc3b-f48b57f3b4ef.png)
+
 ![image](https://user-images.githubusercontent.com/40586970/170838173-0cc0b4d3-446f-48b9-aec9-2cb17879f983.png)
 
 - Default Virtual Switch on Win11 = virtual NAT router
