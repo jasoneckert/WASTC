@@ -1,7 +1,7 @@
 # ***NOTE: Run the commands in the following sections within a new Terminal on your Fedora Workstation as root:***
 
 # Redirection
-   - `df -hT >diskspace` (we examine the df command later)
+   - `df -hT >diskspace` (we examine the `df` command later)
    - `date >>diskspace`
    - `cat diskspace`
    - `ls letter lett >good 2>bad`
@@ -10,7 +10,7 @@
    - `cp /etc/hosts ~`
    - `cat hosts`
    - `sort hosts >hosts`
-   - `cat hosts` (the file is empty because the shell clears an existing file before writing stdout to it with the > symbol)
+   - `cat hosts` (the file is empty because the shell clears an existing file before writing stdout to it with the `>` symbol)
    - `tr a A <letter >newletter`
    - `cat newletter`
    - `ls <letter` (ls runs normally because it does not accept stdin)
@@ -31,9 +31,9 @@
    - `env | grep VAR1` (VAR1 is not shown, as it was not exported)
    - `export VAR1`
    - `env | grep VAR1`
-   - `PS1='C:${PWD////\\\\}>  ' 
+   - `PS1='C:${PWD////\\\\}>  '` 
    - `cat ~/.bash_profile` (on Fedora, it runs .bashrc first if it exists)
-   - `cat ~/.bashrc` (note the aliases for rm, cp and mv)
+   - `cat ~/.bashrc` (note the aliases for `rm`, `cp` and `mv`)
    - `exit` (open a new shell as the root user)
    - `echo $VAR1`
    - `vi ~/.bashrc` (add the following lines, save and quit)
