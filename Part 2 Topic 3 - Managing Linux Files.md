@@ -17,7 +17,7 @@
    - `rm -Rf Poems3`
    - `ls`
 
-FINDING FILES ON THE FILESYSTEM
+# Finding Files
    - `cd classfiles`
    - `touch newfile1`
    - `locate newfile1` (no results in the locate database for this new file)		
@@ -32,7 +32,7 @@ FINDING FILES ON THE FILESYSTEM
    - `find / -name “*hosts*”`
    - `find /usr -type d`
 
-LINKING FILES & DIRECTORIES
+# File Linking
    - `cd classfiles`
    - `ll letter` (note that it is not hard linked or symlinked from the link count)
    - `ln letter hardletter`
@@ -43,7 +43,7 @@ LINKING FILES & DIRECTORIES
    - `ll`	(note the file type and target pointer)
    - `rm -f symletter`
 
-FILE & DIRECTORY OWNERSHIP
+# Ownership
    - `cd classfiles`			
    - `ll proposal1` (note the user and group owner)
    - `chown nobody proposal1`
@@ -52,7 +52,7 @@ FILE & DIRECTORY OWNERSHIP
    - `chown root.bin proposal1`
    - `ll proposal1` (note the root user and bin group owner)
 
-FILE & DIRECTORY PERMISSIONS
+# Permissions
    - `cd classfiles`
    - `chmod u=r,g=rwx,o=w letter`
    - `ll letter` (note the mode is r--rwx-w-)
@@ -65,7 +65,7 @@ FILE & DIRECTORY PERMISSIONS
    - `chmod 664 letter`
    - `ll letter` (note the mode is rw-rw-r--)
 
-DEFAULT PERMISSIONS
+# Default Permissions
    - `umask`	(note the default umask of 0022, which is 022)
    - `mkdir sampledir`
    - `ll -d sampledir` (note the default permissions of rwx-r-xr-x)
@@ -77,7 +77,7 @@ DEFAULT PERMISSIONS
    - `touch samplefile2`
    - `ll samplefile2` (note the default permissions of rw--------)
 
-SPECIAL PERMISSIONS
+# Special Permissions
    - `cd classfiles`
    - `chmod 4666 /bin/false`	
    - `ll /bin/false` (note the capitalization indicating absence of x)
@@ -94,7 +94,7 @@ SPECIAL PERMISSIONS
    - `rm -f /public/rootfile` (note the error message, even though you have w permission on the directory)
    - `exit` (log into a new terminal as root to execute commands in the next 2 sections)
    
-MODIFYING THE ACL (beyond User, Group, Other)
+# Modifying the ACL (beyond User, Group, Other)
    - `cd classfiles`
    - `setfacl -m u:woot:rw- letter`	
    - `ll letter` (note the + symbol next to the mode)
@@ -103,7 +103,7 @@ MODIFYING THE ACL (beyond User, Group, Other)
    - `ll letter` (note the + symbol is no longer present)
    - `getfacl letter` (note the absence of additional ACL entries)
 
-FILE ATTRIBUTES
+# File Attributes
    - `cd classfiles`
    - `lsattr letter`
    - `chattr +i letter`
