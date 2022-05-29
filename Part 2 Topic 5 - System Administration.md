@@ -399,7 +399,7 @@
   - `dnf grouplist`
   - `dnf list installed`
   - `rpm -qf /bin/bash`
-  * Open a Terminal on your Ubuntu Server virtual machine as root
+  - Open a Terminal on your Ubuntu Server virtual machine as root
   - `apt install nmap`
   - `dpkg -l`
   - `dpkg -l '*nmap*'`
