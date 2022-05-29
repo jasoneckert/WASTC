@@ -24,28 +24,28 @@
 # ***Run the following commands in a new Terminal on your Fedora Workstation as root:***
 
 # Basic Shell Usage
-   `date`
-   `who`
-   `w`
-   `uname -a`
-   `date;id;who`
-   `echo We use the $SHELL shell`
-   `echo 'You owe me $4.50'`
-   `echo "You owe me $4.50"`
-   `echo You owe me \$4.50`
-   `clear`
-   `reset`
-   `wall "The system will reboot in 5 minutes"`
-   `shutdown -r +5 minutes`
-   `shutdown -c`(cancels reboot)
-   `reboot`
+   - `date`
+   - `who`
+   - `w`
+   - `uname -a`
+   - `date;id;who`
+   - `echo We use the $SHELL shell`
+   - `echo 'You owe me $4.50'`
+   - `echo "You owe me $4.50"`
+   - `echo You owe me \$4.50`
+   - `clear`
+   - `reset`
+   - `wall "The system will reboot in 5 minutes"`
+   - `shutdown -r +5 minutes`
+   - `shutdown -c`(cancels reboot)
+   - `reboot`
 
 # Obtaining Command Help
-   `whatis crontab`
-   `man crontab` (use `q` or `[Ctrl]+c` to quit out of any interactive utility)
-   `man 5 crontab`
-   `man -k cron`
-   `info crontab`
-   `help | more`
-   `help echo`
-   `help help`
+   - `whatis crontab`
+   - `man crontab` (use `q` or `[Ctrl]+c` to quit out of any interactive utility)
+   - `man 5 crontab`
+   - `man -k cron`
+   - `info crontab`
+   - `help | more`
+   - `help echo`
+   - `help help`
