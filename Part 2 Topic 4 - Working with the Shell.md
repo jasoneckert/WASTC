@@ -13,7 +13,7 @@
    - `cat hosts` (the file is empty because the shell clears an existing file before writing stdout to it with the `>` symbol)
    - `tr a A <letter >newletter`
    - `cat newletter`
-   - `ls <letter` (ls runs normally because it does not accept stdin)
+   - `ls <letter` (`ls` runs normally because it does not accept stdin)
 
 # Piping
    - `cd classfiles`
@@ -94,7 +94,6 @@
   	- `cat scriptname`
    - `git merge sample`
   	- `cat scriptname`
-
    - Optionally create a free account on GitHub and create a public "scripts" repo. 
    - Next, use the appropriate commands (shown on GitHub after you create a new repo) to push your /scripts repo to GitHub and set it as the origin (this converts your /scripts repo into a cloned copy). 
    - When you push your /scripts repo to GitHub, you will be prompted to log in with your GitHub username and a personal access token (very long password) that is used in place of your real GitHub password for pushing. 
