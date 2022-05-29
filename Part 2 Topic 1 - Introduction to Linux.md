@@ -21,7 +21,7 @@
    - Use the KDE start menu to locate the Terminal app to obtain a bash shell and run the who command. 
    - Log out of the KDE desktop environment. 
 
-## ***Run the commands in the following sections within a new Terminal on your Fedora Workstation as root:***
+## ***NOTE: Run the commands in the following sections within a new Terminal on your Fedora Workstation as root:***
 
 # Basic Shell Usage
    - `date`
