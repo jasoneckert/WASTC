@@ -111,7 +111,7 @@
    - `sort <proposal1 <greeting >sortedresults.txt`
    - `cat sortedresults.txt`
    - `setopt autocd correct`
-   - `grp -i mother letter` (note that it prompts you to correct the command to grep)
+   - `grp -i mother letter` (note that it prompts you to correct the command to `grep`)
    - `autoload -U compinit`
    - `compinit`
    - `date -` (press `[Tab]` to see the available date command options)
