@@ -32,3 +32,7 @@
 11. On VMA
    - Connect to `\\IPaddress` (where IPaddress is the IP address of your Domain Controller on the external virtual switch) - note the shared folders that you can access unencrypted
    - Connect to `\\172.16.0.1` (in your DMZ) to access the same shared folders across the encrypted VPN tunnel
+
+# Understanding how VPNs provide for continuity between private LANs
+![image](https://user-images.githubusercontent.com/40586970/170846571-d7cab8b0-8217-4de8-a9bc-4476d4c8bae5.png)
+
