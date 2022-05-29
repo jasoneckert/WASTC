@@ -79,21 +79,21 @@
    - `cp scriptname scriptname scriptname /scripts`
    - `cd /scripts`
    - `git config --global user.name name`
-  	- `git config --global user.email emailaddress`
-  	- `git init`
-  	- `git status`
-  	- `git add .`
-  	- `git commit -m "My first snapshot"`
-  	- `git log`
+   - `git config --global user.email emailaddress`
+   - `git init`
+   - `git status`
+   - `git add .`
+   - `git commit -m "My first snapshot"`
+   - `git log`
    - `git checkout -b sample`
-  	- `git branch`
+   - `git branch`
    - `vi scriptname`
-  	- `git add .`
-  	- `git commit -m "Description"`
+   - `git add .`
+   - `git commit -m "Description"`
    - `git checkout master`
-  	- `cat scriptname`
+   - `cat scriptname`
    - `git merge sample`
-  	- `cat scriptname`
+   - `cat scriptname`
    - Optionally create a free account on GitHub and create a public "scripts" repo. 
    - Next, use the appropriate commands (shown on GitHub after you create a new repo) to push your /scripts repo to GitHub and set it as the origin (this converts your /scripts repo into a cloned copy). 
    - When you push your /scripts repo to GitHub, you will be prompted to log in with your GitHub username and a personal access token (very long password) that is used in place of your real GitHub password for pushing. 
