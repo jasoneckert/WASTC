@@ -338,71 +338,71 @@
 
 # Firewalls
   - Open a Terminal on your Ubuntu Server virtual machine as root
-  - `iptables -L (note the default policy for each chain)
-  - `iptables –P INPUT DROP  
-  - `ping gateway	(where gateway is your default gateway – this should fail)
-  - `iptables -L (note the default policy for the INPUT chain)
-  - `iptables –A INPUT –s subnet -j ACCEPT  (where subnet is your local IP network)
-  - `iptables -L (note the firewall rule under the INPUT chain)
-  - `ping gateway	(where gateway is your default gateway – this works now because the ping reply is now allowed into your system)
-  - `iptables –F ; iptables –P INPUT ACCEPT 
-  - `iptables -L (note that your configuration has been reverted to defaults)
-  - `apt install nftables
-  - `nft add table ip filter
-  - `nft add chain ip filter input
-  - `nft add rule ip filter input drop
-  - `nft add rule ip filter input tcp dport 22 accept
-  - `nft add rule ip filter input tcp dport 80 accept
-  - `nft list table ip filter
-  - `nft list ruleset (same output since the ip table is the only one defined)
-  - `nft delete table ip filter
-  - `ufw enable 
-  - `ufw status verbose
-  - `ufw allow ssh ; ufw allow ftp ; ufw allow nfs 
-  - `ufw allow samba ; ufw allow http ; ufw allow postgres
-  - `ufw status verbose
-  - `ufw disable 
+  - `iptables -L` (note the default policy for each chain)
+  - `iptables –P INPUT DROP`  
+  - `ping gateway`	(where gateway is your default gateway – this should fail)
+  - `iptables -L` (note the default policy for the INPUT chain)
+  - `iptables –A INPUT –s subnet -j ACCEPT`  (where subnet is your local IP network)
+  - `iptables -L` (note the firewall rule under the INPUT chain)
+  - `ping gateway`	(where gateway is your default gateway – this works now because the ping reply is now allowed into your system)
+  - `iptables –F ; iptables –P INPUT ACCEPT` 
+  - `iptables -L` (note that your configuration has been reverted to defaults)
+  - `apt install nftables`
+  - `nft add table ip filter`
+  - `nft add chain ip filter input`
+  - `nft add rule ip filter input drop`
+  - `nft add rule ip filter input tcp dport 22 accept`
+  - `nft add rule ip filter input tcp dport 80 accept`
+  - `nft list table ip filter`
+  - `nft list ruleset` (same output since the ip table is the only one defined)
+  - `nft delete table ip filter`
+  - `ufw enable` 
+  - `ufw status verbose`
+  - `ufw allow ssh ; ufw allow ftp ; ufw allow nfs` 
+  - `ufw allow samba ; ufw allow http ; ufw allow postgres`
+  - `ufw status verbose`
+  - `ufw disable` 
   - Open a Terminal on your Fedora Workstation virtual machine as root
-  - `iptables -L
-  - `firewall-cmd --get-zones 
-  - `firewall-cmd --get-services 
-  - `firewall-cmd --list-all-zones 
-  - `firewall-cmd --get-default-zone 
-  - `firewall-cmd --get-active-zones
-  - `firewall-cmd --list-all  
-  - `firewall-cmd --add-service samba 
-  - `firewall-cmd --permanent --add-service samba
-  - `firewall-cmd --query-service=samba  
+  - `iptables -L`
+  - `firewall-cmd --get-zones` 
+  - `firewall-cmd --get-services` 
+  - `firewall-cmd --list-all-zones` 
+  - `firewall-cmd --get-default-zone`
+  - `firewall-cmd --get-active-zones`
+  - `firewall-cmd --list-all`  
+  - `firewall-cmd --add-service samba` 
+  - `firewall-cmd --permanent --add-service samba`
+  - `firewall-cmd --query-service=samba`  
   - Log into the GNOME desktop as the woot user and explore the graphical Firewall configuration tool (Activities > Show Applications > Sundry > Firewall)
 
 # Security Services (SELinux & AppArmor)
   - Open a Terminal on your Fedora Workstation virtual machine as root
-  - `sestatus –v (note that SELinux is enabled and enforcing by default)
-  - `cat /etc/selinux/config 
-  - `setenforce permissive
-  - `sestatus -v
-  - `setenforce enforcing
-  - `sestatus -v
-  - `ps -eZ | less
-  - `ls -lZ /var/* | less
-  - `ls -lZ classfiles (note the default type of admin_home)
-  - `mv text.err /var
-  - `ls -lZ /var (note that text.err still has the same type)
-  - `restorecon /var/text.err
-  - `ls -lZ /var (note that text.err now has a generic var type)
-  - `getsebool -a | less
-  - `less /var/log/audit/audit.log (note any SELinux violations)
-  - `audit2why </var/log/audit/audit.log | less (note the summaries and remediations)
+  - `sestatus –v` (note that SELinux is enabled and enforcing by default)
+  - `cat /etc/selinux/config`
+  - `setenforce permissive`
+  - `sestatus -v`
+  - `setenforce enforcing`
+  - `sestatus -v`
+  - `ps -eZ | less`
+  - `ls -lZ /var/* | less`
+  - `ls -lZ classfiles` (note the default type of admin_home)
+  - `mv text.err /var`
+  - `ls -lZ /var` (note that text.err still has the same type)
+  - `restorecon /var/text.err`
+  - `ls -lZ /var` (note that text.err now has a generic var type)
+  - `getsebool -a | less`
+  - `less /var/log/audit/audit.log` (note any SELinux violations)
+  - `audit2why </var/log/audit/audit.log | less` (note the summaries and remediations)
   - Log into the GNOME desktop environment as woot and navigate to Activities > Show Applications > SELinux Troubleshooter 
   - Note the most recent SELinux violation and click Troubleshoot to see the commands that you can run to allow it (should it be allowed)
   - Next, click List all Alerts to view all of the unique SELinux violations that occurred (these are parsed from /var/log/audit/audit.log)
   - Open a Terminal on your Ubuntu Server virtual machine as root
-  - `aa-status (note the AppArmor profiles configured in enforce mode, the PowerShell profile in complain mode and the NTP daemon process in enforce mode)
-  - `apt install apparmor-utils
-  - `aa-complain /usr/sbin/ntpd
-  - `aa-status
-  - `aa-enforce /usr/sbin/ntpd
-  - `aa-status
-  - `less /etc/apparmor.d/usr.sbin.ntpd
-  - `ls /etc/apparmor.d/tuneables 
-  - `cat /etc/apparmor.d/tuneables/home 
+  - `aa-status` (note the AppArmor profiles configured in enforce mode, the PowerShell profile in complain mode and the NTP daemon process in enforce mode)
+  - `apt install apparmor-utils`
+  - `aa-complain /usr/sbin/ntpd`
+  - `aa-status`
+  - `aa-enforce /usr/sbin/ntpd`
+  - `aa-status`
+  - `less /etc/apparmor.d/usr.sbin.ntpd`
+  - `ls /etc/apparmor.d/tuneables`
+  - `cat /etc/apparmor.d/tuneables/home`
