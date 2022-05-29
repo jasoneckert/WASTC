@@ -295,207 +295,207 @@
   - `poweroff`
   - In the Settings of your Ubuntu Server virtual machine, remove the 4 additional 8GB virtual disks you added earlier.
 
-SYSTEM STARTUP & DAEMONS
+# System Startup & Daemons
   - Open a Terminal on your Fedora Workstation virtual machine as root
-  - `vi /etc/default/grub (change the GRUB_TIMEOUT to 30 seconds, saving your changes)
-  - `grub2-mkconfig –o /boot/grub2/grub.cfg (if your hypervisor emulates standard BIOS)
-  - `grub2-mkconfig –o /boot/efi/EFI/fedora/grub.cfg (if your hypervisor emulates UEFI)
-  - `less /boot/grub2/grub.cfg (if standard BIOS, noting the timeout value)
-  - `less /boot/efi/EFI/fedora/grub.cfg (if UEFI, noting the timeout value)
-  - `reboot	(at the GRUB menu, press c to obtain a command prompt and run the following)
-     - `[Tab]
-     - `ls
-     - `[Esc]
-     - `e (scroll down to the linux ($root)/vmlinuz-* line, and append the word "single" to it) 
-     - `[F10] (supply the root password once the system reaches single user mode) 
-  - `runlevel 
-  - `reboot (press [Enter] at the GRUB menu to boot the default kernel normally - following boot, open a Terminal as root)  
-  - `runlevel (note that your current runlevel is 5 and previous is N)
-  - `init 3
-  - `runlevel (note that your current runlevel is 3 and previous is 5)
-  - `[Ctrl]+[Alt]+[F1] (note that the gdm is not available)
-  - `[Ctrl]+[Alt]+[F3] (log in as root)
-  - `startx (log out of GNOME when finished)
-  - `init 6 (following boot, open a Teminal as root)
-  - `chkconfig --list (note the livesys and livesys-late legacy daemons)
-  - `systemctl | grep crond (note that crond is a modern Systemd-managed daemon)
-  - `service crond restart	(this works because Systemd is init-compatible)
-  - `systemctl restart crond.service
-  - `systemctl status crond.service (crond is started, and set to start in the default target)
-  - `systemctl disable crond.service
-  - `systemctl status crond.service (note that crond not set to start in the default target)
-  - `systemctl enable crond.service
-  - `systemctl get-default (note that graphical.target is the default target)
+  - `vi /etc/default/grub` (change the `GRUB_TIMEOUT` to `30` seconds, saving your changes)
+  - `grub2-mkconfig –o /boot/grub2/grub.cfg` (if your hypervisor emulates standard BIOS)
+  - `grub2-mkconfig –o /boot/efi/EFI/fedora/grub.cfg` (if your hypervisor emulates UEFI)
+  - `less /boot/grub2/grub.cfg` (if standard BIOS, noting the timeout value)
+  - `less /boot/efi/EFI/fedora/grub.cfg` (if UEFI, noting the timeout value)
+  - `reboot`	(at the GRUB menu, press `c` to obtain a command prompt and run the following)
+     - `[Tab]`
+     - `ls`
+     - `[Esc]`
+     - `e` (scroll down to the `linux ($root)/vmlinuz-*` line, and append the word `single` to it) 
+     - `[F10]` (supply the root password once the system reaches single user mode) 
+  - `runlevel` 
+  - `reboot` (press `[Enter]` at the GRUB menu to boot the default kernel normally - following boot, open a Terminal as root)  
+  - `runlevel` (note that your current runlevel is 5 and previous is N)
+  - `init 3`
+  - `runlevel` (note that your current runlevel is 3 and previous is 5)
+  - `[Ctrl]+[Alt]+[F1]` (note that the gdm is not available)
+  - `[Ctrl]+[Alt]+[F3]` (log in as root)
+  - `startx` (log out of GNOME when finished)
+  - `init 6` (following boot, open a Teminal as root)
+  - `chkconfig --list` (note the livesys and livesys-late legacy daemons)
+  - `systemctl | grep crond` (note that crond is a modern Systemd-managed daemon)
+  - `service crond restart`	(this works because Systemd is init-compatible)
+  - `systemctl restart crond.service`
+  - `systemctl status crond.service` (crond is started, and set to start in the default target)
+  - `systemctl disable crond.service`
+  - `systemctl status crond.service` (note that crond not set to start in the default target)
+  - `systemctl enable crond.service`
+  - `systemctl get-default` (note that graphical.target is the default target)
   - Optionally explore various unit files under the /lib/systemd/system folder, interpreting their contents. 
 
-LOCALIZATION
+# Localization
   - Open a Terminal on your Fedora Workstation virtual machine as root
-  - `date +%s 
-  - `hwclock
-  - `date
-  - `timedatectl
-  - `ls -l /etc/localtime
-  - `cat /proc/cmdline (note the kernel that was loaded during the previous boot did not receive a locale from GRUB)
-  - `locale
-  - `localectl
-  - `locale –a | less
-  - `localectl list-locales | less
-  - `localectl list-keymaps | less (note the us-mac keymap for U.S. Apple keyboards)
+  - `date +%s` 
+  - `hwclock`
+  - `date`
+  - `timedatectl`
+  - `ls -l /etc/localtime`
+  - `cat /proc/cmdline` (note the kernel that was loaded during the previous boot did not receive a locale from GRUB)
+  - `locale`
+  - `localectl`
+  - `locale –a | less`
+  - `localectl list-locales | less`
+  - `localectl list-keymaps | less` (note the us-mac keymap for U.S. Apple keyboards)
 
-COMPRESSION
+# Compression
   - Open a Terminal on your Fedora Workstation virtual machine as root
-  - `dnf install ncompress	
-  - `cd classfiles
-  - `compress -v bigfile (note the compression ratio)
-  - `uncompress bigfile
-  - `zip -v bigfile.zip bigfile (note the compression ratio)
-  - `unzip bigfile.zip (choose to overwrite bigfile)
-  - `gzip -v -9 bigfile (note the compression ratio)
-  - `gunzip bigfile.gz
-  - `xz -v -9 bigfile (note the compression ratio)
-  - `unxz bigfile.xz
-  - `bzip2 -v bigfile (note the compression ratio is better than other commands)
-  - `bunzip2 bigfile.bz2		
+  - `dnf install ncompress`	
+  - `cd classfiles`
+  - `compress -v bigfile` (note the compression ratio)
+  - `uncompress bigfile`
+  - `zip -v bigfile.zip bigfile` (note the compression ratio)
+  - `unzip bigfile.zip` (choose to overwrite bigfile)
+  - `gzip -v -9 bigfile` (note the compression ratio)
+  - `gunzip bigfile.gz`
+  - `xz -v -9 bigfile` (note the compression ratio)
+  - `unxz bigfile.xz`
+  - `bzip2 -v bigfile` (note the compression ratio is better than other commands)
+  - `bunzip2 bigfile.bz2`		
 
-BACKUP
+# Backup
   - Open a Terminal on your Fedora Workstation virtual machine as root
-  - `cd classfiles
-  - `tar -zcvf /sample.tar.gz Poems
-  - `tar -ztvf /sample.tar.gz
-  - `mkdir test1 && cd test1
-  - `tar -zxvf /sample.tar.gz
-  - `ls -R 
-  - `cd ~/classfiles 
-  - `find Poems | cpio -vocBL -O /sample.cpio
-  - `cpio -Bitv -I /sample.cpio
-  - `mkdir test2 && cd test2
-  - `cpio -vicdumB -I /sample.cpio
-  - `dnf install dump
-  - `dump -0uf /sda1.dump0 /dev/sda1 (if UEFI, use sda2 instead of sda1)
-  - `dump -1uf /sda1.dump1 /dev/sda1 (if UEFI, use sda2 instead of sda1)
-  - `cat /etc/dumpdates (note the two backups and their dump levels)
-  - `dd if=/dev/sda1 of=/sda1.dd
-  - `df -hT 
-  - `ls -l /sda1.dd (note the size of the backup = the size of the filesystem)
+  - `cd classfiles`
+  - `tar -zcvf /sample.tar.gz Poems`
+  - `tar -ztvf /sample.tar.gz`
+  - `mkdir test1 && cd test1`
+  - `tar -zxvf /sample.tar.gz`
+  - `ls -R`
+  - `cd ~/classfiles`
+  - `find Poems | cpio -vocBL -O /sample.cpio`
+  - `cpio -Bitv -I /sample.cpio`
+  - `mkdir test2 && cd test2`
+  - `cpio -vicdumB -I /sample.cpio`
+  - `dnf install dump`
+  - `dump -0uf /sda1.dump0 /dev/sda1` (if UEFI, use sda2 instead of sda1)
+  - `dump -1uf /sda1.dump1 /dev/sda1` (if UEFI, use sda2 instead of sda1)
+  - `cat /etc/dumpdates` (note the two backups and their dump levels)
+  - `dd if=/dev/sda1 of=/sda1.dd`
+  - `df -hT`
+  - `ls -l /sda1.dd` (note the size of the backup = the size of the filesystem)
   
-SOFTWARE
+# Software
   - Open a Terminal on your Fedora Workstation virtual machine as root
-  - `dnf groupinstall “Development Tools”   
-  - `git clone https://github.com/bartobri/no-more-secrets.git 
-  - `cd no-more-secrets 
-  - `less README.md
-  - `make nms 
-  - `make sneakers 
-  - `make install 
-  - `which sneakers
-  - `which nms
-  - `sneakers 
-  - `ls -l | nms 
-  - `dnf install nmap
-  - `rpm -qi nmap
-  - `rpm -V nmap
-  - `rpm -ql nmap
-  - `dnf info nmap
-  - `dnf grouplist
-  - `dnf list installed
-  - `rpm -qf /bin/bash
+  - `dnf groupinstall “Development Tools”`   
+  - `git clone https://github.com/bartobri/no-more-secrets.git`
+  - `cd no-more-secrets` 
+  - `less README.md`
+  - `make nms` 
+  - `make sneakers` 
+  - `make install`
+  - `which sneakers`
+  - `which nms`
+  - `sneakers`
+  - `ls -l | nms` 
+  - `dnf install nmap`
+  - `rpm -qi nmap`
+  - `rpm -V nmap`
+  - `rpm -ql nmap`
+  - `dnf info nmap`
+  - `dnf grouplist`
+  - `dnf list installed`
+  - `rpm -qf /bin/bash`
   * Open a Terminal on your Ubuntu Server virtual machine as root
-  - `apt install nmap
-  - `dpkg -l 
-  - `dpkg -l '*nmap*'
-  - `dpkg -L nmap | less
-  - `snap install powershell --classic
-  - `snap info powershell
-  - `snap list
-  - `powershell
-     - `Get-Host
-     - `exit
+  - `apt install nmap`
+  - `dpkg -l`
+  - `dpkg -l '*nmap*'`
+  - `dpkg -L nmap | less`
+  - `snap install powershell --classic`
+  - `snap info powershell`
+  - `snap list`
+  - `powershell`
+     - `Get-Host`
+     - `exit`
   - Open a Terminal on your Fedora Workstation virtual machine as root
-  - `flatpak --system remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo 
-  - `flatpak search vlc 
-  - `flatpak install flathub org.videolan.VLC (search for VLC in the GNOME desktop to run it)
+  - `flatpak --system remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo` 
+  - `flatpak search vlc`
+  - `flatpak install flathub org.videolan.VLC` (search for VLC in the GNOME desktop to run it)
   - In Firefox on your Fedora Workstation (as woot), download the sample Subsurface .appimage package from https://appimage.org/ for your architecture. 
   - Next, open a Terminal app as woot and run the following commands to run your AppImage package:
-  - `cd Downloads 
-  - `chmod +x Subsurface*.appimage
-  - `./Subsurface*.appimage
+  - `cd Downloads`
+  - `chmod +x Subsurface*.appimage`
+  - `./Subsurface*.appimage`
 
-LOGS
+# Logs
   - Open a Terminal on your Fedora Workstation virtual machine as root
-  - `ls /var/log
-  - `less /etc/logrotate.conf
-  - `ls /etc/logrotate.d
-  - `less /etc/logrotate.d/*
-  - `who /var/log/wtmp
-  - `journalctl _COMM=su 
-  - `journalctl _COMM=gdm --since “08:00”
-  - `journalctl --unit=crond.service --since “08:00”
-  - `journalctl --unit=cups.service --since “08:00”
-  - `journalctl -b 
-  - `journalctl -k 
-  - `dmesg | less
+  - `ls /var/log`
+  - `less /etc/logrotate.conf`
+  - `ls /etc/logrotate.d`
+  - `less /etc/logrotate.d/*`
+  - `who /var/log/wtmp`
+  - `journalctl _COMM=su`
+  - `journalctl _COMM=gdm --since “08:00”`
+  - `journalctl --unit=crond.service --since “08:00”`
+  - `journalctl --unit=cups.service --since “08:00”`
+  - `journalctl -b`
+  - `journalctl -k`
+  - `dmesg | less`
   - Open a Terminal on your Ubuntu Server virtual machine as root
-  - `ls /var/log
-  - `less /etc/logrotate.conf
-  - `ls /etc/logrotate.d
-  - `less /etc/logrotate.d/*
-  - `who -f /var/log/wtmp
-  - `less /etc/rsyslog.conf
-  - `less /etc/rsyslog.d/50-default.conf
-  - `less /var/log/kern.log
-  - `less /var/log/syslog
-  - `less /var/log/boot.log
+  - `ls /var/log`
+  - `less /etc/logrotate.conf`
+  - `ls /etc/logrotate.d`
+  - `less /etc/logrotate.d/*`
+  - `who -f /var/log/wtmp`
+  - `less /etc/rsyslog.conf`
+  - `less /etc/rsyslog.d/50-default.conf`
+  - `less /var/log/kern.log`
+  - `less /var/log/syslog`
+  - `less /var/log/boot.log`
 
-PERFORMANCE
+# Performance
   - Open a Terminal on your Fedora Workstation virtual machine as root
-  - `dnf install sysstat iotop ioping iftop
-  - `mpstat 2 5
-  - `pidstat
-  - `iostat
-  - `vmstat
-  - `free
-  - `sar -u 2 5
-  - `sar -q 2 5
-  - `sar -d 2 5
-  - `sar -f /var/log/sa/saX (where X is the day of the month – this will work tomorrow!)
-  - `top
-  - `iotop
-  - `ioping /dev/sda
-  - `iftop
-  - `uptime
-  - `tload (use [Ctrl]+c to quit)
-  - `w
+  - `dnf install sysstat iotop ioping iftop`
+  - `mpstat 2 5`
+  - `pidstat`
+  - `iostat`
+  - `vmstat`
+  - `free`
+  - `sar -u 2 5`
+  - `sar -q 2 5`
+  - `sar -d 2 5`
+  - `sar -f /var/log/sa/saX` (where X is the day of the month – this will work tomorrow!)
+  - `top`
+  - `iotop`
+  - `ioping /dev/sda`
+  - `iftop`
+  - `uptime`
+  - `tload` (use `[Ctrl]+c` to quit)
+  - `w`
 
-DEVICES
+# Devices
   - Open a Terminal on your Fedora Workstation virtual machine as root
-  - `dnf install lshw
-  - `lshw -class network (note the driver used)
-  - `lsmod | less (note that your driver is listed)
-  - `modprobe dummy (dummy is a fake network card driver used for testing only) 
-  - `lsmod | grep dummy (note that your driver is listed)
-  - `modinfo dummy
-  - `rmmod dummy
-  - `less /etc/modprobe.d/* (note any manually-loaded modules)
-  - `poweroff (for next section)
+  - `dnf install lshw`
+  - `lshw -class network` (note the driver used)
+  - `lsmod | less` (note that your driver is listed)
+  - `modprobe dummy` (dummy is a fake network card driver used for testing only) 
+  - `lsmod | grep dummy` (note that your driver is listed)
+  - `modinfo dummy`
+  - `rmmod dummy`
+  - `less /etc/modprobe.d/*` (note any manually-loaded modules)
+  - `poweroff` (for next section)
 
-SYSTEM RESCUE
+# System Rescue
   - In the settings of your Fedora Workstation virtual machine:
      - Insert the Fedora installation ISO into the virtual DVD, and 
      - Ensure that the virtual DVD is listed first in the boot order 
   - Start your Fedora Workstation virtual machine
   - Once the live distro has loaded, open a Terminal 
-     - `su -
-     - `df -hT	(note the partitions that are mounted)
-     - `ls -l / (note that there are fewer directories under the root of the live distribution)
-     - `fsck -f device1 (where device1 is the device file for your root filesystem – e.g. /dev/sda3)  
-     - `mount device1 /mnt
-     - `mount device2 /mnt/boot (where device2 is the device file for your /boot filesystem – e.g. /dev/sda1)
-     - `mount -t proc proc /proc	(this activates the /proc filesystem)
-     - `chroot /mnt (changes the system root from the live distribution to the root of the system installed on /dev/sda as the root user)
-     - `ls -l / (note that you are on the root filesystem on /dev/sda)
-     - `cat /etc/fstab	(note the entry you created earlier in this chapter)
-     - `passwd root (specify a new root password of your choice)
-     - `exit
-     - `poweroff
+     - `su -`
+     - `df -hT`	(note the partitions that are mounted)
+     - `ls -l /` (note that there are fewer directories under the root of the live distribution)
+     - `fsck -f device1` (where device1 is the device file for your root filesystem – e.g. /dev/sda3)  
+     - `mount device1 /mnt`
+     - `mount device2 /mnt/boot` (where device2 is the device file for your /boot filesystem – e.g. /dev/sda1)
+     - `mount -t proc proc /proc`	(this activates the /proc filesystem)
+     - `chroot /mnt` (changes the system root from the live distribution to the root of the system installed on /dev/sda as the root user)
+     - `ls -l /` (note that you are on the root filesystem on /dev/sda)
+     - `cat /etc/fstab`	(note the entry you created earlier in this chapter)
+     - `passwd root` (specify a new root password of your choice)
+     - `exit`
+     - `poweroff`
    - In the settings of your Fedora Workstation virtual machine, remove the Fedora Workstation installation media from the virtual DVD drive
    - Boot your Fedora Workstation virtual machine and obtain a Terminal as root (using your new password!)
