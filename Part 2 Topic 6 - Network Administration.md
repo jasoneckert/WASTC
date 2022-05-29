@@ -1,202 +1,173 @@
-NETWORK INTERFACES & SERVICES
-   * Open a Terminal on your Fedora Workstation virtual machine as root
-   
-  ifconfig (note the IP address you received from DHCP)
-  ip addr show
-  nmcli conn show  
-  cat /etc/NetworkManager/system-connections (note that the folder is empty)
-  
-  * Log into GNOME desktop as the woot user and navigate to Activities > Show Applications > Settings > Network 
-  * Next, modify your network interface to use a static configuration for your network and Apply your changes. 
-  
-  ls /etc/NetworkManager/system-connections (note the name.nmconnection file)
-  cat /etc/NetworkManager/system-connections/name.nmconnection 
-  nmcli connection down "name" ; nmcli connection up "name"
-  nmcli conn show  
-  ifconfig (note the new IP address for future exercises)
-  ip addr show
-  ping -c 5 www.yahoo.ca 
-  hostnamectl set-hostname fedoraworkstation 
-  hostname
-  cat /etc/hostname
-  bash (new shells will indicate the new hostname)
-  cat /etc/resolv.conf (note the redirection to Systemd-resolved)
-  resolvectl status
-  vi /etc/hosts	(add the line below)
-     1.2.3.4  fakehost.fakedomain.com  fakehost
-  host fakehost.fakedomain.com
-  resolvectl query fakehost.fakedomain.com 
-  nslookup fakehost.fakedomain.com
-  dig fakehost.fakedomain.com
-  host www.yahoo.ca
-  resolvectl query www.yahoo.ca
-  nslookup www.yahoo.ca
-  dig www.yahoo.ca
-  ip route (note the two routes for your network and gateway)
-  traceroute www.yahoo.ca
-  tracepath www.yahoo.ca
-  mtr www.yahoo.ca (press q to quit)
-  grep -i HTTP /etc/services | less
-  nmap -sT localhost (note the default services started, and the ports they listen on)
-  dnf install telnet-server telnet
-  systemctl start telnet.socket ; systemctl enable telnet.socket
-  nmap -sT localhost (note the telnet service listening to port 23/tcp, on demand)
-  telnet localhost (log in as the root user)
-  who (note that you are logged in remotely via a pseudo terminal, pts/0)
-  ss -t (note the established telnet socket on your system – after initially connecting on port 23/tcp, communication is redirected to a random port above 32768 for the session duration)
-  exit (quits your telnet session to localhost)
-  who (note that your pseudo terminal is no longer present)
-  ss -t (note that your telnet socket is no longer present)
+# Network Interfaces & Services
+  -Open a Terminal on your Fedora Workstation virtual machine as root
+  - `ifconfig (note the IP address you received from DHCP)
+  - `ip addr show
+  - `nmcli conn show  
+  - `cat /etc/NetworkManager/system-connections (note that the folder is empty)
+  - Log into GNOME desktop as the woot user and navigate to Activities > Show Applications > Settings > Network 
+  - Next, modify your network interface to use a static configuration for your network and Apply your changes. 
+  - `ls /etc/NetworkManager/system-connections (note the name.nmconnection file)
+  - `cat /etc/NetworkManager/system-connections/name.nmconnection 
+  - `nmcli connection down "name" ; nmcli connection up "name"
+  - `nmcli conn show  
+  - `ifconfig (note the new IP address for future exercises)
+  - `ip addr show
+  - `ping -c 5 www.yahoo.ca 
+  - `hostnamectl set-hostname fedoraworkstation 
+  - `hostname
+  - `cat /etc/hostname
+  - `bash (new shells will indicate the new hostname)
+  - `cat /etc/resolv.conf (note the redirection to Systemd-resolved)
+  - `resolvectl status
+  - `vi /etc/hosts	(add the line below)
+     - `1.2.3.4  fakehost.fakedomain.com  fakehost
+  - `host fakehost.fakedomain.com
+  - `resolvectl query fakehost.fakedomain.com 
+  - `nslookup fakehost.fakedomain.com
+  - `dig fakehost.fakedomain.com
+  - `host www.yahoo.ca
+  - `resolvectl query www.yahoo.ca
+  - `nslookup www.yahoo.ca
+  - `dig www.yahoo.ca
+  - `ip route (note the two routes for your network and gateway)
+  - `traceroute www.yahoo.ca
+  - `tracepath www.yahoo.ca
+  - `mtr www.yahoo.ca (press q to quit)
+  - `grep -i HTTP /etc/services | less
+  - `nmap -sT localhost (note the default services started, and the ports they listen on)
+  - `dnf install telnet-server telnet
+  - `systemctl start telnet.socket ; systemctl enable telnet.socket
+  - `nmap -sT localhost (note the telnet service listening to port 23/tcp, on demand)
+  - `telnet localhost (log in as the root user)
+  - `who (note that you are logged in remotely via a pseudo terminal, pts/0)
+  - `ss -t (note the established telnet socket on your system – after initially connecting on port 23/tcp, communication is redirected to a random port above 32768 for the session duration)
+  - `exit (quits your telnet session to localhost)
+  - `who (note that your pseudo terminal is no longer present)
+  - `ss -t (note that your telnet socket is no longer present)
+  - Open a Terminal on your Ubuntu Server virtual machine as root
+  - `ifconfig (note the DHCP address assigned for future exercises)
+  - `ip addr show
+  - `networkctl
+  - `cat /etc/netplan/00-installer-config.yaml
+  - `hostname
+  - `cat /etc/hostname
+  - `ping -c 5 www.yahoo.ca
+  - `nmap -sT localhost (we’ll be adding several additional services later)
 
-   * Open a Terminal on your Ubuntu Server virtual machine as root
-  
-  ifconfig (note the DHCP address assigned for future exercises)
-  ip addr show
-  networkctl
-  cat /etc/netplan/00-installer-config.yaml
-  hostname
-  cat /etc/hostname
-  ping -c 5 www.yahoo.ca
-  nmap -sT localhost (we’ll be adding several additional services later)
-
-SSH
-   * Open a Terminal on your Fedora Workstation virtual machine as root
-  
-  ssh woot@UbuntuIPaddress (accept the SSH host key and supply the woot user’s password when prompted)
-     su - (supply the root user’s password when prompted)
-     who (note that you are connected via a remote pseudo terminal session) 
-     exit
-  ssh-keygen (press Enter at each prompt to use default settings)
-  ssh-copy-id -i woot@UbuntuIPaddress
-  ssh woot@UbuntuIPaddress (note that you are not prompted to supply a password!)
-     exit
-  ssh woot@UbuntuIPaddress cat /etc/hosts > downloadedhosts 
-  cat downloadedhosts
-
-  * If your host OS is Windows, download and install the Putty Windows SSH client (putty.exe) from the following website: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html. 
-  * Next, run the putty.exe executable and connect to the IP address of your Ubuntu Server using SSH on port 22. Accept the SSH host key and log in as the woot user. 
-  
-     who
-     exit
-     
-  * If your host OS is macOS, navigate to Applications > Utilities > Terminal to open a shell on your local system. 
-  
-    ssh woot@UbuntuIPaddress (accept the SSH host key and supply woot’s password when prompted)
-    who
-    exit
+# SSH
+  - Open a Terminal on your Fedora Workstation virtual machine as root
+  - `ssh woot@UbuntuIPaddress (accept the SSH host key and supply the woot user’s password when prompted)
+     - `su - (supply the root user’s password when prompted)
+     - `who (note that you are connected via a remote pseudo terminal session) 
+     - `exit
+  - `ssh-keygen (press Enter at each prompt to use default settings)
+  - `ssh-copy-id -i woot@UbuntuIPaddress
+  - `ssh woot@UbuntuIPaddress (note that you are not prompted to supply a password!)
+     - `exit
+  - `ssh woot@UbuntuIPaddress cat /etc/hosts > downloadedhosts 
+  - `cat downloadedhosts
+  - If your host OS is Windows, download and install the Putty Windows SSH client (putty.exe) from the following website: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html. 
+  - Next, run the putty.exe executable and connect to the IP address of your Ubuntu Server using SSH on port 22. Accept the SSH host key and log in as the woot user. 
+    - `who
+    - `exit
+  - If your host OS is macOS, navigate to Applications > Utilities > Terminal to open a shell on your local system. 
+    - `ssh woot@UbuntuIPaddress (accept the SSH host key and supply woot’s password when prompted)
+    - `who
+    - `exit
     
-FTP
-   * Open a Terminal on your Ubuntu Server virtual machine as root
-   
-   apt install vsftpd 
-   cp -f /etc/hosts ~woot/file1 
-   cp -f /etc/hosts ~woot/file2 
-   cp -f /etc/hosts /srv/ftp/file3 
-   vi /etc/vsftpd.conf (view the comments and ensure the following lines are uncommented, saving your changes)
-      anonymous_enable=YES 
-      write_enable=YES
-   systemctl restart vsftpd.service 
-   
-   * Open a Terminal on your Fedora Workstation virtual machine as root
- 
-   ftp UbuntuIPaddress (log in as the woot user when prompted)
-      dir (note that file1 and file2 are present)
-      lcd /etc (changes the directory on Fedora to /etc)
-      put hosts (uploads the hosts file to woot’s home directory on the Ubuntu server)
-      dir 
-      lcd / (changes the directory on Fedora to /)
-      get hosts (downloads the hosts file from the Ubuntu server to / on Fedora)
-      mget file* (press y when prompted to download the file1 and file2)
-      help 
-      bye
+# FTP
+  - Open a Terminal on your Ubuntu Server virtual machine as root
+  - `apt install vsftpd 
+  - `cp -f /etc/hosts ~woot/file1 
+  - `cp -f /etc/hosts ~woot/file2 
+  - `cp -f /etc/hosts /srv/ftp/file3 
+  - `vi /etc/vsftpd.conf (view the comments and ensure the following lines are uncommented, saving your changes)
+     - `anonymous_enable=YES 
+     - `write_enable=YES
+  - `systemctl restart vsftpd.service 
+  - Open a Terminal on your Fedora Workstation virtual machine as root
+  - `ftp UbuntuIPaddress (log in as the woot user when prompted)
+     - `dir (note that file1 and file2 are present)
+     - `lcd /etc (changes the directory on Fedora to /etc)
+     - `put hosts (uploads the hosts file to woot’s home directory on the Ubuntu server)
+     - `dir 
+     - `lcd / (changes the directory on Fedora to /)
+     - `get hosts (downloads the hosts file from the Ubuntu server to / on Fedora)
+     - `mget file* (press y when prompted to download the file1 and file2)
+     - `help 
+     - `bye
   
-   ls / (note that hosts, file1, and file2 were downloaded successfully)
-   ftp UbuntuIPaddress (log in as the anonymous user when prompted)
-     dir (note that file3 is present)
-     lcd /
-     get file3
-     put file2 (note that you receive a permission error!)
-     bye 
-
-   * On your Windows or macOS host OS, open a Web browser and navigate to ftp://UbuntuIPaddress and note that you can see and download file3. 
-   * On your Windows or macOS PC, download and install the FileZilla FTP client program from https://filezilla-project.org/. 
-   * Next, open FileZilla and connect to sftp://UbuntuIPaddress as the woot user and practice some graphical file transfers. 
+  - `ls / (note that hosts, file1, and file2 were downloaded successfully)
+  - `ftp UbuntuIPaddress (log in as the anonymous user when prompted)
+     - `dir (note that file3 is present)
+     - `lcd /
+     - `get file3
+     - `put file2 (note that you receive a permission error!)
+     - `bye 
+  - On your Windows or macOS host OS, open a Web browser and navigate to ftp://UbuntuIPaddress and note that you can see and download file3. 
+  - On your Windows or macOS PC, download and install the FileZilla FTP client program from https://filezilla-project.org/. 
+  - Next, open FileZilla and connect to sftp://UbuntuIPaddress as the woot user and practice some graphical file transfers. 
    
-NFS
-   * Open a Terminal on your Ubuntu Server virtual machine as root
- 
-  apt install nfs-kernel-server 
-  vi /etc/exports (add the following line, saving your changes)
-     /etc *(rw) 
-  exportfs -a 
-  systemctl restart nfs-kernel-server 
-  showmount –e localhost 
-  mount –t nfs localhost:/etc /mnt 
-  df -hT
-  cat /mnt/hosts (note that you are viewing /etc/hosts on the remote system via NFS)
-  umount /mnt 
+# NFS
+  - Open a Terminal on your Ubuntu Server virtual machine as root
+  - `apt install nfs-kernel-server 
+  - `vi /etc/exports (add the following line, saving your changes)
+    - `/etc *(rw) 
+  - `exportfs -a 
+  - `systemctl restart nfs-kernel-server 
+  - `showmount –e localhost 
+  - `mount –t nfs localhost:/etc /mnt 
+  - `df -hT
+  - `cat /mnt/hosts (note that you are viewing /etc/hosts on the remote system via NFS)
+  - `umount /mnt 
+  - Open a Terminal on your Fedora Workstation virtual machine as root
+  - `dnf install nfs-utils (this installs the NFS client utilities if not already installed)
+  - `mount –t nfs IPaddress:/etc /mnt (where IPaddress is your Ubuntu Server IP address)
+  - `df -hT 
+  - `ls /mnt
+  - `cat /mnt/hosts
+  - `umount /mnt 
+  - `dnf install sshfs (SSHFS is an NFS-like implementation using SSH)
+  - `sshfs woot@IPaddress:/etc /mnt (where IPaddress is your Ubuntu Server IP address)
+  - `df -hT
+  - `ls /mnt
+  - `cat /mnt/hosts 
+  - `umount /mnt
 
-   * Open a Terminal on your Fedora Workstation virtual machine as root
+# Samba
+  - Open a Terminal on your Ubuntu Server virtual machine as root
+  - `apt install samba smbclient cifs-utils
+  - `ps –ef | grep mbd (note that smbd and nmbd are running)
+  - `vi /etc/samba/smb.conf 
+     - View the comments and then add the following line under the workgroup = WORKGROUP line
+       - `netbios name = ubuntu
+     - Uncomment/modify the section that shares out all home directories
+       - `[homes]
+       - `comment = Home Directories
+       - `browseable = yes
+       - `read only = no
+     - Add the following share definition to the bottom of the file, save your changes and quit vi
+       - `[etc]
+       - `comment = The etc directory
+       - `path = /etc
+       - `guest ok = yes
+       - `read only = yes
+       - `browseable = yes
+  - `testparm (if you made an error, re-edit the /etc/samba/smb.conf file to fix it)
+  - `systemctl restart smbd.service ; systemctl restart nmbd.service 
+  - `smbpasswd –a root (supply Secret555 when prompted)
+  - `smbpasswd –a woot (supply Secret555 when prompted)
+  - `pdbedit –L (note that both root and woot have Samba passwords)
+  - `nmblookup ubuntu (note that your NetBIOS name resolves to your IP address)
+  - `smbclient –L ubuntu (note your shares shown, including the root home directory)
+  - `mount –t cifs //ubuntu/root /mnt
+  - `df -hT
+  - `ls -a /mnt (note your home directory contents)
+  - If your host OS is Windows, open File Explorer and enter \\ubuntu in the search bar. Next, open PowerShell as Administrator and run the following command
+    - `net use z: \\ubuntu\woot /user:woot Secret555 (access your Z:\ mapped drive afterwards in File Explorer)
+  - If your host OS is macOS, open the Finder app and navigate to Go > Connect to Server and enter smb://ubuntu and click Connect (note the connection in your Finder)
 
-  dnf install nfs-utils (this installs the NFS client utilities if not already installed)
-  mount –t nfs IPaddress:/etc /mnt (where IPaddress is your Ubuntu Server IP address)
-  df -hT 
-  ls /mnt
-  cat /mnt/hosts
-  umount /mnt 
-
-  dnf install sshfs (SSHFS is an NFS-like implementation using SSH)
-  sshfs woot@IPaddress:/etc /mnt (where IPaddress is your Ubuntu Server IP address)
-  df -hT
-  ls /mnt
-  cat /mnt/hosts 
-  umount /mnt
-
-SAMBA
-   * Open a Terminal on your Ubuntu Server virtual machine as root
- 
-  apt install samba smbclient cifs-utils
-  ps –ef | grep mbd (note that smbd and nmbd are running)
-
-  vi /etc/samba/smb.conf 
-     * View the comments and then add the following line under the workgroup = WORKGROUP line
-     
-     netbios name = ubuntu
-
-     * Uncomment/modify the section that shares out all home directories
-     
-     [homes]
-       comment = Home Directories
-       browseable = yes
-       read only = no
-
-     * Add the following share definition to the bottom of the file, save your changes and quit vi
-     
-     [etc]
-       comment = The etc directory
-       path = /etc
-       guest ok = yes
-       read only = yes
-       browseable = yes
-
-  testparm (if you made an error, re-edit the /etc/samba/smb.conf file to fix it)
-  systemctl restart smbd.service ; systemctl restart nmbd.service 
-  smbpasswd –a root (supply Secret555 when prompted)
-  smbpasswd –a woot (supply Secret555 when prompted)
-  pdbedit –L (note that both root and woot have Samba passwords)
-  nmblookup ubuntu (note that your NetBIOS name resolves to your IP address)
-  smbclient –L ubuntu (note your shares shown, including the root home directory)
-  mount –t cifs //ubuntu/root /mnt
-  df -hT
-  ls -a /mnt (note your home directory contents)
-
-  * If your host OS is Windows, open File Explorer and enter \\ubuntu in the search bar. Next, open PowerShell as Administrator and run the following command
-  
-  net use z: \\ubuntu\woot /user:woot Secret555 (access your Z:\ mapped drive afterwards in File Explorer)
-
-  * If your host OS is macOS, open the Finder app and navigate to Go > Connect to Server and enter smb://ubuntu and click Connect (note the connection in your Finder)
-
-APACHE
+# Apache
    * Open a Terminal on your Ubuntu Server virtual machine as root
    
   apt install apache2
