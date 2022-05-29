@@ -1,79 +1,79 @@
 # Network Interfaces & Services
-  -Open a Terminal on your Fedora Workstation virtual machine as root
-  - `ifconfig (note the IP address you received from DHCP)
-  - `ip addr show
-  - `nmcli conn show  
-  - `cat /etc/NetworkManager/system-connections (note that the folder is empty)
+  - Open a Terminal on your Fedora Workstation virtual machine as root
+  - `ifconfig` (note the IP address you received from DHCP)
+  - `ip addr show`
+  - `nmcli conn show`  
+  - `cat /etc/NetworkManager/system-connections` (note that the folder is empty)
   - Log into GNOME desktop as the woot user and navigate to Activities > Show Applications > Settings > Network 
   - Next, modify your network interface to use a static configuration for your network and Apply your changes. 
-  - `ls /etc/NetworkManager/system-connections (note the name.nmconnection file)
-  - `cat /etc/NetworkManager/system-connections/name.nmconnection 
-  - `nmcli connection down "name" ; nmcli connection up "name"
-  - `nmcli conn show  
-  - `ifconfig (note the new IP address for future exercises)
-  - `ip addr show
-  - `ping -c 5 www.yahoo.ca 
-  - `hostnamectl set-hostname fedoraworkstation 
-  - `hostname
-  - `cat /etc/hostname
-  - `bash (new shells will indicate the new hostname)
-  - `cat /etc/resolv.conf (note the redirection to Systemd-resolved)
-  - `resolvectl status
-  - `vi /etc/hosts	(add the line below)
-     - `1.2.3.4  fakehost.fakedomain.com  fakehost
-  - `host fakehost.fakedomain.com
-  - `resolvectl query fakehost.fakedomain.com 
-  - `nslookup fakehost.fakedomain.com
-  - `dig fakehost.fakedomain.com
-  - `host www.yahoo.ca
-  - `resolvectl query www.yahoo.ca
-  - `nslookup www.yahoo.ca
-  - `dig www.yahoo.ca
-  - `ip route (note the two routes for your network and gateway)
-  - `traceroute www.yahoo.ca
-  - `tracepath www.yahoo.ca
-  - `mtr www.yahoo.ca (press q to quit)
-  - `grep -i HTTP /etc/services | less
-  - `nmap -sT localhost (note the default services started, and the ports they listen on)
-  - `dnf install telnet-server telnet
-  - `systemctl start telnet.socket ; systemctl enable telnet.socket
-  - `nmap -sT localhost (note the telnet service listening to port 23/tcp, on demand)
-  - `telnet localhost (log in as the root user)
-  - `who (note that you are logged in remotely via a pseudo terminal, pts/0)
-  - `ss -t (note the established telnet socket on your system – after initially connecting on port 23/tcp, communication is redirected to a random port above 32768 for the session duration)
-  - `exit (quits your telnet session to localhost)
-  - `who (note that your pseudo terminal is no longer present)
-  - `ss -t (note that your telnet socket is no longer present)
+  - `ls /etc/NetworkManager/system-connections` (note the name.nmconnection file)
+  - `cat /etc/NetworkManager/system-connections/name.nmconnection` 
+  - `nmcli connection down "name" ; nmcli connection up "name"`
+  - `nmcli conn show`
+  - `ifconfig` (note the new IP address for future exercises)
+  - `ip addr show`
+  - `ping -c 5 www.yahoo.ca`
+  - `hostnamectl set-hostname fedoraworkstation` 
+  - `hostname`
+  - `cat /etc/hostname`
+  - `bash` (new shells will indicate the new hostname)
+  - `cat /etc/resolv.conf` (note the redirection to Systemd-resolved)
+  - `resolvectl status`
+  - `vi /etc/hosts`	(add the line below)
+     - `1.2.3.4  fakehost.fakedomain.com  fakehost`
+  - `host fakehost.fakedomain.com`
+  - `resolvectl query fakehost.fakedomain.com` 
+  - `nslookup fakehost.fakedomain.com`
+  - `dig fakehost.fakedomain.com`
+  - `host www.yahoo.ca`
+  - `resolvectl query www.yahoo.ca`
+  - `nslookup www.yahoo.ca`
+  - `dig www.yahoo.ca`
+  - `ip route` (note the two routes for your network and gateway)
+  - `traceroute www.yahoo.ca`
+  - `tracepath www.yahoo.ca`
+  - `mtr www.yahoo.ca` (press `q` to quit)
+  - `grep -i HTTP /etc/services | less`
+  - `nmap -sT localhost` (note the default services started, and the ports they listen on)
+  - `dnf install telnet-server telnet`
+  - `systemctl start telnet.socket ; systemctl enable telnet.socket`
+  - `nmap -sT localhost` (note the telnet service listening to port 23/tcp, on demand)
+  - `telnet localhost` (log in as the root user)
+     - `who` (note that you are logged in remotely via a pseudo terminal, pts/0)
+     - `ss -t` (note the established telnet socket on your system – after initially connecting on port 23/tcp, communication is redirected to a random port above 32768 for the session duration)
+     - `exit` (quits your telnet session to localhost)
+  - `who` (note that your pseudo terminal is no longer present)
+  - `ss -t` (note that your telnet socket is no longer present)
   - Open a Terminal on your Ubuntu Server virtual machine as root
-  - `ifconfig (note the DHCP address assigned for future exercises)
-  - `ip addr show
-  - `networkctl
-  - `cat /etc/netplan/00-installer-config.yaml
-  - `hostname
-  - `cat /etc/hostname
-  - `ping -c 5 www.yahoo.ca
-  - `nmap -sT localhost (we’ll be adding several additional services later)
+  - `ifconfig` (note the DHCP address assigned for future exercises)
+  - `ip addr show`
+  - `networkctl`
+  - `cat /etc/netplan/00-installer-config.yaml`
+  - `hostname`
+  - `cat /etc/hostname`
+  - `ping -c 5 www.yahoo.ca`
+  - `nmap -sT localhost` (we’ll be adding several additional services later)
 
 # SSH
   - Open a Terminal on your Fedora Workstation virtual machine as root
-  - `ssh woot@UbuntuIPaddress (accept the SSH host key and supply the woot user’s password when prompted)
-     - `su - (supply the root user’s password when prompted)
-     - `who (note that you are connected via a remote pseudo terminal session) 
-     - `exit
-  - `ssh-keygen (press Enter at each prompt to use default settings)
-  - `ssh-copy-id -i woot@UbuntuIPaddress
-  - `ssh woot@UbuntuIPaddress (note that you are not prompted to supply a password!)
-     - `exit
-  - `ssh woot@UbuntuIPaddress cat /etc/hosts > downloadedhosts 
-  - `cat downloadedhosts
+  - `ssh woot@UbuntuIPaddress` (accept the SSH host key and supply the woot user’s password when prompted)
+     - `su -` (supply the root user’s password when prompted)
+     - `who` (note that you are connected via a remote pseudo terminal session) 
+     - `exit`
+  - `ssh-keygen` (press `[Enter]` at each prompt to use default settings)
+  - `ssh-copy-id -i woot@UbuntuIPaddress`
+  - `ssh woot@UbuntuIPaddress` (note that you are not prompted to supply a password!)
+     - `exit`
+  - `ssh woot@UbuntuIPaddress cat /etc/hosts > downloadedhosts`
+  - `cat downloadedhosts`
   - If your host OS is Windows, download and install the Putty Windows SSH client (putty.exe) from the following website: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html. 
   - Next, run the putty.exe executable and connect to the IP address of your Ubuntu Server using SSH on port 22. Accept the SSH host key and log in as the woot user. 
-    - `who
-    - `exit
+    - `who`
+    - `exit`
   - If your host OS is macOS, navigate to Applications > Utilities > Terminal to open a shell on your local system. 
-    - `ssh woot@UbuntuIPaddress (accept the SSH host key and supply woot’s password when prompted)
-    - `who
-    - `exit
+    - `ssh woot@UbuntuIPaddress` (accept the SSH host key and supply woot’s password when prompted)
+    - `who`
+    - `exit`
     
 # FTP
   - Open a Terminal on your Ubuntu Server virtual machine as root
