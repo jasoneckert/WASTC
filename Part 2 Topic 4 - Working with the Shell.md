@@ -78,8 +78,8 @@
    - `mkdir /scripts`
   	- `cp scriptname scriptname scriptname /scripts`
   	- `cd /scripts`
-   - `git config --global user.name "name"`
-  	- `git config --global user.email "email"`
+   - `git config --global user.name name`
+  	- `git config --global user.email emailaddress`
   	- `git init`
   	- `git status`
   	- `git add .`
