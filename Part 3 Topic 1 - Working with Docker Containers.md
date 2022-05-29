@@ -3,7 +3,7 @@
   - `snap install docker` 
   - `docker search busybox | less`
   - `docker pull busybox` (pulls the official busybox Linux container image from Docker Hub)
-  - `docker images` (you can remove a downloaded image using "docker rmi imagename")
+  - `docker images` (you can remove a downloaded image using `docker rmi imagename`)
   - `docker run busybox echo Hello World` (exits upon completion)
   - `docker ps` (note that there are no running containers)
   - `docker ps -a` (note the container run in the past based on the busybox image)
