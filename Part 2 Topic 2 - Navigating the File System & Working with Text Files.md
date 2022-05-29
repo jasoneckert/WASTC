@@ -1,4 +1,4 @@
-Run the following commands in a new Terminal on your Fedora Workstation as root:
+# ***NOTE: Run the commands in the following sections within a new Terminal on your Fedora Workstation as root:***
 
 NAVIGATING THE DIRECTORY STRUCTURE
    pwd (you should be in /root)
