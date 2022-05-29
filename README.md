@@ -1,8 +1,13 @@
 # WASTC Materials
 
 ## Part 1: Networking
-In most Networking courses, 
-
+Networing courses contain a plethora of theory topics. You can leverage virtualization to apply many of these topics to build understanding and consolidate key concepts together. After covering IPv4 and network basics, some key topics you can use virtualization alongside include NAT, routing, VPNs, RADIUS and 802.1X. Following a solid foundation, other topic areas (e.g. IPv6) can then be covered and applied as necessary. I've focused on the following topic areas in this part:
+- Topic 1: Evolution of IPv4
+- Topic 2: Virtual Machine & Virtual Switch Setup
+- Topic 3: NAT
+- Topic 4: Routing
+- Topic 5: VPN Remote Access
+- Topic 6: RADIUS & 802.1X Wireless
 
 ## Part 2: Linux
 In most Linux courses, there are 7 major topic areas that are essential for anyone pursuing a career in systems administration or software development:
