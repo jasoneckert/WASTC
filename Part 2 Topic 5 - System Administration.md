@@ -80,7 +80,7 @@
    - `cat /proc/uptime`
    - `cat /proc/sys/net/ipv4/ip_forward` 
   
-PRINTING 
+# Printing 
    - Open a Terminal on your Fedora Workstation virtual machine as root
    - `lpadmin -p p1 -E -v /dev/null -m raw`  (creates a fake printer that prints to /dev/null)
    - `lpadmin -d p1` (sets the system default printer to p1)
