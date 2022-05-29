@@ -42,7 +42,7 @@
    - `touch secondnewfile`
    - `ls -l secondnewfile` (note the owner of root, and group owner of sys) 
 
-PROCESSES 
+# Processes 
    * Open a Terminal on your Fedora Workstation virtual machine as root
    - `ps -ef | less` (view the processes on your system)
    - `ps -el | grep Z` (do you have any zombie processes on your system?)
