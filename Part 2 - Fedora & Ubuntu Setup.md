@@ -1,4 +1,4 @@
-INSTALLING FEDORA WORKSTATION & OBTAINING SAMPLE FILES
+# Installing Fedora Workstation & Obtaining Sample Files
 
 1. On your Windows or macOS computer, download the latest ISO image for Fedora Workstation from getfedora.org.
 2. Install a free hypervisor on your Windows or macOS system. 
@@ -32,12 +32,12 @@ INSTALLING FEDORA WORKSTATION & OBTAINING SAMPLE FILES
 17. Type "sudo passwd root" at the command prompt and press Enter. 
     - Enter the password for your woot user account (Secret555)
     - Next, enter a password of Secret555 for the root user when prompted (twice).
-18. Type "su - root" and press Enter. 
+18. Type `su - root` and press Enter. 
     - Supply the root user’s password of Secret555 when prompted. 
-    - Type "git clone https://github.com/jasoneckert/classfiles.git" and press Enter. 
-    - Type "poweroff" to shut down your Fedora virtual machine.
+    - Type `git clone https://github.com/jasoneckert/classfiles.git` and press Enter. 
+    - Type `poweroff` to shut down your Fedora virtual machine.
 
-INSTALLING UBUNTU SERVER (this can be done later in Topic 5)
+# Installing Ubuntu Server (this can be done later in Topic 5)
 
 1. On your Windows or macOS computer, download the latest ISO image for Ubuntu Server from ubuntu.com/download/server. 
 2. In your hypervisor software, create a new virtual machine called "Ubuntu Server" that has 1GB of RAM, 64GB of virtual hard disk storage, 
@@ -62,5 +62,5 @@ INSTALLING UBUNTU SERVER (this can be done later in Topic 5)
 13. At the SSH Setup, select Install OpenSSH server and select Done.
 14. At the Featured Server Snaps screen, select Done.
 15. At the Install complete screen, select Reboot Now. When prompted to remove your installation medium, press Enter.
-16. After the system has booted, log in as woot, type "sudo passwd root" and set the root user password to Secret555. 
-17. Type "poweroff" to shut down your Ubuntu Server virtual machine.
+16. After the system has booted, log in as woot, type `sudo passwd root` and set the root user password to Secret555. 
+17. Type `poweroff` to shut down your Ubuntu Server virtual machine.
