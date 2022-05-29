@@ -1,103 +1,103 @@
 # Users & Groups
    - Open a Terminal on your Fedora Workstation virtual machine as root
-   - `less /etc/login.defs
-   - `cat /etc/default/useradd
-   - `touch /etc/skel/policies.txt
-   - `su - woot (switches to a woot session – no password needed!)
-   - `sudo useradd -m larry (enter woot’s password of Secret555)
-   - `sudo useradd -m curly (sudo caches your previous authentication during the session)
-   - `pkexec useradd -m moe (enter woot’s password of Secret555)
-   - `exit	(returns you to your root session)
-   - `passwd larry (enter Secret555)
-   - `passwd curly (enter Secret555)
-   - `passwd moe (enter Secret555)
-   - `groupadd stooges
-   - `usermod -aG stooges larry curly moe
-   - `grep larry /etc/passwd (interpret the fields shown)
-   - `grep larry /etc/shadow (interpret the fields shown)
-   - `grep stooges /etc/group (interpret the fields shown) 
-   - `passwd -l larry
-   - `grep larry /etc/shadow
-   - `passwd -u larry
-   - `grep larry /etc/shadow
-   - `chfn larry (supply some suitable values of your choice)
-   - `grep larry /etc/passwd
-   - `dnf install finger
-   - `finger larry
-   - `ls -a /etc/skel  
-   - `ls -a /home/larry (note the contents are the same as /etc/skel and include policies.txt)
-   - `su - woot
-   - `groups (note that you are a member of the wheel group)
-   - `sudo userdel larry (supply your password of Secret555 when prompted to confirm)
-   - `su -	(supply the root user password of Secret555 when prompted)
-   - `ls -la /home/larry (note that larry’s old UID owns existing files)
-   - `useradd -m -u UID shemp (where UID is larry’s old UID)
-   - `ls -la /home/larry /home/shemp (note that shemp owns larry’s old files)
-   - `exit
-   - `id	(note your UID & GID and that root is your primary group)
-   - `touch firstnewfile
-   - `ls -l firstnewfile (note the owner of root, and group owner of root)
-   - `newgrp sys  
-   - `id	(note your UID & GID and that sys is your primary group)
-   - `touch secondnewfile
-   - `ls -l secondnewfile (note the owner of root, and group owner of sys) 
+   - `less /etc/login.defs`
+   - `cat /etc/default/useradd`
+   - `touch /etc/skel/policies.txt`
+   - `su - woot` (switches to a woot session – no password needed!)
+   - `sudo useradd -m larry` (enter woot’s password of Secret555)
+   - `sudo useradd -m curly` (sudo caches your previous authentication during the session)
+   - `pkexec useradd -m moe` (enter woot’s password of Secret555)
+   - `exit`	(returns you to your root session)
+   - `passwd larry` (enter Secret555)
+   - `passwd curly`(enter Secret555)
+   - `passwd moe` (enter Secret555)
+   - `groupadd stooges`
+   - `usermod -aG stooges larry curly moe`
+   - `grep larry /etc/passwd` (interpret the fields shown)
+   - `grep larry /etc/shadow` (interpret the fields shown)
+   - `grep stooges /etc/group` (interpret the fields shown) 
+   - `passwd -l larry`
+   - `grep larry /etc/shadow`
+   - `passwd -u larry`
+   - `grep larry /etc/shadow`
+   - `chfn larry` (supply some suitable values of your choice)
+   - `grep larry /etc/passwd`
+   - `dnf install finger`
+   - `finger larry`
+   - `ls -a /etc/skel` 
+   - `ls -a /home/larry` (note the contents are the same as /etc/skel and include policies.txt)
+   - `su - woot`
+   - `groups` (note that you are a member of the wheel group)
+   - `sudo userdel larry` (supply your password of Secret555 when prompted to confirm)
+   - `su -`	(supply the root user password of Secret555 when prompted)
+   - `ls -la /home/larry` (note that larry’s old UID owns existing files)
+   - `useradd -m -u UID shemp` (where UID is larry’s old UID)
+   - `ls -la /home/larry /home/shemp` (note that shemp owns larry’s old files)
+   - `exit`
+   - `id` (note your UID & GID and that root is your primary group)
+   - `touch firstnewfile`
+   - `ls -l firstnewfile` (note the owner of root, and group owner of root)
+   - `newgrp sys`  
+   - `id`	(note your UID & GID and that sys is your primary group)
+   - `touch secondnewfile`
+   - `ls -l secondnewfile` (note the owner of root, and group owner of sys) 
 
 PROCESSES 
    * Open a Terminal on your Fedora Workstation virtual machine as root
-   - `ps -ef | less (view the processes on your system)
-   - `ps -el | grep Z (do you have any zombie processes on your system?)
-   - `pstree (use [Shift]+[PageUp] and [Shift]+[PageDown] to navigate)
-   - `top (press q to quit when finished)
-   - `dnf install htop
-   - `htop	(press F10 to quit when finished)
-   - `ps (note the PID of your bash shell for the following commands)
-   - `kill -2 PID (note that bash trapped the signal)
-   - `kill -3 PID (note that bash trapped the signal)
-   - `kill -15 PID (note that bash trapped the signal)
-   - `kill -9 PID (note that the process was killed successfully - log back in as root afterwards)
-   - `sleep 10 (note that you do not receive your prompt until sleep terminates)
-   - `sleep 5000000& ; sleep 5000000& ; sleep 5000000&	
-   - `jobs
-   - `fg %3		
-   - `[Ctrl]+c (this sends a 2/SIGINT kill signal to the foreground process)
-   - `killall -9 sleep
-   - `nice -n 19 ps -l (note the priority and nice values)
-   - `nice -n -20 ps -l (note the priority and nice values)
-   - `nice -n 11 sleep 50000& (note the PID for the next command)
-   - `renice -5 PID
-   - `exec ls (you were logged out after this command was run because you directed your shell to not fork() a subshell - log back in as root afterwards)
-   - `at now + 1 minute 
-      - `echo Hello World >>/testfile
-      - `Press [Ctrl]+d
-   - `cat /testfile (to this in about 1 minute to see the results)
-   - `crontab -e (save your changes when finished - use https://crontab.guru/ to interpret when /bin/false is scheduled to run!)
-      - `15  6   1-6  *  2  /bin/false
-      - `20  21  1-6  *  2  /bin/false
-   - `crontab -l 
-   - `ls -F /proc/1 (this is the PID for the first daemon on the system)
-   - `cat /proc/cpuinfo
-   - `cat /proc/meminfo
-   - `cat /proc/uptime
-   - `cat /proc/sys/net/ipv4/ip_forward 
+   - `ps -ef | less` (view the processes on your system)
+   - `ps -el | grep Z` (do you have any zombie processes on your system?)
+   - `pstree` (use `[Shift]+[PageUp]` and `Shift]+[PageDown]` to navigate)
+   - `top` (press `q` to quit when finished)
+   - `dnf install htop`
+   - `htop`	(press `F10` to quit when finished)
+   - `ps` (note the PID of your bash shell for the following commands)
+   - `kill -2 PID` (note that bash trapped the signal)
+   - `kill -3 PID` (note that bash trapped the signal)
+   - `kill -15 PID` (note that bash trapped the signal)
+   - `kill -9 PID` (note that the process was killed successfully - log back in as root afterwards)
+   - `sleep 10` (note that you do not receive your prompt until sleep terminates)
+   - `sleep 5000000& ; sleep 5000000& ; sleep 5000000&`
+   - `jobs`
+   - `fg %3`	
+   - `[Ctrl]+c` (this sends a 2/SIGINT kill signal to the foreground process)
+   - `killall -9 sleep`
+   - `nice -n 19 ps -l` (note the priority and nice values)
+   - `nice -n -20 ps -l` (note the priority and nice values)
+   - `nice -n 11 sleep 50000&` (note the PID for the next command)
+   - `renice -5 PID`
+   - `exec ls` (you were logged out after this command was run because you directed your shell to not fork() a subshell - log back in as root afterwards)
+   - `at now + 1 minute` 
+      - `echo Hello World >>/testfile`
+      - `Press [Ctrl]+d`
+   - `cat /testfile` (to this in about 1 minute to see the results)
+   - `crontab -e` (save your changes when finished - use https://crontab.guru/ to interpret when /bin/false is scheduled to run!)
+      - `15  6   1-6  *  2  /bin/false`
+      - `20  21  1-6  *  2  /bin/false`
+   - `crontab -l` 
+   - `ls -F /proc/1` (this is the PID for the first daemon on the system)
+   - `cat /proc/cpuinfo`
+   - `cat /proc/meminfo`
+   - `cat /proc/uptime`
+   - `cat /proc/sys/net/ipv4/ip_forward` 
   
 PRINTING 
    - Open a Terminal on your Fedora Workstation virtual machine as root
-   - `lpadmin -p p1 -E -v /dev/null -m raw  (creates a fake printer that prints to /dev/null)
-   - `lpadmin -d p1 (sets the system default printer to p1)
-   - `cupsaccept p1
-   - `cupsdisable p1 (this holds print jobs in the print queue)
-   - `lpstat -t
-   - `less /etc/cups/printers.conf
-   - `lp /etc/issue
-   - `lpstat
-   - `ls /var/spool/cups
-   - `lpr /etc/issue
-   - `lpq
-   - `ls /var/spool/cups
-   - `lpc status
-   - `lpstat
-   - `cancel p1-1 p1-2
-   - `lpstat
+   - `lpadmin -p p1 -E -v /dev/null -m raw`  (creates a fake printer that prints to /dev/null)
+   - `lpadmin -d p1` (sets the system default printer to p1)
+   - `cupsaccept p1`
+   - `cupsdisable p1` (this holds print jobs in the print queue)
+   - `lpstat -t`
+   - `less /etc/cups/printers.conf`
+   - `lp /etc/issue`
+   - `lpstat`
+   - `ls /var/spool/cups`
+   - `lpr /etc/issue`
+   - `lpq`
+   - `ls /var/spool/cups`
+   - `lpc status`
+   - `lpstat`
+   - `cancel p1-1 p1-2`
+   - `lpstat`
    - Also explore the graphical CUPS admin tool in Firefox (http://localhost:631)
 
 STORAGE
