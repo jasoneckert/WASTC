@@ -74,7 +74,7 @@
    - `awk '/Mother/ {print $1 "\t" $4}' letter`
    - `awk –F: '/root/ {print $3, $5}' /etc/passwd`
    
-# Git
+# Using Git
    - `mkdir /scripts`
    
   	- `cp scriptname scriptname scriptname /scripts`
