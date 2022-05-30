@@ -1,5 +1,12 @@
-# Kubernetes Overview (it's a black box!)
+# Kubernetes (K8S) Overview
+- K8S is the industry standard orchestrator/API, and can be thought of as a "black box" that holds your container infrastructure
+- You install a K8S ***cluster*** with a ***control plane*** and one or more ***nodes*** (~VMs with container runtime & kubelet service)
+- Web apps are called ***pods*** and may consist of one or more containers or persistent storage volumes
+- Managed K8S is common (cloud provider service)
 
+![image](https://user-images.githubusercontent.com/40586970/171035289-3d5692ea-5258-41ed-8db7-f1ede4932855.png)
+
+![image](https://user-images.githubusercontent.com/40586970/171035312-ad52d478-399f-414c-99aa-9616641d4248.png)
 
 # Installing K3S
   - Open a Terminal on your Ubuntu Server virtual machine as root
