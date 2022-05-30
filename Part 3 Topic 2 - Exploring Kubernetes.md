@@ -19,7 +19,7 @@
   - `kubectl get service webapp -o yaml` (note the `nodePort:` line to see which service port is automatically exposed outside of the Kubernetes cluster)
   - Open a Web browser on your Windows or macOS PC and navigate to http://UbuntuIP:port (where port is the exposed service port from the previous command)
 
-NOTE: You can add the `-o yaml` output to most `kubectl` to obtain the information about a component in YAML format. This output if often called a ***manifest*** as it can also be saved to a file and used alongside the `kubectl apply -f filename` command to automatically configure components in Kubernetes.
+NOTE: You can add `-o yaml` to most `kubectl` commands to obtain configuration information in YAML format. This information is called a ***manifest*** as it can also be saved to a file and used alongside the `kubectl apply -f filename` command to automatically configure components in Kubernetes.
 
 # Horizontal Pod Autoscaling (HPA)
   - `kubectl top nodes` (note that K3S comes with a metrics service that collects statistics - these can be used to perform HPA)
