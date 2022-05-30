@@ -19,6 +19,8 @@
   - `kubectl get service webapp -o yaml` (note the `nodePort:` line to see which service port is automatically exposed outside of the Kubernetes cluster)
   - Open a Web browser on your Windows or macOS PC and navigate to http://UbuntuIP:port (where port is the exposed service port from the previous command)
 
+NOTE: You can add the `-o yaml` output to most `kubectl` to obtain the information about a component in YAML format. This output if often called a ***manifest*** as it can also be saved to a file and used alongside the `kubectl apply -f filename` command to automatically configure components in Kubernetes.
+
 # Horizontal Pod Autoscaling (HPA)
   - `kubectl top nodes` (note that K3S comes with a metrics service that collects statistics - these can be used to perform HPA)
   - `kubectl autoscale deployment webapp --min=3 --max=8 --cpu-percent=50` (create HPA configuration for your Web app that automatically scales from 3 to 8 pods when a consistent trend of more than 50% of the CPU is consumed)
@@ -32,7 +34,11 @@ After a while, your developers will make a new container image available (e.g. j
 Kubernetes will immediately start replacing the pods with your new image in sequence until all of them are upgraded. If an upgraded image causes stability issues, you can revert to the previous image using `kubectl rollout undo deployment webapp`. You can also use `kubectl rollout history deployment webapp` to view rollout history.
 
 # Ingress
-Up until now, you've had to access the pods that comprise webapp using http://UbuntuIP:port (where port is the port exposed from our NodePort service). This is why there is no public EXTERNAL-IP listed in the output of `kubectl get service webapp`. On a cloud provider, you normally configure either a load balancer or an ingress controller to provide access to a service from outside the Kubernetes cluster. To use a load balancer, you just need to change from using NodePort to LoadBalancer and pay for the load balancing service on your cloud provider. The cloud provider then gives you an external IP that you can use when creating a DNS record for your Web app. Alternatively, you can use an ingress controller proxy (e.g. Nginx, HAProxy or Traefik). In this method, you configure a node balancer in front of your cluster that routes traffic to Nginx/HAProxy/Traefik and then your Web app.
+Up until now, you've had to access the pods that comprise webapp using http://UbuntuIP:port (where port is the port exposed from our NodePort service). This is because K3S comes preconfigured with the Traefik ingress controller that allows external traffic to enter your Kubernetes cluster and interact with exposed services. However, most Kubernetes clusters do not come with a preconfigured ingress controller, and you must configure either a load balancer service or an ingress controller to provide access to a service from outside the Kubernetes cluster. 
+- To use a load balancer, you just need to change from using NodePort to LoadBalancer and pay for the load balancing service on your cloud provider. The cloud provider then gives you an external IP that you can use when creating a DNS record for your Web app. 
+- Alternatively, you can use an ingress controller (Traefik, Nginx, HAProxy, etc.) that accepts and reroutes traffic to your services. The easiest way to install an ingress controller in your Kubernetes cluster is by using the ***Helm package manager*** which uses ***Helm charts*** to define what components to download and how to connect them to other components within Kubernetes.
+
+NOTE: To configure a different ingress controller in K3S, you must edit /etc/systemd/system/k3s.service, add the `--disable traefik` option and restart K3S with `systemctl restart k3s.service`.
 
 Let’s install an Nginx ingress controller in our Kubernetes cluster and configure it to allow external access to our Web app. The easiest way to install additional components in a Kubernetes cluster is by using the Helm package manager, which uses helm charts to store the information needed to add/configure the appropriate software. There are many different repositories on the Internet that provide helm charts for different Kubernetes components. The following commands install the Helm package manger, add the Nginx Helm repository, and install the Nginx ingress controller:
 
