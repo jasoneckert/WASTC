@@ -1,6 +1,6 @@
 # Docker Basics
   - Open a Terminal on your Fedora Workstation virtual machine as root
-  - `snap install docker` 
+  - `apt install docker.io` 
   - `docker search busybox | less`
   - `docker pull busybox` (pulls the official busybox Linux container image from Docker Hub)
   - `docker images` (you can remove a downloaded image using `docker rmi imagename`)
