@@ -40,7 +40,28 @@ Up until now, you've had to access the pods that comprise webapp using http://Ub
 
 NOTE: To configure a different ingress controller in K3S, you must edit /etc/systemd/system/k3s.service, add the `--disable traefik` option and restart K3S with `systemctl restart k3s.service`.
 
-Let’s install an Nginx ingress controller in our Kubernetes cluster and configure it to allow external access to our Web app. The easiest way to install additional components in a Kubernetes cluster is by using the Helm package manager, which uses helm charts to store the information needed to add/configure the appropriate software. There are many different repositories on the Internet that provide helm charts for different Kubernetes components. The following commands install the Helm package manger, add the Nginx Helm repository, and install the Nginx ingress controller:
+# Monitoring 
+You can also use graphical apps to monitor and manage Kubernetes. The most common app for this is Lens (https://k8slens.dev), which is quite powerful. Unfortunately, it can also be quite daunting for those new to Kubernetes as it can view/edit all of the core concepts (deployments, services, HPA, etc.) as well as all of the advanced ones that I didn’t mention.
 
-  -  that are collected container)
-  -  service webapp
+Most administrators use a combination of command line tools and templating tools (e.g. Terraform) for managing Kubernetes, but use graphical tools for monitoring it. There are many cloud-based monitoring tools (e.g. Datadog) that can be integrated into Kubernetes for a fee, as well as free tools that you can install directly in your Kubernetes cluster, such as Prometheus and Grafana. Prometheus monitors the events in your cluster and sends the data to Grafana for visualization. Even the graphs and metrics shown in the Lens app require Prometheus (they are empty otherwise).
+
+To install both Prometheus and Grafana, you can install the Prometheus stack using a helm chart:
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install prometheus prometheus-community/kube-prometheus-stack
+This will install a series of pods, including a pod called prometheus-grafana. Since these pods take several minutes to start, watch the output of kubectl get pods periodically to know when they are ready. Next, open the Lens app, locate the prometheus-grafana pod, and scroll down until you find the URL with port 3000. Click the appropriate button/link to set up a port forward (this opens your default Web browser to access it much like minikube service does). Alternatively, you could run the following commands to expose the service:
+
+kubectl expose service prometheus-grafana --type=NodePort --target-port=3000 --name=pgservice
+minikube service prometheus-grafana
+Next, log into the Grafana Web app as the user admin (default password is prom-operator) and view the different available monitoring templates by navigating to Dashboards > Browse (click on each one). Following is the compute resource (pod) dashboard:
+
+If you’ve browsed around the Lens app, you’ve probably noticed that we’ve only scratched the surface of Kubernetes configuration, and only to provide a very rough proof-of-concept style overview only. There’s a lot more that you’ll likely want to know at this stage, and you should now have enough basic knowledge to search for the relevant information in the Kubernetes documentation: https://kubernetes.io/docs/home/
+
+# Additional Core Concepts (for further exploration)
+- You can integrate Kubernetes directly with a DNS provider (~Dynamic DNS) using https://github.com/kubernetes-sigs/external-dns
+- For HTTPS/TLS, you can connect your ingress controller to https://cert-manager.io so that it can automatically get certificates for each service. You can install it using Helm or a downloadable manifest you can apply (see instructions on the website for details on either method). Next, follow the instructions to connect to a CA (e.g. Letsencrypt) and modify your ingress controller settings to list cert-manager. Of course, you’ll also need a publicly-resolvable DNS record for your cluster for this to work.
+- ***Cronjobs*** are often used by Web apps to do things like reindexing DBs, maintenance tasks, clearing caches, and so on. Kubernetes has a CronJob resource that can do this. Simply create a manifest that lists the cron schedule, as well as a container it can spawn (e.g. Alpine/Busybox) to perform the commands you specify.
+- For persistent block storage needed by containers, you need to create a ***PVC (Persistent Volume Claim)*** to create a resource that doesn’t disappear when you restart your cluster. Many block storage volumes can only attach to 1 pod at time, which makes it difficult to scale. Rook/Ceph and GlusterFS can do this but are complex to configure. NFS is a simple method that can be used to access persistent block storage. To use NFS, install and configure the NFS Client Provisioner and configure it to connect to an NFS share on another container or NFS server. If the block storage is only used for hosting databases, there are many different persistent and cloud native solutions (e.g. CockroachDB) available on the market that may be worth the money depending on your use case.
+- ***Namespaces*** limit the scope of resources in Kubernetes. I’ve been using the default namespace for everything so far, but you typically create namespaces for related resources that comprise a Web app. You can use kubectl create namespace lala to create a lala namespace, and add -n lala to other kubectl commands to limit their functionality to that namespace. If you run kubectl delete namespace lala, all resources associated with that namespace will also be deleted.
+
