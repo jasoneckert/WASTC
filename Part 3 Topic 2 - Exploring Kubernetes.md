@@ -45,21 +45,10 @@ You can also use graphical apps to monitor and manage Kubernetes. The most commo
 
 Most administrators use a combination of command line tools and templating tools (e.g. Terraform) for managing Kubernetes, but use graphical tools for monitoring it. There are many cloud-based monitoring tools (e.g. Datadog) that can be integrated into Kubernetes for a fee, as well as free tools that you can install directly in your Kubernetes cluster, such as Prometheus and Grafana. Prometheus monitors the events in your cluster and sends the data to Grafana for visualization. Even the graphs and metrics shown in the Lens app require Prometheus (they are empty otherwise).
 
-To install both Prometheus and Grafana, you can install the Prometheus stack using a helm chart:
-   - `snap install helm --classic`
-   - `helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-   - `helm repo update`
-   - `helm install prometheus prometheus-community/kube-prometheus-stack`
-
-This will install a series of pods, including a pod called prometheus-grafana. Since these pods take several minutes to start, watch the output of kubectl get pods periodically to know when they are ready. Next, open the Lens app, locate the prometheus-grafana pod, and scroll down until you find the URL with port 3000. Click the appropriate button/link to set up a port forward (this opens your default Web browser to access it much like minikube service does). Alternatively, you could run the following commands to expose the service:
-
-kubectl expose service prometheus-grafana --type=NodePort --target-port=3000 --name=pgservice
-minikube service prometheus-grafana
-Next, log into the Grafana Web app as the user admin (default password is prom-operator) and view the different available monitoring templates by navigating to Dashboards > Browse (click on each one). Following is the compute resource (pod) dashboard:
-
-If you’ve browsed around the Lens app, you’ve probably noticed that we’ve only scratched the surface of Kubernetes configuration, and only to provide a very rough proof-of-concept style overview only. There’s a lot more that you’ll likely want to know at this stage, and you should now have enough basic knowledge to search for the relevant information in the Kubernetes documentation: https://kubernetes.io/docs/home/
+To install both Prometheus and Grafana, you can install the Prometheus stack using a Kubernetes operator or Helm chart. This will install a series of pods, including a pod called prometheus-grafana. Since these pods take several minutes to start, watch the output of `kubectl get pods` periodically to know when they are ready. Next, run `kubectl expose service prometheus-grafana --type=NodePort --target-port=3000 --name=pgservice` and log into the Grafana Web app http://UbuntuIP:3000 as the user admin (default password is prom-operator) and view the different available monitoring templates by navigating to Dashboards > Browse. 
 
 # Additional Concepts (for further exploration)
+- Kubernetes has excellent documentation: https://kubernetes.io/docs/home/
 - You can integrate Kubernetes directly with a DNS provider (~Dynamic DNS) using https://github.com/kubernetes-sigs/external-dns
 - For HTTPS/TLS, you can connect your ingress controller to https://cert-manager.io so that it can automatically get certificates for each service. You can install it using Helm or a downloadable manifest you can apply (see instructions on the website for details on either method). Next, follow the instructions to connect to a CA (e.g. Letsencrypt) and modify your ingress controller settings to list cert-manager. Of course, you’ll also need a publicly-resolvable DNS record for your cluster for this to work.
 - ***Cronjobs*** are often used by Web apps to do things like reindexing DBs, maintenance tasks, clearing caches, and so on. Kubernetes has a CronJob resource that can do this. Simply create a manifest that lists the cron schedule, as well as a container it can spawn (e.g. Alpine/Busybox) to perform the commands you specify.
