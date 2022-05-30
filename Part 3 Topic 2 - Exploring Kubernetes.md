@@ -3,6 +3,8 @@
 - You install a K8S ***cluster*** with a ***control plane*** and one or more ***nodes*** (~VMs with container runtime & kubelet service)
 - Web apps are called ***pods*** and may consist of one or more containers or persistent storage volumes
 - Managed K8S is common (cloud provider service)
+- K3S is a pre-packaged single-node K8S cluster that strips out unnecessary cloud-provider-specific additions so that it can run fast on any platform, including IoT platforms (it also uses SQLite instead of etcd for storing cluster configuration)
+- Other common pre-packaged single-node K8S clusters include Kind, Minikube and Docker Desktop (Kubernetes component)
 
 ![image](https://user-images.githubusercontent.com/40586970/171035289-3d5692ea-5258-41ed-8db7-f1ede4932855.png)
 
