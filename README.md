@@ -24,3 +24,6 @@ Most Linux concepts are easy to apply to macOS and FreeBSD UNIX. As a result, ma
 - https://jasoneckert.github.io/myblog/freebsd-unix-for-linux-sysadmins/
 
 ## Part 3: Cloud
+While SaaS and IaaS (VM) concepts are relatively straightforward and easy to demonstrate using a public cloud provider, PaaS (container) concepts often require additional time and practice. As a result, I've focused on the following two topics:
+- Topic 1: Working with Docker Containers
+- Topic 2: Exploring Kubernetes
