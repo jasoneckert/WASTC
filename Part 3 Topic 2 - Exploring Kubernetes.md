@@ -50,6 +50,7 @@ To install both Prometheus and Grafana, you can install the Prometheus stack usi
    - `helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
    - `helm repo update`
    - `helm install prometheus prometheus-community/kube-prometheus-stack`
+
 This will install a series of pods, including a pod called prometheus-grafana. Since these pods take several minutes to start, watch the output of kubectl get pods periodically to know when they are ready. Next, open the Lens app, locate the prometheus-grafana pod, and scroll down until you find the URL with port 3000. Click the appropriate button/link to set up a port forward (this opens your default Web browser to access it much like minikube service does). Alternatively, you could run the following commands to expose the service:
 
 kubectl expose service prometheus-grafana --type=NodePort --target-port=3000 --name=pgservice
