@@ -14,7 +14,10 @@
   - `kubectl get deployment webapp` (note that 3 containers are now running in the pod based on the same container image - requests sent to the service are load balanced across these containers)
   - `kubectl get pods -l app=webapp` (to see these 3 containers)
   - `kubectl logs -f -l app=webapp --prefix=true` (this displays events related to your webapp and is often useful when troubleshooting issues with a deployment such as not being able to pull the container image)
-  - `kubectl get service webapp -o yaml` (note the `nodePort:` line to see which port is automatically exposed outside of the Kubernetes cluster)
-  - In your Web bro
-  - - 
+  - `kubectl get service webapp -o yaml` (note the `nodePort:` line to see which service port is automatically exposed outside of the Kubernetes cluster)
+  - Open a Web browser on your Windows or macOS PC and navigate to http://UbuntuIP:port (where port is the exposed service port from the previous command)
+  - `kubectl top nodes` (note that K3S comes with a metrics service that collects statistics - these can be used to perform ***horizontal pod autoscaling (HPA)***)
+  - `kubectl autoscale deployment webapp --min=3 --max=8 --cpu-percent=50` (create HPA configuration for your Web app that automatically scales from 3 to 8 pods when a consistent trend of more than 50% of the CPU is consumed)
+  - `kubectl get hpa webapp` 
+  -  that are collected container)
   -  service webapp
