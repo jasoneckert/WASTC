@@ -59,7 +59,7 @@ Next, log into the Grafana Web app as the user admin (default password is prom-o
 
 If you’ve browsed around the Lens app, you’ve probably noticed that we’ve only scratched the surface of Kubernetes configuration, and only to provide a very rough proof-of-concept style overview only. There’s a lot more that you’ll likely want to know at this stage, and you should now have enough basic knowledge to search for the relevant information in the Kubernetes documentation: https://kubernetes.io/docs/home/
 
-# Additional Concepts (For Further Exploration)
+# Additional Concepts (for further exploration)
 - You can integrate Kubernetes directly with a DNS provider (~Dynamic DNS) using https://github.com/kubernetes-sigs/external-dns
 - For HTTPS/TLS, you can connect your ingress controller to https://cert-manager.io so that it can automatically get certificates for each service. You can install it using Helm or a downloadable manifest you can apply (see instructions on the website for details on either method). Next, follow the instructions to connect to a CA (e.g. Letsencrypt) and modify your ingress controller settings to list cert-manager. Of course, you’ll also need a publicly-resolvable DNS record for your cluster for this to work.
 - ***Cronjobs*** are often used by Web apps to do things like reindexing DBs, maintenance tasks, clearing caches, and so on. Kubernetes has a CronJob resource that can do this. Simply create a manifest that lists the cron schedule, as well as a container it can spawn (e.g. Alpine/Busybox) to perform the commands you specify.
