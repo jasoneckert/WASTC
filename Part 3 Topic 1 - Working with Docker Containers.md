@@ -72,7 +72,6 @@
   - `vi Dockerfile` (add the following contents, saving your changes)
      - `FROM httpd`
      - `COPY ./index.html htdocs/index.html`
-  - `cd webappcontainer`
   - `docker build -t jasoneckert/webapp .` (replace jasoneckert with your Docker Hub username) 
   - `docker images`  
   - `docker login -u jasoneckert` (paste your Docker Hub access token when prompted)
