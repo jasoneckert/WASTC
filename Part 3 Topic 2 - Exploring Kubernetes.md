@@ -31,6 +31,10 @@ After a while, your developers will make a new container image available (e.g. j
 
 Kubernetes will immediately start replacing the pods with your new image in sequence until all of them are upgraded. If an upgraded image causes stability issues, you can revert to the previous image using `kubectl rollout undo deployment webapp`. You can also use `kubectl rollout history deployment webapp` to view rollout history.
 
+# Ingress
+Up until now, you've had to access the pods that comprise webapp using http://UbuntuIP:port (where port is the port exposed from our NodePort service). This is why there is no public EXTERNAL-IP listed in the output of `kubectl get service webapp`. On a cloud provider, you normally configure either a load balancer or an ingress controller to provide access to a service from outside the Kubernetes cluster. To use a load balancer, you just need to change from using NodePort to LoadBalancer and pay for the load balancing service on your cloud provider. The cloud provider then gives you an external IP that you can use when creating a DNS record for your Web app. Alternatively, you can use an ingress controller proxy (e.g. Nginx, HAProxy or Traefik). In this method, you configure a node balancer in front of your cluster that routes traffic to Nginx/HAProxy/Traefik and then your Web app.
+
+Let’s install an Nginx ingress controller in our Kubernetes cluster and configure it to allow external access to our Web app. The easiest way to install additional components in a Kubernetes cluster is by using the Helm package manager, which uses helm charts to store the information needed to add/configure the appropriate software. There are many different repositories on the Internet that provide helm charts for different Kubernetes components. The following commands install the Helm package manger, add the Nginx Helm repository, and install the Nginx ingress controller:
 
   -  that are collected container)
   -  service webapp
