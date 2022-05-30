@@ -41,15 +41,15 @@ Up until now, you've had to access the pods that comprise webapp using http://Ub
 NOTE: To configure a different ingress controller in K3S, you must edit /etc/systemd/system/k3s.service, add the `--disable traefik` option and restart K3S with `systemctl restart k3s.service`.
 
 # Monitoring 
-You can also use graphical apps to monitor and manage Kubernetes. The most common app for this is Lens (https://k8slens.dev), which is quite powerful. Unfortunately, it can also be quite daunting for those new to Kubernetes as it can view/edit all of the core concepts (deployments, services, HPA, etc.) as well as all of the advanced ones that I didn’t mention.
+You can also use graphical apps to monitor and manage Kubernetes. The most common app for this is Lens (https://k8slens.dev), which is quite powerful. Unfortunately, it can also be quite daunting for those new to Kubernetes as it can view/edit all of the core concepts (deployments, services, HPA, etc.) as well as advanced ones.
 
 Most administrators use a combination of command line tools and templating tools (e.g. Terraform) for managing Kubernetes, but use graphical tools for monitoring it. There are many cloud-based monitoring tools (e.g. Datadog) that can be integrated into Kubernetes for a fee, as well as free tools that you can install directly in your Kubernetes cluster, such as Prometheus and Grafana. Prometheus monitors the events in your cluster and sends the data to Grafana for visualization. Even the graphs and metrics shown in the Lens app require Prometheus (they are empty otherwise).
 
 To install both Prometheus and Grafana, you can install the Prometheus stack using a helm chart:
-
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm repo update
-helm install prometheus prometheus-community/kube-prometheus-stack
+   - `snap install helm --classic`
+   - `helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+   - `helm repo update`
+   - `helm install prometheus prometheus-community/kube-prometheus-stack`
 This will install a series of pods, including a pod called prometheus-grafana. Since these pods take several minutes to start, watch the output of kubectl get pods periodically to know when they are ready. Next, open the Lens app, locate the prometheus-grafana pod, and scroll down until you find the URL with port 3000. Click the appropriate button/link to set up a port forward (this opens your default Web browser to access it much like minikube service does). Alternatively, you could run the following commands to expose the service:
 
 kubectl expose service prometheus-grafana --type=NodePort --target-port=3000 --name=pgservice
