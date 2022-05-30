@@ -1,5 +1,5 @@
 # Docker Basics
-  - Open a Terminal on your Fedora Workstation virtual machine as root
+  - Open a Terminal on your Ubuntu Server virtual machine as root
   - `apt install docker.io` 
   - `docker search busybox | less`
   - `docker pull busybox` (pulls the official busybox Linux container image from Docker Hub)
