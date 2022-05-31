@@ -1,8 +1,7 @@
-# ***NOTE: Run the commands in the following sections within a new Terminal on your Fedora Workstation as root:***
-
 # Navigating the Directory Structure
+   * Open a Terminal on your Fedora Workstation virtual machine as root
    - `pwd` (you should be in /root)
-   - `cd /etc/sysconfig`	(switches directory using absolute pathname) 
+   - `cd /etc/sysconfig` (switches directory using absolute pathname) 
    - `pwd` (you should be in /etc/sysconfig)
    - `cd ../..` (switches to / using relative pathname)
    - `cd root` (switches to /root using relative pathname)
@@ -13,6 +12,7 @@
    - `cd /etc/sysconfig/network-scripts` (instead of typing this out, use the `[Tab]` key to autocomplete the path!)
 
 # Viewing Directories
+   * Open a Terminal on your Fedora Workstation virtual machine as root
    - `cd classfiles` 
    - `ls -F`
    - `ls -l`
@@ -26,6 +26,7 @@
    - `tree classfiles/Poems`
 
 # Viewing Text Files
+   * Open a Terminal on your Fedora Workstation virtual machine as root
    - `cd classfiles`
    - `cat bigfile`
    - `more bigfile` (type `h` for help, `q` to quit)
@@ -41,6 +42,7 @@
    - `head -1 Poems/Blake/tiger`
 
 # Common Text Tools
+   * Open a Terminal on your Fedora Workstation virtual machine as root
    - ` cd classfiles`
    - ` grep "I " letter` 
    - ` grep -v "I " letter`
@@ -48,6 +50,7 @@
    - ` wc -l Poems/Shakespeare/*` (was Shakespeare a romantic?) 
 
 # Editing Text Files
+   * Open a Terminal on your Fedora Workstation virtual machine as root
    - ` nano letter` (note the legend with `[Ctrl]` key combinations)
    - ` dnf install vim` (installs the full version of vi improved)
    - ` vimtutor` (interactive vi tutorial, alternatively visit https://vim.is/#exercise)
