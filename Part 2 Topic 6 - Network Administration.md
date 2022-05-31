@@ -138,14 +138,14 @@
   - `apt install samba smbclient cifs-utils`
   - `ps –ef | grep mbd` (note that smbd and nmbd are running)
   - `vi /etc/samba/smb.conf` 
-     - View the comments and then add the following line under the `workgroup = WORKGROUP` line
+     * View the comments and then add the following line under the `workgroup = WORKGROUP` line
        - `netbios name = ubuntu`
-     - Uncomment/modify the section that shares out all home directories
+     * Uncomment/modify the section that shares out all home directories
        - `[homes]`
        - `comment = Home Directories`
        - `browseable = yes`
        - `read only = no`
-     - Add the following share definition to the bottom of the file, save your changes and quit vi
+     * Add the following share definition to the bottom of the file, save your changes and quit vi
        - `[etc]`
        - `comment = The etc directory`
        - `path = /etc`
@@ -162,9 +162,8 @@
   - `mount –t cifs //ubuntu/root /mnt`
   - `df -hT`
   - `ls -a /mnt` (note your home directory contents)
-  * If your host OS is Windows, open File Explorer and enter \\ubuntu in the search bar. Next, open PowerShell as Administrator and run the following command
-    - `net use z: \\ubuntu\woot /user:woot Secret555` (access your Z:\ mapped drive afterwards in File Explorer)
-  * If your host OS is macOS, open the Finder app and navigate to Go > Connect to Server and enter smb://ubuntu and click Connect (note the connection in your Finder)
+  * If your host OS is Windows, open File Explorer and enter `\\ubuntu` in the search bar - next, open PowerShell as Administrator and run `net use z: \\ubuntu\woot /user:woot Secret555` (access your Z:\ mapped drive afterwards in File Explorer)
+  * If your host OS is macOS, open the Finder app and navigate to Go > Connect to Server, enter `smb://ubuntu` and click Connect (note the connection in your Finder)
 
 # Apache
   * Open a Terminal on your Ubuntu Server virtual machine as root
@@ -218,6 +217,7 @@
      - `</VirtualHost>`
   - `systemctl restart apache2.service`
   * If your host OS is Windows, add the following line to the bottom of the C:\Windows\System32\drivers\etc\hosts file
+    - `UbuntuIPaddress www.example.com www.example2.com`
   * If your host OS is macOS, add the following line to the bottom of your /etc/hosts file (using `sudo /etc/hosts` at a Terminal prompt) 
     - `UbuntuIPaddress www.example.com www.example2.com`
   * Open a Web browser on your Windows or macOS PC and navigate to http://www.example.com to view the webpage from /var/www/html/
@@ -249,9 +249,9 @@
   - `chmod 644 /var/named/example.com.dns` 
   - `curl http://triosdevelopers.com/jason.eckert/trios/named.conf.additions --output named.conf.additions` 
   - `vi /etc/named.conf`
-     - Go to the end of the file and type `:r named.conf.additions` 
-     - Ensure that the last line (the `forwarders` option for 8.8.8.8) is added to the options block near the top of the file (remove the word `options` when adding it to this block), and then comment this last line. 
-     - Save your changes and quit vi
+     * Go to the end of the file and type `:r named.conf.additions` 
+     * Ensure that the last line (the `forwarders` option for 8.8.8.8) is added to the options block near the top of the file (remove the word `options` when adding it to this block), and then comment this last line. 
+     * Save your changes and quit vi
   - `systemctl start named.service ; systemctl enable named.service` 
   * Log into the GNOME desktop environment and set a static DNS server of 127.0.0.1 for your network interface in the Network tool
   - `nmcli connection down "name"` (where name is the name of your network interface)
