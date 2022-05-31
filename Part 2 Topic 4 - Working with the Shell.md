@@ -1,6 +1,5 @@
-# ***NOTE: Run the commands in the following sections within a new Terminal on your Fedora Workstation as root:***
-
 # Redirection
+   * Open a Terminal on your Fedora Workstation virtual machine as root
    - `df -hT >diskspace` (we examine the `df` command later)
    - `date >>diskspace`
    - `cat diskspace`
@@ -16,6 +15,7 @@
    - `ls <letter` (`ls` runs normally because it does not accept stdin)
 
 # Piping
+   * Open a Terminal on your Fedora Workstation virtual machine as root
    - `cd classfiles`
    - `grep -i mother letter | wc -l`
    - `cat letter | pr -d | less`
@@ -25,6 +25,7 @@
    - `grep -i love Poems/Shakespeare/sonnet* | wc -l`
 
 # Shell Variables
+   * Open a Terminal on your Fedora Workstation virtual machine as root
    - `VAR1="Hello World"`
    - `echo $VAR1`
    - `set | grep VAR1`
@@ -42,6 +43,7 @@
    - `source ~/.bashrc` (so you don't need to open a new shell)
 
 # Shell Scripts (note that the `tar` command is discussed later)
+   * Open a Terminal on your Fedora Workstation virtual machine as root
    - `git clone https://github.com/jasoneckert/shellscripts.git`
    - `cd shellscripts`
    - `cat script1.sh`
@@ -50,6 +52,7 @@
    - `cat script5.sh`
    
 # Advanced Text Tools
+   * Open a Terminal on your Fedora Workstation virtual machine as root
    - `cd classfiles`
    - `cut –d: -f3 /etc/passwd`		
    - `cut –d: -f3 /etc/passwd > passfile`
@@ -75,6 +78,7 @@
    - `awk –F: '/root/ {print $3, $5}' /etc/passwd`
    
 # Using Git
+   * Open a Terminal on your Fedora Workstation virtual machine as root
    - `mkdir /scripts`
    - `cp scriptname scriptname scriptname /scripts`
    - `cd /scripts`
@@ -94,13 +98,14 @@
    - `cat scriptname`
    - `git merge sample`
    - `cat scriptname`
-   - Optionally create a free account on GitHub and create a public "scripts" repo. 
-   - Next, use the appropriate commands (shown on GitHub after you create a new repo) to push your /scripts repo to GitHub and set it as the origin (this converts your /scripts repo into a cloned copy). 
-   - When you push your /scripts repo to GitHub, you will be prompted to log in with your GitHub username and a personal access token (very long password) that is used in place of your real GitHub password for pushing. 
-   - You can generate a personal access token on the GitHub website by clicking your user icon and navigating to Settings > Developer settings > Personal access tokens. When generating a personal access token, you must supply 
+   * Optionally create a free account on GitHub and create a public "scripts" repo. 
+   * Next, use the appropriate commands (shown on GitHub after you create a new repo) to push your /scripts repo to GitHub and set it as the origin (this converts your /scripts repo into a cloned copy). 
+   * When you push your /scripts repo to GitHub, you will be prompted to log in with your GitHub username and a personal access token (very long password) that is used in place of your real GitHub password for pushing. 
+   * You can generate a personal access token on the GitHub website by clicking your user icon and navigating to Settings > Developer settings > Personal access tokens. When generating a personal access token, you must supply 
      a description, expiration and select the repo scope for it to work. 
 
 # The Z Shell (optional extra)
+   * Open a Terminal on your Fedora Workstation virtual machine as root
    - `cd classfiles`
    - `grep -i mother letter >file1.txt >file2.txt`
    - `cat file1.txt`
