@@ -21,9 +21,8 @@
    16. Use the KDE start menu to locate the Terminal app to obtain a bash shell and run the who command. 
    17. Log out of the KDE desktop environment. 
 
-# Run the commands in the following sections within a new Terminal on your Fedora Workstation as root:***
-
 # Basic Shell Usage
+   * Open a Terminal on your Fedora Workstation virtual machine as root
    - `date`
    - `who`
    - `w`
@@ -41,6 +40,7 @@
    - `reboot`
 
 # Obtaining Command Help
+   * Open a Terminal on your Fedora Workstation virtual machine as root
    - `whatis crontab`
    - `man crontab` (use `q` or `[Ctrl]+c` to quit out of any interactive utility)
    - `man 5 crontab`
