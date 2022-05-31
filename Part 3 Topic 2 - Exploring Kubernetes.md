@@ -59,11 +59,13 @@ NOTE: To configure a different ingress controller in K3S, you must edit /etc/sys
     - The most common app used by developers for this is Lens (https://k8slens.dev), which is quite powerful
       - Unfortunately, it can also be quite daunting for those new to Kubernetes as it can view/edit all of the core concepts (deployments, services, HPA, etc.) as well as advanced ones
     - Most administrators use a combination of command line tools and templating tools (e.g. Terraform) for managing Kubernetes, but use graphical tools for monitoring it
-      - There are many cloud-based monitoring tools (e.g. Datadog) that can be integrated into Kubernetes for a fee, as well as free tools that you can install directly in your Kubernetes cluster, such as Prometheus and Grafana.\
+      - There are many cloud-based monitoring tools (e.g. Datadog) that can be integrated into Kubernetes for a fee, as well as free tools that you can install directly in your Kubernetes cluster, such as Prometheus and Grafana.
       - Prometheus monitors the events in your cluster and sends the data to Grafana for visualization
       - Even the graphs and metrics shown in the Lens app require Prometheus (they are empty otherwise).
 
-To install both Prometheus and Grafana, you can install the Prometheus stack using a Kubernetes operator or Helm chart. This will install a series of pods, including a pod called prometheus-grafana. Since these pods take several minutes to start, watch the output of `kubectl get pods` periodically to know when they are ready. Next, run `kubectl expose service prometheus-grafana --type=NodePort --target-port=3000 --name=pgservice` and log into the Grafana Web app http://UbuntuIP:3000 as the user admin (default password is prom-operator) and view the different available monitoring templates by navigating to Dashboards > Browse. 
+  * To install both Prometheus and Grafana, you can install the Prometheus stack using a Kubernetes operator or Helm chart
+    - This will install a series of pods, including a pod called prometheus-grafana (since these pods take several minutes to start, watch the output of `kubectl get pods` periodically to know when they are ready)
+    - Next, run `kubectl expose service prometheus-grafana --type=NodePort --target-port=3000 --name=pgservice` and log into the Grafana Web app http://UbuntuIP:3000 as the user admin (default password is prom-operator) and view the different available monitoring templates by navigating to Dashboards > Browse
 
 # Additional Concepts (for further exploration)
 - Kubernetes has excellent documentation: https://kubernetes.io/docs/home/
