@@ -71,7 +71,7 @@ NOTE: To configure a different ingress controller in K3S, you must edit /etc/sys
   * Kubernetes has excellent documentation: https://kubernetes.io/docs/home/
   * You can integrate Kubernetes directly with a DNS provider (~Dynamic DNS) using https://github.com/kubernetes-sigs/external-dns
   * For HTTPS/TLS, you can connect your ingress controller to https://cert-manager.io so that it can automatically get certificates for each service
-    - You can install it using Helm or a downloadable manifest you can apply (see instructions on the website for details)
+    - You can install it using Helm or a downloadable manifest you can apply (refer to instructions on the website)
     - Next, follow the instructions to connect to a CA (e.g. Letsencrypt) and modify your ingress controller settings to list cert-manager
     - You’ll also need a publicly-resolvable DNS record for your cluster for this to work
   * ***Cronjobs*** are often used by Web apps to do things like reindexing DBs, maintenance tasks, clearing caches, and so on
