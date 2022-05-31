@@ -41,10 +41,9 @@ NOTE: You can add `-o yaml` to most `kubectl` commands to obtain configuration i
   * To update your Kubernetes cluster to use the new image in production, you can either:
     - Edit your deployment (`kubectl edit deployment webapp`), modify the `Image` line and save your changes, or
     - Run `kubectl set image deployment/webapp webapp=jasoneckert/webapp:2.0`
-
-  * Kubernetes will immediately start replacing the pods with your new image in sequence until all of them are upgraded
-  * If an upgraded image causes stability issues, you can revert to the previous image using `kubectl rollout undo deployment webapp`
-  * You can also use `kubectl rollout history deployment webapp` to view rollout history
+    - Kubernetes will immediately start replacing the pods with your new image in sequence until all of them are upgraded
+    - If an upgraded image causes stability issues, you can revert to the previous image using `kubectl rollout undo deployment webapp`
+    - You can also use `kubectl rollout history deployment webapp` to view rollout history
 
 # Ingress
   * Up until now, you've had to access the pods that comprise webapp using http://UbuntuIP:port (where port is the port exposed from our NodePort service)
