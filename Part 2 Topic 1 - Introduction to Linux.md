@@ -5,8 +5,8 @@
    4. Switch to tty4 and log in as the user woot ($ prompt in the bash shell). 
    5. Switch to tty1 and log into the gdm as the woot user to start the GNOME desktop environment. 
    6. Open a command line terminal by clicking Activities and typing Terminal. At the terminal, run the following commands:
-       `who`
-       `su - root` 
+       - `who`
+       - `su - root` 
    7. Switch to tty3 and run the "tmux" command. 
    8. Press the `[Ctrl]+b` key combination and then type `%` to split your screen. 
    9. Press the `[Ctrl]+b` key combination and then type `“` to split your screen in the opposite direction. 
@@ -14,8 +14,8 @@
    11. Practice switching between these three screens by pressing the `[Ctrl]+b` key combination followed by a cursor key (up down left right). 
    12. Type `exit` within each of your screens to kill each bash shell, returning you to your original bash shell.
    13. Run the following commands to install the KDE Plasma Workspaces desktop environment:
-       `dnf groupinstall “KDE Plasma Workspaces”`
-       `reboot`
+       - `dnf groupinstall “KDE Plasma Workspaces”`
+       - `reboot`
    14. After your system has rebooted, choose the Settings (cog wheel icon) menu in the gdm and select Plasma. 
    15. Complete your login as the user woot.
    16. Use the KDE start menu to locate the Terminal app to obtain a bash shell and run the who command. 
