@@ -5,7 +5,7 @@
   - `nmcli conn show`  
   - `cat /etc/NetworkManager/system-connections` (note that the folder is empty)
   * Log into GNOME desktop as the woot user and navigate to Activities > Show Applications > Settings > Network 
-  * Next, modify your network interface to use a static configuration for your network and Apply your changes. 
+  * Next, modify your network interface to use a static configuration for your network and Apply your changes 
   - `ls /etc/NetworkManager/system-connections` (note the name.nmconnection file)
   - `cat /etc/NetworkManager/system-connections/name.nmconnection` 
   - `nmcli connection down "name" ; nmcli connection up "name"`
@@ -67,10 +67,10 @@
   - `ssh woot@UbuntuIPaddress cat /etc/hosts > downloadedhosts`
   - `cat downloadedhosts`
   * If your host OS is Windows, download and install the Putty Windows SSH client (putty.exe) from the following website: http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html. 
-  * Next, run the putty.exe executable and connect to the IP address of your Ubuntu Server using SSH on port 22. Accept the SSH host key and log in as the woot user. 
+  * Next, run the putty.exe executable and connect to the IP address of your Ubuntu Server using SSH on port 22. Accept the SSH host key and log in as the woot user 
     - `who`
     - `exit`
-  * If your host OS is macOS, navigate to Applications > Utilities > Terminal to open a shell on your local system. 
+  * If your host OS is macOS, navigate to Applications > Utilities > Terminal to open a shell on your local system 
     - `ssh woot@UbuntuIPaddress` (accept the SSH host key and supply woot’s password when prompted)
     - `who`
     - `exit`
@@ -103,9 +103,9 @@
      - `get file3`
      - `put file2` (note that you receive a permission error!)
      - `bye` 
-  * On your Windows or macOS host OS, open a Web browser and navigate to ftp://UbuntuIPaddress and note that you can see and download file3. 
-  * On your Windows or macOS PC, download and install the FileZilla FTP client program from https://filezilla-project.org/. 
-  * Next, open FileZilla and connect to sftp://UbuntuIPaddress as the woot user and practice some graphical file transfers. 
+  * On your Windows or macOS host OS, open a Web browser and navigate to ftp://UbuntuIPaddress and note that you can see and download file3 
+  * On your Windows or macOS PC, download and install the FileZilla FTP client program from https://filezilla-project.org/ 
+  * Next, open FileZilla and connect to sftp://UbuntuIPaddress as the woot user and practice some graphical file transfers 
    
 # NFS
   * Open a Terminal on your Ubuntu Server virtual machine as root
@@ -199,11 +199,11 @@
   - `a2enmod userdir`
   - `systemctl restart apache2.service`
   - `ls -l /etc/apache2/mods-enabled` (note the shortcut to userdir.conf)
-  * Open a Web browser on your Windows or macOS PC and navigate to http://UbuntuIPaddress/~shrek/ to view shrek’s webpage.
+  * Open a Web browser on your Windows or macOS PC and navigate to http://UbuntuIPaddress/~shrek/ to view shrek’s webpage
   - `vi /etc/apache2/apache2.conf` (add the following line to the end, saving changes)
      - `alias /donkey/  /home/shrek/public_html/`
   - `apachectl graceful` 
-  * Open a Web browser on your Windows or macOS PC and navigate to http://UbuntuIPaddress/donkey/ to view shrek’s webpage.
+  * Open a Web browser on your Windows or macOS PC and navigate to http://UbuntuIPaddress/donkey/ to view shrek’s webpage
   - `mkdir /var/www/html2`
   - `vi /var/www/html2/index.html` (add the following, saving changes)
      - `<html><body><h1>It works!</h1></body></html>`
@@ -250,7 +250,7 @@
   - `curl http://triosdevelopers.com/jason.eckert/trios/named.conf.additions --output named.conf.additions` 
   - `vi /etc/named.conf`
      * Go to the end of the file and type `:r named.conf.additions` 
-     * Ensure that the last line (the `forwarders` option for 8.8.8.8) is added to the options block near the top of the file (remove the word `options` when adding it to this block), and then comment this last line. 
+     * Ensure that the last line (the `forwarders` option for 8.8.8.8) is added to the options block near the top of the file (remove the word `options` when adding it to this block), and then comment this last line 
      * Save your changes and quit vi
   - `systemctl start named.service ; systemctl enable named.service` 
   * Log into the GNOME desktop environment and set a static DNS server of 127.0.0.1 for your network interface in the Network tool
@@ -326,7 +326,7 @@
   * Open a Terminal on your Ubuntu Server virtual machine as root
   - `vi /etc/pam.d/common-auth` (add the following line above the `pam_unix.so` line) 
      - `auth required pam_tally2.so deny=3 unlock_time=7200`
-  * Log into tty5 three times as woot with an incorrect password and note the warning that your account was locked when attempting to log in a fouth time. 
+  * Log into tty5 three times as woot with an incorrect password and note the warning that your account was locked when attempting to log in a fouth time 
   * Next, return to your previous Terminal as root
   - `pam_tally2` (note that woot has been locked out)
   - `pam_tally2 --reset --user woot`
