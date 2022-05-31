@@ -68,10 +68,20 @@ NOTE: To configure a different ingress controller in K3S, you must edit /etc/sys
     - Next, run `kubectl expose service prometheus-grafana --type=NodePort --target-port=3000 --name=pgservice` and log into the Grafana Web app http://UbuntuIP:3000 as the user admin (default password is prom-operator) and view the different available monitoring templates by navigating to Dashboards > Browse
 
 # Additional Concepts (for further exploration)
-- Kubernetes has excellent documentation: https://kubernetes.io/docs/home/
-- You can integrate Kubernetes directly with a DNS provider (~Dynamic DNS) using https://github.com/kubernetes-sigs/external-dns
-- For HTTPS/TLS, you can connect your ingress controller to https://cert-manager.io so that it can automatically get certificates for each service. You can install it using Helm or a downloadable manifest you can apply (see instructions on the website for details on either method). Next, follow the instructions to connect to a CA (e.g. Letsencrypt) and modify your ingress controller settings to list cert-manager. Of course, you’ll also need a publicly-resolvable DNS record for your cluster for this to work.
-- ***Cronjobs*** are often used by Web apps to do things like reindexing DBs, maintenance tasks, clearing caches, and so on. Kubernetes has a CronJob resource that can do this. Simply create a manifest that lists the cron schedule, as well as a container it can spawn (e.g. Alpine/Busybox) to perform the commands you specify.
-- For persistent block storage needed by containers, you need to create a ***PVC (Persistent Volume Claim)*** to create a resource that doesn’t disappear when you restart your cluster. Many block storage volumes can only attach to 1 pod at time, which makes it difficult to scale. Rook/Ceph and GlusterFS can do this but are complex to configure. NFS is a simple method that can be used to access persistent block storage. To use NFS, install and configure the NFS Client Provisioner and configure it to connect to an NFS share on another container or NFS server. If the block storage is only used for hosting databases, there are many different persistent and cloud native solutions (e.g. CockroachDB) available on the market that may be worth the money depending on your use case.
-- ***Namespaces*** limit the scope of resources in Kubernetes. I’ve been using the default namespace for everything so far, but you typically create namespaces for related resources that comprise a Web app. You can use kubectl create namespace lala to create a lala namespace, and add -n lala to other kubectl commands to limit their functionality to that namespace. If you run kubectl delete namespace lala, all resources associated with that namespace will also be deleted.
-
+  * Kubernetes has excellent documentation: https://kubernetes.io/docs/home/
+  * You can integrate Kubernetes directly with a DNS provider (~Dynamic DNS) using https://github.com/kubernetes-sigs/external-dns
+  * For HTTPS/TLS, you can connect your ingress controller to https://cert-manager.io so that it can automatically get certificates for each service
+    - You can install it using Helm or a downloadable manifest you can apply (see instructions on the website for details on either method)
+    - Next, follow the instructions to connect to a CA (e.g. Letsencrypt) and modify your ingress controller settings to list cert-manager
+    - You’ll also need a publicly-resolvable DNS record for your cluster for this to work
+  * ***Cronjobs*** are often used by Web apps to do things like reindexing DBs, maintenance tasks, clearing caches, and so on
+    - Kubernetes has a CronJob resource that can do this - simply create a manifest that lists the cron schedule, as well as a container it can spawn (e.g. Alpine/Busybox) to perform the commands you specify
+  * For persistent block storage needed by containers, you need to create a ***PVC (Persistent Volume Claim)*** to create a resource that doesn’t disappear when you restart your cluster
+    - Many block storage volumes can only attach to 1 pod at time, which makes it difficult to scale
+    - Rook/Ceph and GlusterFS can do this but are complex to configure
+    - NFS is a simple method that can be used to access persistent block storage (install and configure the NFS Client Provisioner and configure it to connect to an NFS share on another container or NFS server)
+    - If the block storage is only used for hosting databases, there are many different persistent and cloud native solutions (e.g. CockroachDB) available on the market that may be worth the money depending on your use case.
+  * ***Namespaces*** limit the scope of resources in Kubernetes
+    - I’ve been using the default namespace for everything so far, but you typically create namespaces for related resources that comprise a Web app
+    - You can use `kubectl create namespace lala` to create a lala namespace, and add `-n lala` to other `kubectl` commands to limit their functionality to that namespace
+    - If you run `kubectl delete namespace lala`, all resources associated with that namespace will also be deleted
