@@ -1,21 +1,22 @@
 # Kubernetes (K8S) Overview
-- K8S is the industry standard orchestrator/API, and can be thought of as a "black box" that holds your container infrastructure
-- You install a K8S ***cluster*** with a ***control plane*** and one or more ***nodes*** (~VMs with container runtime & kubelet service)
-- Web apps are called ***pods*** and may consist of one or more containers or persistent storage volumes
-- Managed K8S is common (cloud provider service)
-- K3S is a pre-configured single-node K8S cluster that strips out unnecessary cloud-provider-specific additions so that it can run fast on any platform, including IoT platforms (it also uses SQLite instead of etcd for storing cluster configuration)
-- Other common pre-configured single-node K8S clusters include Kind, Minikube and Docker Desktop (Kubernetes component)
+* K8S is the industry standard orchestrator/API, and can be thought of as a "black box" that holds your container infrastructure
+* You install a K8S ***cluster*** with a ***control plane*** and one or more ***nodes*** (~VMs with container runtime & kubelet service)
+* Web apps are called ***pods*** and may consist of one or more containers or persistent storage volumes
+* Managed K8S is common (cloud provider service)
+* K3S is a pre-configured single-node K8S cluster that strips out unnecessary cloud-provider-specific additions so that it can run fast on any platform, including IoT platforms (it also uses SQLite instead of etcd for storing cluster configuration)
+* Other common pre-configured single-node K8S clusters include Kind, Minikube and Docker Desktop (Kubernetes component)
 
 ![image](https://user-images.githubusercontent.com/40586970/171035289-3d5692ea-5258-41ed-8db7-f1ede4932855.png)
 
 ![image](https://user-images.githubusercontent.com/40586970/171035312-ad52d478-399f-414c-99aa-9616641d4248.png)
 
 # Installing K3S
-  - Open a Terminal on your Ubuntu Server virtual machine as root
+  * Open a Terminal on your Ubuntu Server virtual machine as root
   - `curl -sfL https://get.k3s.io | sh -` 
   - `kubectl get nodes`
 
 # Working with Deployments, Pods and Services
+  * Open a Terminal on your Ubuntu Server virtual machine as root
   - `kubectl create deployment webapp --image=jasoneckert/x86webapp:latest`	(creates a deployment configuration used to start/manage/scale containers based on a container image that is pulled in from Docker Hub)
   - `kubectl get deployment`
   - `kubectl expose deployment webapp --type=NodePort --port=80` (creates a service to expose the deployment (NodePort exposes the port on every cluster node)
@@ -36,23 +37,32 @@ NOTE: You can add `-o yaml` to most `kubectl` commands to obtain configuration i
   - `kubectl get hpa webapp` 
 
 # Upgrading/Downgrading Container Images in Production
-After a while, your developers will make a new container image available (e.g. jasoneckert/x86webapp:2.0 on Docker Hub). To update your Kubernetes cluster to use the new image in production, you can either:
-- Edit your deployment (`kubectl edit deployment webapp`), modify the `Image` line and save your changes, or
-- Run `kubectl set image deployment/webapp webapp=jasoneckert/webapp:2.0`
+  * After a while, your developers will make a new container image available (e.g. jasoneckert/x86webapp:2.0 on Docker Hub)
+  * To update your Kubernetes cluster to use the new image in production, you can either:
+    - Edit your deployment (`kubectl edit deployment webapp`), modify the `Image` line and save your changes, or
+    - Run `kubectl set image deployment/webapp webapp=jasoneckert/webapp:2.0`
 
-Kubernetes will immediately start replacing the pods with your new image in sequence until all of them are upgraded. If an upgraded image causes stability issues, you can revert to the previous image using `kubectl rollout undo deployment webapp`. You can also use `kubectl rollout history deployment webapp` to view rollout history.
+  * Kubernetes will immediately start replacing the pods with your new image in sequence until all of them are upgraded
+  * If an upgraded image causes stability issues, you can revert to the previous image using `kubectl rollout undo deployment webapp`
+  * You can also use `kubectl rollout history deployment webapp` to view rollout history
 
 # Ingress
-Up until now, you've had to access the pods that comprise webapp using http://UbuntuIP:port (where port is the port exposed from our NodePort service). This is because K3S comes preconfigured with the Traefik ingress controller that allows external traffic to enter your Kubernetes cluster and interact with exposed services. However, most Kubernetes clusters do not come with a preconfigured ingress controller, and you must configure either a load balancer service or an ingress controller to provide access to a service from outside the Kubernetes cluster. 
-- To use a load balancer, you just need to change from using NodePort to LoadBalancer and pay for the load balancing service on your cloud provider. The cloud provider then gives you an external IP that you can use when creating a DNS record for your Web app. 
-- Alternatively, you can use an ingress controller (Traefik, Nginx, HAProxy, etc.) that accepts and reroutes traffic to your services. The easiest way to install an ingress controller in your Kubernetes cluster is by running a ***Kubernetes operator*** (a script for performing Kubernetes tasks), or by using the ***Helm package manager*** (which uses ***Helm charts*** to define the components to download and how to connect them to other components within Kubernetes). 
+  * Up until now, you've had to access the pods that comprise webapp using http://UbuntuIP:port (where port is the port exposed from our NodePort service)
+    - This is because K3S comes preconfigured with the Traefik ingress controller that allows external traffic to enter your Kubernetes cluster and interact with exposed services
+  * However, most Kubernetes clusters do not come with a preconfigured ingress controller, and you must configure either a load balancer service or an ingress controller to provide access to a service from outside the Kubernetes cluster 
+    - To use a load balancer, you just need to change from using NodePort to LoadBalancer and pay for the load balancing service on your cloud provider - the cloud provider then gives you an external IP that you can use when creating a DNS record for your Web app 
+    - Alternatively, you can use an ingress controller (Traefik, Nginx, HAProxy, etc.) that accepts and reroutes traffic to your services - the easiest way to install an ingress controller in your Kubernetes cluster is by running a ***Kubernetes operator*** (a script for performing Kubernetes tasks), or by using the ***Helm package manager*** (which uses ***Helm charts*** to define the components to download and how to connect them to other components within Kubernetes) 
 
 NOTE: To configure a different ingress controller in K3S, you must edit /etc/systemd/system/k3s.service, add the `--disable traefik` option and restart K3S with `systemctl restart k3s.service`.
 
 # Monitoring 
-You can also use graphical apps to monitor and manage Kubernetes. The most common app for this is Lens (https://k8slens.dev), which is quite powerful. Unfortunately, it can also be quite daunting for those new to Kubernetes as it can view/edit all of the core concepts (deployments, services, HPA, etc.) as well as advanced ones.
-
-Most administrators use a combination of command line tools and templating tools (e.g. Terraform) for managing Kubernetes, but use graphical tools for monitoring it. There are many cloud-based monitoring tools (e.g. Datadog) that can be integrated into Kubernetes for a fee, as well as free tools that you can install directly in your Kubernetes cluster, such as Prometheus and Grafana. Prometheus monitors the events in your cluster and sends the data to Grafana for visualization. Even the graphs and metrics shown in the Lens app require Prometheus (they are empty otherwise).
+  * You can also use graphical apps to monitor and manage Kubernetes
+    - The most common app used by developers for this is Lens (https://k8slens.dev), which is quite powerful
+      - Unfortunately, it can also be quite daunting for those new to Kubernetes as it can view/edit all of the core concepts (deployments, services, HPA, etc.) as well as advanced ones
+    - Most administrators use a combination of command line tools and templating tools (e.g. Terraform) for managing Kubernetes, but use graphical tools for monitoring it
+      - There are many cloud-based monitoring tools (e.g. Datadog) that can be integrated into Kubernetes for a fee, as well as free tools that you can install directly in your Kubernetes cluster, such as Prometheus and Grafana.\
+      - Prometheus monitors the events in your cluster and sends the data to Grafana for visualization
+      - Even the graphs and metrics shown in the Lens app require Prometheus (they are empty otherwise).
 
 To install both Prometheus and Grafana, you can install the Prometheus stack using a Kubernetes operator or Helm chart. This will install a series of pods, including a pod called prometheus-grafana. Since these pods take several minutes to start, watch the output of `kubectl get pods` periodically to know when they are ready. Next, run `kubectl expose service prometheus-grafana --type=NodePort --target-port=3000 --name=pgservice` and log into the Grafana Web app http://UbuntuIP:3000 as the user admin (default password is prom-operator) and view the different available monitoring templates by navigating to Dashboards > Browse. 
 
